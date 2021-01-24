@@ -42,15 +42,59 @@ html * {
 -moz-box-shadow: 10px 10px 85px 4px rgba(0,0,0,0.47);
 }
 
-.home-form-container h1 {
+h1 {
     font-size: 38px;
     font-weight: 700;
 }
-
-.row {
-    width: 1200px;
+h2 {
+    font-weight: 700;
 }
 
 input {
     height: 60px;
+}
+
+section {
+    padding-top: 60px;
+    padding-bottom: 30px;
+}
+
+.category-container {
+    width: fit-content;
+}
+
+.img {
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    background-position: center;
+}
+
+.category-img {
+    height: 300px;
+    width: 220px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.category-img:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.ski-img {
+    background-image: url('https://images.unsplash.com/photo-1565992441121-4367c2967103?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80');
+}
+.climbing-img {
+    background-image: url('https://images.unsplash.com/photo-1524786842735-a4096ed01353?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=634&q=80');
+}
+.hiking-img {
+    background-image: url('https://images.unsplash.com/photo-1501554728187-ce583db33af7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80');
+}
+.mountaineering-img {
+    background-image: url('https://images.unsplash.com/photo-1597251000118-e702d0828392?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=634&q=80');
+    background-size: 200%;
+}
+.mtb-img {
+    background-image: url('https://images.unsplash.com/photo-1574117482334-14b040604998?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80');
 }
