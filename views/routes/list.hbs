@@ -1,3 +1,32 @@
 <div class="routes-banner text-center">
-    <h2>Routes / Hiking / Expert</h2>
+    <h2>Routes > Hiking > Expert</h2>
+    <div class="container d-flex justify-content-center">
+        <form class="search-filter d-flex">
+            <div class="form-floating col-4">
+                <input class="form-control" placeholder="Zermatt" id="location"></input>
+                <label for="location">Location</label>
+            </div>
+            <div class="form-floating col-3">
+                <select class="form-select" id="floatingSelect">
+                    <option value="all">All</option>
+                    <option value="hiking">Hiking</option>
+                    <option value="mountaineering">Mountaineering</option>
+                    <option value="climbing">Climbing</option>
+                    <option value="mtb">Mountain biking</option>
+                </select>
+                <label for="floatingSelect">Sport</label>
+            </div>
+            <div class="form-floating col-2">
+                <select class="form-select" id="floatingSelect">
+                    <option value="all">All</option>
+                    <option value="hiking">Easy</option>
+                    <option value="mountaineering">Medium</option>
+                    <option value="climbing">Hard</option>
+                    <option value="mtb">Expert</option>
+                </select>
+                <label for="floatingSelect">Difficulty</label>
+            </div>
+            <button type="submit" class="btn btn-dark col-2" style="height: 58px;">Search</button>
+        </form>
+    </div>
 </div>
