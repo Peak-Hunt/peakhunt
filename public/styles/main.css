@@ -165,9 +165,15 @@ section {
     align-items: center;
     padding: 30px 10px 30px 10px;
 }
+.routes-container::after {
+    content: "";
+    width: 400px;
+}
 
 .card {
     border: none;
+    width: 400px;
+    margin-bottom: 50px;
 }
 
 .card-img {
@@ -200,6 +206,7 @@ section {
 }
 .card-rating {
     display: flex;
+    color: #f2b01e;
 }
 .card-rating .material-icons {
     margin-right: 5px;
@@ -215,13 +222,12 @@ section {
 .card-detail-container {
     display: flex;
     justify-content: flex-start;
+    color: #a4a4a4;
 }
 .card-detail-container .material-icons {
     font-size: 20px;
-    color: grey;
 }
 .card-details {
     font-size: 14px;
     font-weight: 500;
-    color: grey;
 }
