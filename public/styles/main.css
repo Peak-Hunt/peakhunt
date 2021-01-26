@@ -58,6 +58,10 @@ h2 {
 h4 {
     font-weight: 600;
 }
+h5 {
+    font-size: 18px;
+    font-weight: 600;
+}
 
 input {
     height: 60px;
@@ -178,6 +182,8 @@ section {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-top: 15px;
+    font-size: 14px;
 }
 
 .author-img {
@@ -187,4 +193,35 @@ section {
     border-radius: 50%;
     margin-right: 20px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+.card-row {
+    display: flex;
+    justify-content: space-between;
+}
+.card-rating {
+    display: flex;
+}
+.card-rating .material-icons {
+    margin-right: 5px;
+    font-size: 20px;
+}
+.card-rating-num {
+    font-size: 16px;
+    font-weight: 500;
+}
+.card-title {
+    margin-right: 15px;
+}
+.card-detail-container {
+    display: flex;
+    justify-content: flex-start;
+}
+.card-detail-container .material-icons {
+    font-size: 20px;
+    color: grey;
+}
+.card-details {
+    font-size: 14px;
+    font-weight: 500;
+    color: grey;
 }
