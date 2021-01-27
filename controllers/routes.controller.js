@@ -1,3 +1,7 @@
+const Route = require('../models/Route.model');
+
 module.exports.list = (req, res, next) => {
-    res.render('routes/list')
+    Route.find()
+        .then(routes => res.render('routes/list', { routes }))
+        .catch(next)
 }
