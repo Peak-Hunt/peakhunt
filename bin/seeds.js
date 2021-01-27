@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Route = require("../models/Route.model");
 require('../config/db.config');
 
-cont routes = [
+const routes = [
     {
         title: 'Säntis via Lisengrat',
         sport: 'Hiking',
