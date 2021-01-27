@@ -3,6 +3,7 @@ const app = express();
 const favicon = require('serve-favicon');
 const path = require('path');
 require('./config/hbs.config');
+require('./config/db.config');
 
 /* Middlewares */
 app.use(express.urlencoded({ extended: false }));
