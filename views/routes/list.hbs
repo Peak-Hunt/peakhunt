@@ -8,21 +8,21 @@
             </div>
             <div class="form-floating col-3">
                 <select name="sport" class="form-select" id="floatingSelect">
-                    <option value="all">All</option>
-                    <option value="Hiking">Hiking</option>
-                    <option value="Mountaineering">Mountaineering</option>
-                    <option value="Climbing">Climbing</option>
-                    <option value="Mountain biking">Mountain biking</option>
+                    <option {{selectedSport sport 'all'}} value="all">All</option>
+                    <option {{selectedSport sport 'Hiking'}} value="Hiking">Hiking</option>
+                    <option {{selectedSport sport 'Mountaineering'}} value="Mountaineering">Mountaineering</option>
+                    <option {{selectedSport sport 'Climbing'}} value="Climbing">Climbing</option>
+                    <option {{selectedSport sport 'Mountain biking'}} value="Mountain biking">Mountain biking</option>
                 </select>
                 <label for="floatingSelect">Sport</label>
             </div>
             <div class="form-floating col-2">
                 <select name="difficulty" class="form-select" id="floatingSelect">
-                    <option value="all">All</option>
-                    <option value="Easy">Easy</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Hard">Hard</option>
-                    <option value="Expert">Expert</option>
+                    <option {{selectedDifficulty difficulty 'all'}} value="all">All</option>
+                    <option {{selectedDifficulty difficulty 'Easy'}} value="Easy">Easy</option>
+                    <option {{selectedDifficulty difficulty 'Medium'}} value="Medium">Medium</option>
+                    <option {{selectedDifficulty difficulty 'Hard'}} value="Hard">Hard</option>
+                    <option {{selectedDifficulty difficulty 'Expert'}} value="Expert">Expert</option>
                 </select>
                 <label for="floatingSelect">Difficulty</label>
             </div>
