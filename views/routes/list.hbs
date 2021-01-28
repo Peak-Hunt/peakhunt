@@ -3,26 +3,26 @@
     <div class="container d-flex justify-content-center">
         <form class="search-filter d-flex">
             <div class="form-floating col-4">
-                <input class="form-control" placeholder="Zermatt" id="location"></input>
+                <input value="{{ location }}" name="location" class="form-control" id="location"></input>
                 <label for="location">Location</label>
             </div>
             <div class="form-floating col-3">
-                <select class="form-select" id="floatingSelect">
+                <select name="sport" class="form-select" id="floatingSelect">
                     <option value="all">All</option>
-                    <option value="hiking">Hiking</option>
-                    <option value="mountaineering">Mountaineering</option>
-                    <option value="climbing">Climbing</option>
-                    <option value="mtb">Mountain biking</option>
+                    <option value="Hiking">Hiking</option>
+                    <option value="Mountaineering">Mountaineering</option>
+                    <option value="Climbing">Climbing</option>
+                    <option value="Mountain biking">Mountain biking</option>
                 </select>
                 <label for="floatingSelect">Sport</label>
             </div>
             <div class="form-floating col-2">
-                <select class="form-select" id="floatingSelect">
+                <select name="difficulty" class="form-select" id="floatingSelect">
                     <option value="all">All</option>
-                    <option value="hiking">Easy</option>
-                    <option value="mountaineering">Medium</option>
-                    <option value="climbing">Hard</option>
-                    <option value="mtb">Expert</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                    <option value="Expert">Expert</option>
                 </select>
                 <label for="floatingSelect">Difficulty</label>
             </div>
@@ -31,9 +31,9 @@
     </div>
 </div>
 
-<div class="container" style="margin-top: 120px; margin-bottom: 150px;">
-    <div class="d-flex justify-content-between">
-        <h4 style="width: fit-content;" class="search-results-number">12 Results</h4>
+<div class="container" style="margin-top: 100px; margin-bottom: 150px;">
+    <div class="d-flex justify-content-between mb-1">
+        <h4 style="width: fit-content;" class="search-results-number">12 Results</h4> {{!-- TODO --}}
         <select class="form-select order-by" aria-label="Default select example">
             <option selected disabled>Order by</option>
             <option value="top-rated">Rating: Top Rated</option>

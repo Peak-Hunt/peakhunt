@@ -6,7 +6,7 @@ require('./config/hbs.config');
 require('./config/db.config');
 
 /* Middlewares */
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
