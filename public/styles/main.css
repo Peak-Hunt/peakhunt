@@ -55,6 +55,9 @@ h1 {
 h2 {
     font-weight: 700;
 }
+h3 {
+    font-weight: 600;
+}
 h4 {
     font-weight: 600;
 }
@@ -194,7 +197,7 @@ section {
     display: flex;
     justify-content: space-between;
 }
-.card-rating {
+.rating {
     display: flex;
     color: #f2b01e;
 }
@@ -225,4 +228,43 @@ section {
 .order-by {
     width: 200px;
     height: 40px;
+}
+
+.main-img {
+    height: 450px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+} 
+.action-label {
+    display: flex;
+    justify-content: space-around;
+    width: 150px;
+    height: fit-content;
+    padding: 10px;
+    border-radius: 7px;
+    background-color: white;
+    cursor: pointer;
+}
+.content-container {
+    margin-top: 60px;
+    margin-bottom: 30px;
+    padding-right: 40px;
+}
+.content-container h3 {
+    margin-bottom: 20px;
+}
+.content-container p {
+    text-align: justify;
+}
+.details-container {
+    margin-top: 60px;
+    border-radius: 10px;
+    border: 1px solid #a4a4a48f;
+    padding: 20px;
+    text-align: left;
 }
