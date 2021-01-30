@@ -43,7 +43,7 @@
         {{#each routes as |route|}}
         <div class="card h-100">
             <div class="img card-img"
-                onclick="location.href='#';" {{!-- TODO --}}
+                onclick="location.href='/route/{{ route.id }}';" {{!-- TODO --}}
                 style="background-image: url('{{ route.image }}');">
                 <span class="badge bg-dark">{{ route.sport }}</span>
                 <span class="badge bg-warning">{{ route.difficulty }}</span>

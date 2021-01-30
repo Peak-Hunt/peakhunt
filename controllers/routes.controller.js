@@ -24,3 +24,12 @@ module.exports.list = (req, res, next) => {
         })
         .catch(next) 
 }
+
+module.exports.detail = (req, res, next) => {
+    const { id } = req.params;
+    Route.findById(id)
+        .then(route => {
+            res.render('routes/detail', { route });
+        })
+        .catch(next);
+}
