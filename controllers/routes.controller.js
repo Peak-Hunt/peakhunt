@@ -1,4 +1,4 @@
-const Route = require('../models/route.model');
+consr Route = require('../models/route.model');
 const constants = require('../public/js/constants');
 
 module.exports.list = (req, res, next) => {
