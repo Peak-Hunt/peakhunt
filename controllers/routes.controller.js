@@ -3,6 +3,7 @@ const Route = require('../models/Route.model');
 module.exports.list = (req, res, next) => {
     // const sport = Route.schema.path('sport').enumValues;
     const filters = req.query;
+    const { key } = req.query;
     const { location, sport, difficulty } = req.query;
     const criterial = Object.keys(filters)
         .filter((key => filters[key] !== 'all'))
@@ -13,7 +14,6 @@ module.exports.list = (req, res, next) => {
 
         Route.find(criterial)
         .then(routes => {
-            console.log(sport);
             res.render('routes/list', { routes, location, sport, difficulty })
         })
         .catch(next) 
