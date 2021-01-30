@@ -8,21 +8,17 @@
             </div>
             <div class="form-floating col-3">
                 <select name="sport" class="form-select" id="floatingSelect">
-                    <option {{option sport 'all'}} value="all">All</option>
-                    <option {{option sport 'Hiking'}} value="Hiking">Hiking</option>
-                    <option {{option sport 'Mountaineering'}} value="Mountaineering">Mountaineering</option>
-                    <option {{option sport 'Climbing'}} value="Climbing">Climbing</option>
-                    <option {{option sport 'Mountain biking'}} value="Mountain biking">Mountain biking</option>
+                    {{#each sportOptions as |sportOption|}}
+                    {{option ../sport sportOption}}
+                    {{/each}}
                 </select>
                 <label for="floatingSelect">Sport</label>
             </div>
             <div class="form-floating col-2">
                 <select name="difficulty" class="form-select" id="floatingSelect">
-                    <option {{option difficulty 'all'}} value="all">All</option>
-                    <option {{option difficulty 'Easy'}} value="Easy">Easy</option>
-                    <option {{option difficulty 'Medium'}} value="Medium">Medium</option>
-                    <option {{option difficulty 'Hard'}} value="Hard">Hard</option>
-                    <option {{option difficulty 'Expert'}} value="Expert">Expert</option>
+                    {{#each difficultyOptions as |difficultyOption|}}
+                    {{option ../difficulty difficultyOption}}
+                    {{/each}}
                 </select>
                 <label for="floatingSelect">Difficulty</label>
             </div>
