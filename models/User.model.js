@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const URL_PATTERN = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+const PASSWORD_PATTERN = /"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/
 
 const userSchema = new Schema({
     username: {
@@ -30,7 +31,7 @@ const userSchema = new Schema({
     password: {
       type: String,
       required: 'Password is required',
-      match: [PASSWORD_PATTERN, 'Password needs at least 8 chars'],
+      match: [PASSWORD_PATTERN, 'Password needs at least 8 characters, one letter and one number'],
     },
     socialLogin: {
       slack: String,
