@@ -59,7 +59,6 @@ module.exports.doEdit = (req, res, next) => {
             if (error instanceof mongoose.Error.ValidationError) {
                 const route = req.body;
                 route.id = req.params.id;
-                console.log(route);
                 res.render('routes/edit', {
                     route,
                     sportOptions: constants.SPORTS,
