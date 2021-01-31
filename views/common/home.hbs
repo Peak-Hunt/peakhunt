@@ -8,16 +8,15 @@
                     <label for="peak">Location</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                        <option selected>Hiking</option>
-                        <option value="mountaineering">Mountaineering</option>
-                        <option value="climbing">Climbing</option>
-                        <option value="mtb">Mountain biking</option>
+                    <select name="sport" class="form-select" id="floatingSelect">
+                        {{#each sportOptions as |sportOption|}}
+                        {{option ../sport sportOption}}
+                        {{/each}}
                     </select>
-                    <label for="floatingSelect">Sports</label>
+                    <label for="floatingSelect">Sport</label>
                 </div>
                 <div class="d-grid gap-2">
-                  <button class="btn btn-dark p-2" type="submit">Search</button>
+                    <button class="btn btn-dark p-2" type="submit">Search</button>
                 </div>
             </form>
         </div>
@@ -35,19 +34,19 @@
                 <h5>Hiking</h5>
             </div>
             <div class="category-container d-flex flex-column align-items-center">
-                <div onclick="location.href='#';"  class="img category-img mountaineering-img"></div>
+                <div onclick="location.href='#';" class="img category-img mountaineering-img"></div>
                 <h5>Mountaineering</h5>
             </div>
             <div class="category-container d-flex flex-column align-items-center">
-                <div onclick="location.href='#';"  class="img category-img ski-img"></div>
+                <div onclick="location.href='#';" class="img category-img ski-img"></div>
                 <h5>Ski</h5>
             </div>
             <div class="category-container d-flex flex-column align-items-center">
-                <div onclick="location.href='#';"  class="img category-img climbing-img"></div>
+                <div onclick="location.href='#';" class="img category-img climbing-img"></div>
                 <h5>Climbing</h5>
             </div>
             <div class="category-container d-flex flex-column align-items-center">
-                <div onclick="location.href='#';"  class="img category-img mtb-img"></div>
+                <div onclick="location.href='#';" class="img category-img mtb-img"></div>
                 <h5>Mountain biking</h5>
             </div>
         </div>
@@ -65,21 +64,22 @@
                     </div>
                 </div>
                 <div class="col d-flex flex-column justify-content-between" style="height: 500px;">
-                   <div onclick="location.href='#';" class="img location-img valais-img" style="height: 240px;">
+                    <div onclick="location.href='#';" class="img location-img valais-img" style="height: 240px;">
                         <h4>Valais, Switzerland</h4>
                     </div>
-                   <div class="row locations-container d-flex" style="height: 240px;">
-                       <div class="col-6">
-                            <div onclick="location.href='#';" class="img location-img dolomites-img" style="height: 100%;">
+                    <div class="row locations-container d-flex" style="height: 240px;">
+                        <div class="col-6">
+                            <div onclick="location.href='#';" class="img location-img dolomites-img"
+                                style="height: 100%;">
                                 <h4>Dolomites, Italy</h4>
                             </div>
-                       </div>
-                       <div class="col-6">
+                        </div>
+                        <div class="col-6">
                             <div onclick="location.href='#';" class="img location-img bern-img" style="height: 100%;">
                                 <h4>Bern, Switzerland</h4>
                             </div>
-                       </div>
-                   </div> 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
