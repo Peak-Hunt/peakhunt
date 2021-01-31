@@ -20,8 +20,8 @@ module.exports.list = (req, res, next) => {
                 location,
                 sport,
                 difficulty,
-                sportOptions: constants.SPORTS,
-                difficultyOptions: constants.DIFFICULTIES
+                sportOptions: constants.SPORT_OPTIONS,
+                difficultyOptions: constants.DIFFICULTY_OPTIONS
             })
         })
         .catch(next)
@@ -37,11 +37,11 @@ module.exports.detail = (req, res, next) => {
 }
 
 module.exports.edit = (req, res, next) => {
-    const sportOptions = constants.SPORTS;
-    const difficultyOptions = constants.DIFFICULTIES;
+    const sports = constants.SPORTS;
+    const difficulties = constants.DIFFICULTIES;
     Route.findById(req.params.id)
         .then(route => {
-            res.render('routes/edit', { route, sportOptions, difficultyOptions });
+            res.render('routes/edit', { route, sports, difficulties });
         })
         .catch(next);
 }
@@ -61,10 +61,34 @@ module.exports.doEdit = (req, res, next) => {
                 route.id = req.params.id;
                 res.render('routes/edit', {
                     route,
-                    sportOptions: constants.SPORTS,
-                    difficultyOptions: constants.DIFFICULTIES,
+                    sports: constants.SPORTS,
+                    difficulties: constants.DIFFICULTIES,
                     errors: error.errors
                 });
             } else next(error);
         });
+}
+
+module.exports.create = (req, res, next) => {
+    res.render('routes/new', {
+        sports: constants.SPORTS,
+        difficulties: constants.DIFFICULTIES,
+    });
+}
+
+module.exports.doCreate = (req, res, next) => {
+    const route = req.body;
+    Route.create(route)
+        .then(route => {
+            console.log(route);
+            res.render('routes/detail', { route });
+        })
+        .catch(error => {
+            if (error instanceof mongoose.Error.ValidationError) {
+                res.render('routes/new', {
+                    errors: error.errors,
+                    route
+                })
+            } else next(error);
+        })
 }
