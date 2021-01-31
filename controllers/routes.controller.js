@@ -13,18 +13,18 @@ module.exports.list = (req, res, next) => {
             return criterial;
         }, {});
 
-        Route.find(criterial)
+    Route.find(criterial)
         .then(routes => {
-            res.render('routes/list', { 
-                routes, 
-                location, 
-                sport, 
-                difficulty, 
-                sportOptions: constants.SPORTS, 
+            res.render('routes/list', {
+                routes,
+                location,
+                sport,
+                difficulty,
+                sportOptions: constants.SPORTS,
                 difficultyOptions: constants.DIFFICULTIES
             })
         })
-        .catch(next) 
+        .catch(next)
 }
 
 module.exports.detail = (req, res, next) => {
@@ -47,18 +47,25 @@ module.exports.edit = (req, res, next) => {
 }
 
 module.exports.doEdit = (req, res, next) => {
-    Route.findByIdAndUpdate(req.params.id, { $set: req.body }, { runValidators: true })
-        .then((route) => {
-            if (route) res.redirect('/routes'); // TODO
-            next(createError(404, 'This route does not exist'))
+    Route.findByIdAndUpdate(req.params.id, { $set: req.body }, { runValidators: true, useFindAndModify: false, new: true })
+        .then(route => {
+            if (route) {
+                res.render('routes/detail', { route });
+            } else {
+                next(createError(404, 'This route does not exist'));
+            }
         })
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
                 const route = req.body;
-                res.render('routes/edit', { 
+                route.id = req.params.id;
+                console.log(route);
+                res.render('routes/edit', {
                     route,
-                    errors: error.errors 
+                    sportOptions: constants.SPORTS,
+                    difficultyOptions: constants.DIFFICULTIES,
+                    errors: error.errors
                 });
-            } next(error);
+            } else next(error);
         });
 }
