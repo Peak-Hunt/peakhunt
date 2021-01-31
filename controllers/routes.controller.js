@@ -20,8 +20,8 @@ module.exports.list = (req, res, next) => {
                 location,
                 sport,
                 difficulty,
-                sportOptions: constants.SPORTS,
-                difficultyOptions: constants.DIFFICULTIES
+                sportOptions: constants.SPORT_OPTIONS,
+                difficultyOptions: constants.DIFFICULTY_OPTIONS
             })
         })
         .catch(next)
@@ -67,4 +67,11 @@ module.exports.doEdit = (req, res, next) => {
                 });
             } else next(error);
         });
+}
+
+module.exports.create = (req, res, next) => {
+    res.render('routes/new', {
+        sports: constants.SPORTS,
+        difficulties: constants.DIFFICULTIES,
+    });
 }
