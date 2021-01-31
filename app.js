@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const favicon = require('serve-favicon');
 const path = require('path');
+const createError = require('http-errors');
 require('./config/hbs.config');
 require('./config/db.config');
 
@@ -17,6 +18,10 @@ app.set('view engine', 'hbs');
 /* Routes */
 const router = require('./config/routes.config');
 app.use('/', router);
+
+app.use((req, res, next) => {
+	next(createError(404, 'Page not found'))
+})
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
