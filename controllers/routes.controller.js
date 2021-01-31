@@ -75,3 +75,20 @@ module.exports.create = (req, res, next) => {
         difficulties: constants.DIFFICULTIES,
     });
 }
+
+module.exports.doCreate = (req, res, next) => {
+    const route = req.body;
+    Route.create(route)
+        .then(route => {
+            console.log(route);
+            res.render('routes/detail', { route });
+        })
+        .catch(error => {
+            if (error instanceof mongoose.Error.ValidationError) {
+                res.render('routes/new', {
+                    errors: error.errors,
+                    route
+                })
+            } else next(error);
+        })
+}
