@@ -1,4 +1,6 @@
 const Route = require('../models/route.model');
+const mongoose = require('mongoose');
+const createError = require('http-errors');
 const constants = require('../public/js/constants');
 
 module.exports.list = (req, res, next) => {
@@ -35,12 +37,28 @@ module.exports.detail = (req, res, next) => {
 }
 
 module.exports.edit = (req, res, next) => {
-    const { id } = req.params;
     const sportOptions = constants.SPORTS;
     const difficultyOptions = constants.DIFFICULTIES;
-    Route.findById(id)
+    Route.findById(req.params.id)
         .then(route => {
             res.render('routes/edit', { route, sportOptions, difficultyOptions });
         })
         .catch(next);
+}
+
+module.exports.doEdit = (req, res, next) => {
+    Route.findByIdAndUpdate(req.params.id, { $set: req.body }, { runValidators: true })
+        .then((route) => {
+            if (route) res.redirect('/routes'); // TODO
+            next(createError(404, 'This route does not exist'))
+        })
+        .catch(error => {
+            if (error instanceof mongoose.Error.ValidationError) {
+                const route = req.body;
+                res.render('routes/edit', { 
+                    route,
+                    errors: error.errors 
+                });
+            } next(error);
+        });
 }
