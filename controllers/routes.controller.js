@@ -37,11 +37,11 @@ module.exports.detail = (req, res, next) => {
 }
 
 module.exports.edit = (req, res, next) => {
-    const sportOptions = constants.SPORTS;
-    const difficultyOptions = constants.DIFFICULTIES;
+    const sports = constants.SPORTS;
+    const difficulties = constants.DIFFICULTIES;
     Route.findById(req.params.id)
         .then(route => {
-            res.render('routes/edit', { route, sportOptions, difficultyOptions });
+            res.render('routes/edit', { route, sports, difficulties });
         })
         .catch(next);
 }
@@ -61,8 +61,8 @@ module.exports.doEdit = (req, res, next) => {
                 route.id = req.params.id;
                 res.render('routes/edit', {
                     route,
-                    sportOptions: constants.SPORTS,
-                    difficultyOptions: constants.DIFFICULTIES,
+                    sports: constants.SPORTS,
+                    difficulties: constants.DIFFICULTIES,
                     errors: error.errors
                 });
             } else next(error);

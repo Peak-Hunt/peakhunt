@@ -9,16 +9,16 @@
         </div>
         <div class="form-floating col-3 mb-3">
             <select name="sport" class="form-select" id="floatingSelect">
-                {{#each sportOptions as |sportOption|}}
-                {{option ../route.sport sportOption}}
+                {{#each sports as |sport|}}
+                {{option ../route.sport sport}}
                 {{/each}}
             </select>
             <label for="floatingSelect">Sport</label>
         </div>
         <div class="form-floating col-2 mb-3">
             <select name="difficulty" class="form-select" id="floatingSelect">
-                {{#each difficultyOptions as |difficultyOption|}}
-                {{option ../route.difficulty difficultyOption}}
+                {{#each difficulties as |difficulty|}}
+                {{option ../route.difficulty difficulty}}
                 {{/each}}
             </select>
             <label for="floatingSelect">Difficulty</label>
