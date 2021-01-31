@@ -8,6 +8,7 @@ const userController = require('../controllers/user.controller');
 router.get('/', commonController.home);
 router.get('/routes', routesController.list);
 router.get('/route/:id', routesController.detail);
+router.get('/route/:id/edit', routesController.edit);
 
 router.get('/register', userController.register);
 

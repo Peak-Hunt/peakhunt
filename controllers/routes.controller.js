@@ -33,3 +33,14 @@ module.exports.detail = (req, res, next) => {
         })
         .catch(next);
 }
+
+module.exports.edit = (req, res, next) => {
+    const { id } = req.params;
+    const sportOptions = constants.SPORTS;
+    const difficultyOptions = constants.DIFFICULTIES;
+    Route.findById(id)
+        .then(route => {
+            res.render('routes/edit', { route, sportOptions, difficultyOptions });
+        })
+        .catch(next);
+}
