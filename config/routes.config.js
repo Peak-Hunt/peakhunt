@@ -12,6 +12,7 @@ router.get('/route/:id/edit', routesController.edit);
 router.post('/route/:id/edit', routesController.doEdit);
 router.get('/routes/new', routesController.create);
 router.post('/routes', routesController.doCreate);
+router.post('/route/:id/delete', routesController.delete);
 
 router.get('/register', userController.register);
 

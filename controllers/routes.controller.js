@@ -92,3 +92,12 @@ module.exports.doCreate = (req, res, next) => {
             } else next(error);
         })
 }
+
+module.exports.delete = (req, res, next) => {
+    Route.findByIdAndDelete(req.params.id)
+        .then(route => {
+            if (route) res.redirect('/routes');
+            else next(createError(404, 'Route does not exist.'));
+        })
+        .catch(next)
+}

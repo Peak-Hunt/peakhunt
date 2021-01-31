@@ -6,16 +6,22 @@
         </div>
         <div onclick="location.href='#';" class="action-label">
             <span class="material-icons">ios_share</span>
-            <p>Share route</p>  
+            <p>Share route</p>
         </div>
         <div onclick="location.href='/route/{{ route.id }}/edit';" class="action-label ms-3">
             <span class="material-icons">create</span>
             <p>Edit route</p>
         </div>
+        <form action="/route/{{ route.id }}/delete" method="POST" id="delete">
+            <div onclick="document.getElementById('delete').submit();" class="action-label ms-3">
+                <span class="material-icons">delete_outline</span>
+                <p>Delete route</p>
+            </div>
+        </form>
     </div>
     <div class="mt-5 mb-5">
         <h1 class="d-flex align-items-center">
-            <span class="badge bg-dark me-3">4.8 
+            <span class="badge bg-dark me-3">4.8
                 <span class="material-icons">grade</span>
             </span> {{ route.title }}
         </h1>
@@ -30,7 +36,9 @@
             {{#if route.video}}
             <div class="content-container">
                 <h3>Video</h3>
-                <iframe width="560" height="315" src={{ route.video }} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="560" height="315" src={{ route.video }} frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
             </div>
             {{/if}}
         </div>
@@ -55,7 +63,7 @@
                     <span class="material-icons me-3">room</span>
                     <p><b>Location: </b>{{ route.location }}</p>
                 </div>
+            </div>
         </div>
+
     </div>
-    
-</div>
