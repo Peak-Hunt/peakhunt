@@ -7,7 +7,7 @@ const ratingSchema = new Schema({
         minlength: [12, 'Your description is not long enough.']
     },
     rating: {
-        type: number,
+        type: Number,
         required: true
     },
     route: {
