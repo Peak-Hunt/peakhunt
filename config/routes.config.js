@@ -4,7 +4,7 @@ const router = express.Router();
 const commonController = require('../controllers/common.controller');
 const routesController = require('../controllers/routes.controller');
 const userController = require('../controllers/user.controller');
-const ratingsController = require('../controllers/ratings.controller');
+const reviewsController = require('../controllers/reviews.controller');
 
 router.get('/', commonController.home);
 router.get('/routes', routesController.list);
@@ -15,7 +15,7 @@ router.get('/routes/new', routesController.create);
 router.post('/routes', routesController.doCreate);
 router.post('/route/:id/delete', routesController.delete);
 
-router.post('./route/:routeId/ratings', ratingsController.doCreate);
+router.post('/route/:routeId/ratings', reviewsController.doCreate);
 
 router.get('/register', userController.register);
 

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ratingSchema = new Schema({
+const reviewSchema = new Schema({
     description: {
         type: String,
         minlength: [12, 'Your description is not long enough.']
@@ -16,5 +16,5 @@ const ratingSchema = new Schema({
     }
 }, { timestamps: true });
 
-const Rating = mongoose.model('Rating', ratingSchema);
-module.exports = Rating;
+const Reviews = mongoose.model('Reviews', reviewSchema);
+module.exports = Reviews;
