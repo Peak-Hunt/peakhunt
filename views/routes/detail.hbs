@@ -75,9 +75,12 @@
                         <option value="5">5</option>
                     </select>
                     <div class="form-floating mt-3 mb-3">
-                        <textarea name="description" class="form-control" placeholder="Leave a rating here"
+                        <textarea name="description" class="form-control {{#if errors.description}}is-invalid{{/if}}" placeholder="Leave a rating here"
                             id="ratingDescription" style="height: 100px"></textarea>
                         <label for="ratingDescription">Description</label>
+                        {{#if errors.description}}
+                        <div class="invalid-feedback">{{errors.description}}</div>
+                        {{/if}}
                     </div>
                     <button type="submit" class="btn btn-dark">Submit review</button>
                 </form>
