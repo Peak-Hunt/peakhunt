@@ -32,7 +32,7 @@ module.exports.detail = (req, res, next) => {
     Route.findById(id)
         .populate('reviews')
         .then(route => {
-            console.log(req);
+            console.log(route);
             res.render('routes/detail', { route });
         })
         .catch(next);
