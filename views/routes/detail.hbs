@@ -84,6 +84,12 @@
                     </div>
                     <button type="submit" class="btn btn-dark">Submit review</button>
                 </form>
+                {{#each reviews as |review|}}
+                    <div class="card review mb-3">
+                        <h3 class="rating">{{ review.rating }}</h3>
+                        <p>{{ review.description }}</p>
+                    </div>
+                {{/each}}
             </div>
         </div>
 

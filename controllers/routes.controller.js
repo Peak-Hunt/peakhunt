@@ -30,7 +30,9 @@ module.exports.list = (req, res, next) => {
 module.exports.detail = (req, res, next) => {
     const { id } = req.params;
     Route.findById(id)
+        .populate('reviews')
         .then(route => {
+            console.log(req);
             res.render('routes/detail', { route });
         })
         .catch(next);

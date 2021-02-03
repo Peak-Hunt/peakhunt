@@ -1,6 +1,7 @@
-const Rating = require('../models/reviews.model');
+const Review = require('../models/reviews.model');
 const Route = require('../models/route.model');
 const mongoose = require('mongoose');
+const createError = require('http-errors');
 
 module.exports.doCreate = (req, res, next) => {
     const { routeId } = req.params;
@@ -8,16 +9,20 @@ module.exports.doCreate = (req, res, next) => {
     let ratingRoute;
 
     Route.findById(routeId)
+        .populate('reviews')
         .then(route => {
             ratingRoute = route;
-            if (route) {
-                return Rating.create({
+            if (!route) {
+                next(createError(404, 'Route not found'));
+            } else {
+                const review = new Review({
                     description,
                     rating,
-                    route: routeId
-                }).then(() => res.redirect(`/route/${routeId}`));
-            } else {
-                next(createError(404, 'Post not found'));
+                    route: route.id
+                })
+
+                return review.save()
+                    .then(() => res.redirect(`/route/${route.id}`));
             }
         })
         .catch(error => {
@@ -25,8 +30,7 @@ module.exports.doCreate = (req, res, next) => {
                 console.log(error)
                 res.render('routes/detail', {
                     route: ratingRoute,
-                    errors: error.errors,
-                    rating: req.body
+                    errors: error.errors
                 });
             } else {
                 next(error);

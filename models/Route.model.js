@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const constants = require('../public/js/constants');
+const { schema } = require('./user.model');
 const Schema = mongoose.Schema;
 
 const routeSchema = new Schema({
@@ -38,6 +39,12 @@ const routeSchema = new Schema({
         type: String
     }
 });
+
+schema.virtual('reviews', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'route'
+})
 
 const Route = mongoose.model('Route', routeSchema);
 module.exports = Route;
