@@ -30,7 +30,9 @@ module.exports.list = (req, res, next) => {
 module.exports.detail = (req, res, next) => {
     const { id } = req.params;
     Route.findById(id)
+        .populate('reviews')
         .then(route => {
+            console.log(route);
             res.render('routes/detail', { route });
         })
         .catch(next);
@@ -50,7 +52,7 @@ module.exports.doEdit = (req, res, next) => {
     Route.findByIdAndUpdate(req.params.id, { $set: req.body }, { runValidators: true, useFindAndModify: false, new: true })
         .then(route => {
             if (route) {
-                res.render('routes/detail', { route });
+                res.render('routes/detail', { route }); // This should be a redirect
             } else {
                 next(createError(404, 'This route does not exist'));
             }
@@ -81,7 +83,7 @@ module.exports.doCreate = (req, res, next) => {
     Route.create(route)
         .then(route => {
             console.log(route);
-            res.render('routes/detail', { route });
+            res.render('routes/detail', { route }); // This should be a redirect
         })
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {

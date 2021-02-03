@@ -39,5 +39,11 @@ const routeSchema = new Schema({
     }
 });
 
+routeSchema.virtual('reviews', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'route'
+})
+
 const Route = mongoose.model('Route', routeSchema);
 module.exports = Route;
