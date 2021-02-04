@@ -20,16 +20,15 @@ module.exports.doCreate = (req, res, next) => {
                     rating,
                     route: route.id
                 })
-
                 return review.save()
                     .then(() => res.redirect(`/route/${route.id}`));
             }
         })
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
-                console.log(error)
                 res.render('routes/detail', {
                     route: ratingRoute,
+                    description,
                     errors: error.errors
                 });
             } else {
