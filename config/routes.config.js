@@ -19,6 +19,7 @@ router.post('/route/:id/delete', routesMid.loadRoute, routesController.delete);
 router.post('/route/:routeId/reviews', routesMid.loadRoute, reviewsController.doCreate);
 router.get('/review/:reviewId/edit', reviewsController.edit);
 router.post('/review/:reviewId/edit', reviewsController.doEdit);
+router.post('/review/:reviewId/delete', reviewsController.delete);
 
 router.get('/register', userController.register);
 

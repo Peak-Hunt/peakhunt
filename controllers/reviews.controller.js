@@ -53,3 +53,12 @@ module.exports.doEdit = (req, res, next) => {
             } else next(error);
         })
 }
+
+module.exports.delete = (req, res, next) => {
+    Review.findByIdAndDelete(req.params.reviewId)
+        .populate()
+        .then(review => {
+            if (review) res.redirect(`/route/${review.route._id}`);
+            else next(createError(404, 'Review does not exist'));
+        }).catch(next)
+}
