@@ -1,8 +1,8 @@
-const { db } = require('../models/User.model');
 const User = require('../models/User.model');
 const mongoose = require('mongoose');
 const passport = require('passport');
-;
+const createError = require('http-errors');
+
 
 
 module.exports.register = (req, res, next) => {
@@ -11,6 +11,7 @@ module.exports.register = (req, res, next) => {
 
 module.exports.doRegister = (req, res, next) => {
   function renderWithErrors(errors) {
+      console.log('hola')
     res.status(400).render("users/register", {
       user: req.body,
       errors: errors,
@@ -20,11 +21,16 @@ module.exports.doRegister = (req, res, next) => {
   User.findOne({ email: req.body.email })
   .then((user) => {
     if (user) {
-      renderWithErrors({ email: 'Email is already registered ' });
-    } 
+      renderWithErrors({ email: 'Email is already registered' });
+    } else {
+        User.create(req.body)
+        .then(() => res.redirect("/"))
+        .catch(next)
+    }
   })
   .catch((error) => {
     if (error instanceof mongoose.Error.ValidationError) {
+        console.log(error)
       renderWithErrors(error.errors);
     } else {
       next(error);

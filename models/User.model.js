@@ -9,14 +9,12 @@ const PASSWORD_PATTERN = /^.{8,}$/;
 const userSchema = new Schema({
     username: {
       type: String,
-      required: [true, 'Name is required'],
       minlength: [3, 'Name needs at last 3 chars'],
       unique: true,
       trim: true,
     },
     name: {
       type: String,
-      required: 'Full Name is required',
       minlength: [3, 'Name needs at last 3 chars'],
       trim: true,
     },

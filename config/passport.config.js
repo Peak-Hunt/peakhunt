@@ -46,9 +46,6 @@ passport.use('local-auth', new LocalStrategy({
     clientSecret: process.env.G_CLIENT_SECRET,
     callbackURL: process.env.G_REDIRECT_URI || '/authenticate/google/cb',
   }, (accessToken, refreshToken, profile, next) => {
-      console.log(accessToken);
-      console.log(refreshToken);
-      console.log(profile);
     const googleId = profile.id;
     const name = profile.displayName;
     const email = profile.emails[0] ? profile.emails[0].value : undefined;
