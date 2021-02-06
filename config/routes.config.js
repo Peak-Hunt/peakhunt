@@ -16,7 +16,8 @@ router.get('/routes/new', routesController.create);
 router.post('/routes', routesController.doCreate);
 router.post('/route/:id/delete', routesMid.loadRoute, routesController.delete);
 
-router.post('/route/:routeId/ratings', routesMid.loadRoute, reviewsController.doCreate);
+router.post('/route/:routeId/reviews', routesMid.loadRoute, reviewsController.doCreate);
+router.get('/review/:reviewId/edit', reviewsController.edit);
 
 router.get('/register', userController.register);
 

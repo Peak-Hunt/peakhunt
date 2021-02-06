@@ -66,7 +66,7 @@
             </div>
             <div class="ratings mb-5">
                 <h4>Rate this route</h4>
-                <form class="mt-3" method="POST" action="/route/{{ route.id }}/ratings">
+                <form class="mt-3" method="POST" action="/route/{{ route.id }}/reviews">
                     <select name="rating" class="form-select" size="5">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -91,6 +91,7 @@
                         style="border: 1px solid #a4a4a48f; border-radius: 10px;">
                         <p class="rating d-inline me-3">{{ review.rating }}</p>
                         <p class="d-inline">{{ review.description }}</p>
+                        <a href="/review/{{ review.id }}/edit">Edit</a>
                     </div>
                     {{/each}}
                 </div>

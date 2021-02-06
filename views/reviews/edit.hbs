@@ -1,0 +1,22 @@
+<div class="container" style="margin-top: 100px; width: 500px;">
+    <h4>Edit your review</h4>
+    <form class="mt-3" method="POST" action="/route/{{ route.id }}/ratings">
+        <select name="rating" class="form-select" size="5">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <div class="form-floating mt-3 mb-3">
+            <textarea name="description" class="form-control {{#if errors.description}}is-invalid{{/if}}"
+                placeholder="Leave a rating here" id="ratingDescription"
+                style="height: 100px">{{ description }}</textarea>
+            <label for="ratingDescription">Description</label>
+            {{#if errors.description}}
+            <div class="invalid-feedback">{{errors.description}}</div>
+            {{/if}}
+        </div>
+        <button type="submit" class="btn btn-dark">Edit review</button>
+    </form>
+</div>
