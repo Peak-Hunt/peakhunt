@@ -1,8 +1,10 @@
 const passport = require('passport');
+const mongoose = require('mongoose');
+const User = require('../models/User.model');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-passport.serializeUser((user) => {
+passport.serializeUser((user, next) => {
     next(null, user.id);
 
 });
@@ -44,36 +46,40 @@ passport.use('local-auth', new LocalStrategy({
     clientSecret: process.env.G_CLIENT_SECRET,
     callbackURL: process.env.G_REDIRECT_URI || '/authenticate/google/cb',
   }, (accessToken, refreshToken, profile, next) => {
+      console.log(accessToken);
+      console.log(refreshToken);
+      console.log(profile);
     const googleId = profile.id;
     const name = profile.displayName;
     const email = profile.emails[0] ? profile.emails[0].value : undefined;
-  
+
     if (googleId && name && email) {
-      User.findOne({ $or: [
-          { email},
-          {'social.google': googleId }
+        User.findOne({ $or: [
+            { email },
+            { 'social.google': googleId }
         ]})
         .then(user => {
-          if (!user) {
-            user = new User({
-              name,
-              email,
-              password: mongoose.Types.ObjectId(),
-              social: {
-                google: googleId
-              },
-              verified: {
-                date: new Date(),
-                token: null
-              }
-            });
-            return user.save()
-              .then(user => next(null, user))
-          } else {
-            next(null, user);
-          }
+            if(!user) {
+                user = new User({
+                    name,
+                    email,
+                    social: {
+                        google: googleId
+                    },
+                    verified: {
+                        date: new Date()
+                    },
+                    password: mongoose.Types.ObjectId()
+                });
+                return user.save()
+                    .then(user => next(null,user));
+                } else {
+                    next(null,user);
+                }
         }).catch(next)
+
     } else {
-      next(null, null, { oauth: 'Invalid google oauth response' })
+        next(null, null, {auth: 'Invalid configuration'})
     }
+  
   }));
