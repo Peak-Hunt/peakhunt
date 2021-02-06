@@ -37,6 +37,16 @@ const routeSchema = new Schema({
     video: {
         type: String
     }
+}, {
+    timestamps: true,
+    toObject: {
+        transform: (doc, ret) => {
+            ret.id = doc._id;
+            delete ret._id;
+            delete ret.__v;
+            return ret;
+        }
+    }
 });
 
 routeSchema.virtual('reviews', {

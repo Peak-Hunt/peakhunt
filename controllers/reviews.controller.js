@@ -12,8 +12,6 @@ module.exports.doCreate = (req, res, next) => {
     }).then(() => res.redirect(`/route/${req.route.id}`))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
-                console.log(error)
-                console.group(review)
                 res.render('routes/detail', {
                     route: req.route,
                     review: req.body,
@@ -28,11 +26,30 @@ module.exports.doCreate = (req, res, next) => {
 module.exports.edit = (req, res, next) => {
     const { reviewId } = req.params;
     Review.findById(reviewId)
+        .populate('route')
         .then(review => {
             if (review) {
-                res.render('reviews/edit', { review, route: req.route })
+                res.render('reviews/edit', { review })
             } else {
                 next(createError(404, 'Route not found'));
             }
         }).catch(next);
+}
+
+module.exports.doEdit = (req, res, next) => {
+    Review.findByIdAndUpdate(req.params.reviewId, { $set: req.body }, { runValidators: true })
+        .then(review => {
+            if (review) res.redirect(`/route/${review.route._id}`); // Doesn't work with just id
+            else next(createError(404, 'Review does not exist'));
+        })
+        .catch(error => {
+            if (error instanceof mongoose.Error.ValidationError) {
+                const review = req.body;
+                review.id = req.params.reviewId;
+                res.render('reviews/edit', {
+                    errors: error.errors,
+                    review
+                })
+            } else next(error);
+        })
 }
