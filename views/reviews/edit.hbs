@@ -11,7 +11,7 @@
         <div class="form-floating mt-3 mb-3">
             <textarea name="description" class="form-control {{#if errors.description}}is-invalid{{/if}}"
                 placeholder="Leave a rating here" id="ratingDescription"
-                style="height: 100px">{{ description }}</textarea>
+                style="height: 100px">{{ review.description }}</textarea>
             <label for="ratingDescription">Description</label>
             {{#if errors.description}}
             <div class="invalid-feedback">{{errors.description}}</div>

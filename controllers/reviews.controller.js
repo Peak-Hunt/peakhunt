@@ -4,14 +4,16 @@ const mongoose = require('mongoose');
 const createError = require('http-errors');
 
 module.exports.doCreate = (req, res, next) => {
-    const { description, rating } = req.body;
+    const review = req.body;
     Review.create({
-        description,
-        rating,
+        rating: review.rating,
+        description: review.description,
         route: req.route.id,
     }).then(() => res.redirect(`/route/${req.route.id}`))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
+                console.log(error)
+                console.group(review)
                 res.render('routes/detail', {
                     route: req.route,
                     review: req.body,
