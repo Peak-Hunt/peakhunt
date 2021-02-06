@@ -24,10 +24,13 @@ module.exports.doCreate = (req, res, next) => {
 }
 
 module.exports.edit = (req, res, next) => {
-    const { routeId } = req.params;
-
-    Route.findById(routeId)
-        .then(route => {
-
-        })
+    const { id } = req.params;
+    Review.findById(id)
+        .then(review => {
+            if (review) {
+                res.render('...', { review, route: req.route })
+            } else {
+                next(createError(404, 'Route not found'));
+            }
+        }).catch(next);
 }
