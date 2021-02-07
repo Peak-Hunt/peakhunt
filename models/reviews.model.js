@@ -10,7 +10,7 @@ const reviewSchema = new Schema({
     rating: {
         type: Number,
         required: 'Rating cannot be empty.',
-        min: 1,
+        min: 0.5,
         max: 5
     },
     route: {
@@ -37,7 +37,7 @@ reviewSchema.statics.calcAverageRatings = async function(route) {
     if (stats.length > 0) {
         await Route.findByIdAndUpdate(route, {
             ratingsQuantity: stats[0].nRating,
-            ratingsAverage: stats[0].avgRating
+            ratingsAverage: Math.round(stats[0].avgRating * 10) / 10 //toFixed doesnt show .0 when n.0, just n
         })
     } else {
         await Route.findByIdAndUpdate(route, {
