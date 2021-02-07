@@ -66,7 +66,7 @@
             </div>
             <div class="ratings mb-5">
                 <h4>Rate this route</h4>
-                <form class="mt-3" method="POST" action="/route/{{ route.id }}/ratings">
+                <form class="mt-3" method="POST" action="/route/{{ route.id }}/reviews">
                     <select name="rating" class="form-select" size="5">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -76,7 +76,7 @@
                     </select>
                     <div class="form-floating mt-3 mb-3">
                         <textarea name="description" class="form-control {{#if errors.description}}is-invalid{{/if}}"
-                            placeholder="Leave a rating here" id="ratingDescription" style="height: 100px"></textarea>
+                            placeholder="Leave a rating here" id="ratingDescription" style="height: 100px">{{ review.description }}</textarea>
                         <label for="ratingDescription">Description</label>
                         {{#if errors.description}}
                         <div class="invalid-feedback">{{errors.description}}</div>
@@ -91,6 +91,10 @@
                         style="border: 1px solid #a4a4a48f; border-radius: 10px;">
                         <p class="rating d-inline me-3">{{ review.rating }}</p>
                         <p class="d-inline">{{ review.description }}</p>
+                        <a href="/review/{{ review.id }}/edit">Edit</a>
+                        <form class="ms-3" action="/review/{{ review.id }}/delete" method="POST">
+                            <button type="submit">Delete</button>
+                        </form>
                     </div>
                     {{/each}}
                 </div>

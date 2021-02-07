@@ -28,41 +28,23 @@ module.exports.list = (req, res, next) => {
 }
 
 module.exports.detail = (req, res, next) => {
-    const { id } = req.params;
-    Route.findById(id)
-        .populate('reviews')
-        .then(route => {
-            console.log(route);
-            res.render('routes/detail', { route });
-        })
-        .catch(next);
+    res.render('routes/detail', { route: req.route });
 }
 
 module.exports.edit = (req, res, next) => {
     const sports = constants.SPORTS;
     const difficulties = constants.DIFFICULTIES;
-    Route.findById(req.params.id)
-        .then(route => {
-            res.render('routes/edit', { route, sports, difficulties });
-        })
-        .catch(next);
+    res.render('routes/edit', { route: req.route, sports, difficulties });
 }
 
 module.exports.doEdit = (req, res, next) => {
-    Route.findByIdAndUpdate(req.params.id, { $set: req.body }, { runValidators: true, useFindAndModify: false, new: true })
-        .then(route => {
-            if (route) {
-                res.render('routes/detail', { route }); // This should be a redirect
-            } else {
-                next(createError(404, 'This route does not exist'));
-            }
-        })
+    Object.assign(req.route, req.body);
+    req.route.save()
+        .then(route => res.redirect(`/route/${route.id}`))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
-                const route = req.body;
-                route.id = req.params.id;
                 res.render('routes/edit', {
-                    route,
+                    route: req.route,
                     sports: constants.SPORTS,
                     difficulties: constants.DIFFICULTIES,
                     errors: error.errors
@@ -81,10 +63,7 @@ module.exports.create = (req, res, next) => {
 module.exports.doCreate = (req, res, next) => {
     const route = req.body;
     Route.create(route)
-        .then(route => {
-            console.log(route);
-            res.render('routes/detail', { route }); // This should be a redirect
-        })
+        .then(() => res.redirect('/routes'))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
                 res.render('routes/new', {
@@ -96,10 +75,7 @@ module.exports.doCreate = (req, res, next) => {
 }
 
 module.exports.delete = (req, res, next) => {
-    Route.findByIdAndDelete(req.params.id)
-        .then(route => {
-            if (route) res.redirect('/routes');
-            else next(createError(404, 'Route does not exist.'));
-        })
+    Route.findByIdAndDelete(req.route.id)
+        .then(() => res.redirect('/routes'))
         .catch(next)
 }

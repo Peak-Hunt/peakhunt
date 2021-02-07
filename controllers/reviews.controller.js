@@ -4,36 +4,61 @@ const mongoose = require('mongoose');
 const createError = require('http-errors');
 
 module.exports.doCreate = (req, res, next) => {
-    const { routeId } = req.params;
-    const { description, rating } = req.body;
-    let ratingRoute;
-
-    Route.findById(routeId)
-        .populate('reviews')
-        .then(route => {
-            ratingRoute = route;
-            if (!route) {
-                next(createError(404, 'Route not found'));
-            } else {
-                const review = new Review({
-                    description,
-                    rating,
-                    route: route.id
-                })
-
-                return review.save()
-                    .then(() => res.redirect(`/route/${route.id}`));
-            }
-        })
+    const review = req.body;
+    Review.create({
+        rating: review.rating,
+        description: review.description,
+        route: req.route.id,
+    }).then(() => res.redirect(`/route/${req.route.id}`))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
-                console.log(error)
                 res.render('routes/detail', {
-                    route: ratingRoute,
+                    route: req.route,
+                    review: req.body,
                     errors: error.errors
                 });
             } else {
                 next(error);
             }
         });
+}
+
+module.exports.edit = (req, res, next) => {
+    const { reviewId } = req.params;
+    Review.findById(reviewId)
+        .populate('route')
+        .then(review => {
+            if (review) {
+                res.render('reviews/edit', { review })
+            } else {
+                next(createError(404, 'Route not found'));
+            }
+        }).catch(next);
+}
+
+module.exports.doEdit = (req, res, next) => {
+    Review.findByIdAndUpdate(req.params.reviewId, { $set: req.body }, { runValidators: true })
+        .then(review => {
+            if (review) res.redirect(`/route/${review.route._id}`); // Doesn't work with just id
+            else next(createError(404, 'Review does not exist'));
+        })
+        .catch(error => {
+            if (error instanceof mongoose.Error.ValidationError) {
+                const review = req.body;
+                review.id = req.params.reviewId;
+                res.render('reviews/edit', {
+                    errors: error.errors,
+                    review
+                })
+            } else next(error);
+        })
+}
+
+module.exports.delete = (req, res, next) => {
+    Review.findByIdAndDelete(req.params.reviewId)
+        .populate()
+        .then(review => {
+            if (review) res.redirect(`/route/${review.route._id}`);
+            else next(createError(404, 'Review does not exist'));
+        }).catch(next)
 }
