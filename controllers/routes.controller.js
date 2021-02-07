@@ -63,10 +63,7 @@ module.exports.create = (req, res, next) => {
 module.exports.doCreate = (req, res, next) => {
     const route = req.body;
     Route.create(route)
-        .then(route => {
-            console.log(route);
-            res.render('routes/detail', { route }); // This should be a redirect
-        })
+        .then(() => res.redirect('/routes'))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
                 res.render('routes/new', {
