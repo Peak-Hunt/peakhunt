@@ -24,8 +24,7 @@
                                     </div>
                                 </div>
                                 <div class="col-2">
-                                    <button class="btn bg-primary" type="submit"><i
-                                            class="fas fa-search"></i></button>
+                                    <button class="btn bg-primary" type="submit"><i class="fas fa-search"></i></button>
                                 </div>
                             </form>
                         </div>
@@ -44,26 +43,26 @@
         <div class="text-center">
             <h2>Search by Sport</h2>
         </div>
-        <div class="d-flex flex-row justify-content-between mb-5 mt-5">
-            <div class="category-container d-flex flex-column align-items-center">
-                <div onclick="location.href='#';" class="img category-img hiking-img"></div>
-                <h5>Hiking</h5>
+        <div class="row row-cols-10 mt-5"> {{!-- TODO --}}
+            <div class="col">
+                <div onclick="location.href='/routes?location=&sport=Hiking';" class="img category-img" style="background-image: url('./images/hiking.jpg');"></div>
+                <h5 class="text-center">Hiking</h5>
             </div>
-            <div class="category-container d-flex flex-column align-items-center">
-                <div onclick="location.href='#';" class="img category-img mountaineering-img"></div>
-                <h5>Mountaineering</h5>
+            <div class="col">
+                <div onclick="location.href='/routes?location=&sport=Mountaineering';" class="img category-img" style="background-image: url('./images/mountaineering.jpg');"></div>
+                <h5 class="text-center">Mountaineering</h5>
             </div>
-            <div class="category-container d-flex flex-column align-items-center">
-                <div onclick="location.href='#';" class="img category-img ski-img"></div>
-                <h5>Ski</h5>
+            <div class="col">
+                <div onclick="location.href='/routes?location=&sport=Ski';" class="img category-img" style="background-image: url('./images/ski.jpg');"></div>
+                <h5 class="text-center">Ski</h5>
             </div>
-            <div class="category-container d-flex flex-column align-items-center">
-                <div onclick="location.href='#';" class="img category-img climbing-img"></div>
-                <h5>Climbing</h5>
+            <div class="col">
+                <div onclick="location.href='/routes?location=&sport=Climbing';" class="img category-img" style="background-image: url('./images/climbing.jpg');"></div>
+                <h5 class="text-center">Climbing</h5>
             </div>
-            <div class="category-container d-flex flex-column align-items-center">
-                <div onclick="location.href='#';" class="img category-img mtb-img"></div>
-                <h5>Mountain biking</h5>
+            <div class="col">
+                <div onclick="location.href='/routes?location=&sport=Mountain%20biking';" class="img category-img" style="background-image: url('./images/mtb.jpg');"></div>
+                <h5 class="text-center">Mountain biking</h5>
             </div>
         </div>
     </div>
@@ -73,7 +72,7 @@
     <div class="container">
         <div class="text-center">
             <h2>Trending locations</h2>
-            <div class="row locations-container mt-5" style="height: 500px;">
+            <div class="row mt-5" style="height: 500px;">
                 <div class="col-5">
                     <div onclick="location.href='#';" class="img location-img chamonix-img">
                         <h4>Chamonix, France</h4>
@@ -83,14 +82,14 @@
                     <div onclick="location.href='#';" class="img location-img valais-img" style="height: 240px;">
                         <h4>Valais, Switzerland</h4>
                     </div>
-                    <div class="row locations-container d-flex" style="height: 240px;">
-                        <div class="col-6">
+                    <div class="row" style="height: 240px;">
+                        <div class="col">
                             <div onclick="location.href='#';" class="img location-img dolomites-img"
                                 style="height: 100%;">
                                 <h4>Dolomites, Italy</h4>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                             <div onclick="location.href='#';" class="img location-img bern-img" style="height: 100%;">
                                 <h4>Bern, Switzerland</h4>
                             </div>
