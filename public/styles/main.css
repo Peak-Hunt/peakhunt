@@ -7,10 +7,36 @@ html * {
     padding: 0;
 }
 
+/* Colors */
 ::selection {
     background: #ffdc00;
   }
+p, h1, h2, h3, h4, h5, h6 {
+    color: #202930;
+}
+.bg-dark {
+    background-color: #202930;
+}
+.primary {
+    color: #5171F1;
+}
+.bg-primary {
+    background-color: #5171F1;
+}
+.secondary {
+    color: #F8A931;
+}
+.bg-secondary {
+    background-color: #F8A931;
+}
+.tertiary {
+    color: #DAEFFF;
+}
+.bg-tertiary {
+    background-color: #DAEFFF;
+}
 
+  /* Navbar */
 .navbar {
     position: absolute;
     left: 0;
@@ -18,16 +44,26 @@ html * {
     padding: 10px 0 10px 0;
     width: 100%;
     z-index: 99999;
-    background-color: white;
-  }
-
+    background-color: rgba(255, 255, 255, 0);
+}
 .navbar-brand {
     font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    display: flex;
+    align-items: flex-end;
 }
-
+.navbar li, .user-area, a {
+    font-size: 16px;
+}
 .navbar button {
     margin-left: 20px;
 }
+.user-area {
+    display: flex;
+    align-items: center;
+}
+
 
 .home-header {
     height: 100vh;
@@ -271,9 +307,6 @@ section {
 }
 
 /* Rating */
-fieldset, label { margin: 0; padding: 0; }
-body{ margin: 20px; }
-h1 { font-size: 1.5em; margin: 10px; }
 
 /****** Style Star Rating Widget *****/
 

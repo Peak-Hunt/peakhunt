@@ -26,6 +26,18 @@ const routeSchema = new Schema({
         type: Number,
         required: 'Please, enter the duration of this route.'
     },
+    elevationGained: {
+        type: Number,
+        required: 'Please enter the elevation gained.'
+    },
+    elevationLost: {
+        type: Number,
+        required: 'Please enter the elevation lost.'
+    },
+    distance: {
+        type: Number,
+        required: 'Please enter the distance of this route.'
+    },
     description: {
         type: String,
         required: 'Please enter a description for this route.'
