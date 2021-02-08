@@ -1,24 +1,40 @@
 <div class="home-header">
     <div class="container">
-        <div class="home-form-container">
-            <h1>Explore mountain routes nearby</h1>
-            <form action="/routes" class="mt-5">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="peak" name="location" placeholder="Matterhorn">
-                    <label for="peak">Location</label>
+        <div class="header-bg">
+            <div class="header-container blur-overlay">
+                <div class="row">
+                    <div class="col">
+                        <h1>Discover mountains nearby</h1>
+                        <div class="form-container p-4">
+                            <form class="row" action="/routes">
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input name="location" class="form-control" id="location"></input>
+                                        <label for="location">Location</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-floating">
+                                        <select name="sport" class="form-select" id="floatingSelect">
+                                            {{#each sportOptions as |sportOption|}}
+                                            {{option ../sport sportOption}}
+                                            {{/each}}
+                                        </select>
+                                        <label for="floatingSelect">Sport</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn bg-primary" type="submit"><i
+                                            class="fas fa-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                        <div class="hero-img"></div>
+                    </div>
                 </div>
-                <div class="form-floating mb-3">
-                    <select name="sport" class="form-select" id="floatingSelect">
-                        {{#each sportOptions as |sportOption|}}
-                        {{option ../sport sportOption}}
-                        {{/each}}
-                    </select>
-                    <label for="floatingSelect">Sport</label>
-                </div>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-dark p-2" type="submit">Search</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
