@@ -7,7 +7,7 @@ module.exports.list = (req, res, next) => {
     const filters = req.query;
     const { location, sport, difficulty } = req.query;
     const criterial = Object.keys(filters)
-        .filter((key => filters[key] !== 'all'))
+        .filter((key => filters[key] !== 'All' && filters[key] !=='all'))
         .reduce((criterial, filter) => {
             if (filters[filter]) criterial[filter] = filters[filter];
             return criterial;
