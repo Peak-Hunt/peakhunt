@@ -4,9 +4,11 @@ const passport = require('passport');
 const GOOGLE_SCOPES = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
 
 
+
 const commonController = require('../controllers/common.controller');
 const routesController = require('../controllers/routes.controller');
 const userController = require('../controllers/user.controller');
+
 
 router.get('/', commonController.home);
 router.get('/routes', routesController.list)

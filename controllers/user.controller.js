@@ -48,9 +48,7 @@ module.exports.doLogin = (req, res, next) => {
     if (error) {
       next(error);
     } else if (!user) {
-        console.log(error, validations)
-
-      res
+    res
         .status(400)
         .render("users/login", { user: req.body, errors: validations });
     } else {
