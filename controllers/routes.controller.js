@@ -43,6 +43,7 @@ module.exports.doEdit = (req, res, next) => {
         .then(route => res.redirect(`/route/${route.id}`))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
+                console.log(req.route.sport)
                 res.render('routes/edit', {
                     route: req.route,
                     sports: constants.SPORTS,
