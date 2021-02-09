@@ -1,9 +1,9 @@
 <div class="list-container row">
-    <div class="col-3">
+    <div class="col-4">
         <div class="form-container p-4">
-            <form class="mb-3 mt-3 text-center">
+            <form class="mb-1 mt-3 text-center">
                 <div class="form-floating mb-2">
-                    <input value="{{ location }}" name="location" class="form-control" id="location"></input>
+                    <input type="text" value="{{ location }}" name="location" class="form-control" id="location"></input>
                     <label for="location">Location</label>
                 </div>
                 <div class="row">
@@ -31,32 +31,32 @@
                 <div class="row">
                     <div class="col-6 pe-1">
                         <div class="form-floating mb-2">
-                            <input type="number" value="{{ location }}" name="location" class="form-control"
-                                id="location"></input>
-                            <label for="location">Min elev.</label>
+                            <input type="number" value="" name="minElevation" class="form-control"
+                                id="minElevation"></input>
+                            <label for="minElevation">Min elev.</label>
                         </div>
                     </div>
                     <div class="col-6 ps-1">
                         <div class="form-floating mb-2">
-                            <input type="number" value="{{ location }}" name="location" class="form-control"
-                                id="location"></input>
-                            <label for="location">Max elev.</label>
+                            <input type="number" value="" name="maxElevation" class="form-control"
+                                id="maxElevation"></input>
+                            <label for="maxElevation">Max elev.</label>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6 pe-1">
                         <div class="form-floating mb-2">
-                            <input type="number" value="{{ location }}" name="location" class="form-control"
-                                id="location"></input>
-                            <label for="location">Min duration</label>
+                            <input type="number" value="" name="minDuration" class="form-control"
+                                id="minDuration"></input>
+                            <label for="minDuration">Min duration</label>
                         </div>
                     </div>
                     <div class="col-6 ps-1">
                         <div class="form-floating mb-2">
-                            <input type="number" value="{{ location }}" name="location" class="form-control"
-                                id="location"></input>
-                            <label for="location">Max duration</label>
+                            <input type="number" value="" name="maxDuration" class="form-control"
+                                id="maxDuration"></input>
+                            <label for="maxDuration">Max duration</label>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
     <div class="col">
         <div class="row">
             {{#each routes as |route|}}
-            <div class="col-4 mb-5">
+            <div class="col-6 mb-5">
                 <div class="route-card" onclick="location.href='/route/{{ route.id }}';">
                     <div class="route-card-img mb-2 p-2 d-flex justify-content-end" style="background-image: url({{ route.image }});">
                         <div class="route-card-rating">

@@ -33,7 +33,6 @@ reviewSchema.statics.calcAverageRatings = async function(route) {
             }
         }
     ]);
-    console.log(stats);
     if (stats.length > 0) {
         await Route.findByIdAndUpdate(route, {
             ratingsQuantity: stats[0].nRating,

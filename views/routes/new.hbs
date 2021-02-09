@@ -10,7 +10,7 @@
         <div class="form-floating col-3 mb-3">
             <select name="sport" class="form-select" id="floatingSelect">
                 {{#each sports as |sport|}}
-                {{option ../route.sport sport}}
+                {{objOption ../route.sport sport}}
                 {{/each}}
             </select>
             <label for="floatingSelect">Sport</label>
