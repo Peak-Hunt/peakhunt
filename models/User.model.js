@@ -10,7 +10,6 @@ const userSchema = new Schema({
     username: {
       type: String,
       minlength: [3, 'Name needs at last 3 chars'],
-      unique: true,
       trim: true,
     },
     name: {
@@ -53,6 +52,18 @@ const userSchema = new Schema({
   },
   { timestamps: true },
 );
+
+userSchema.pre('save', function (next) {
+
+    if (this.isModified('password')) {
+    bcrypt.hash(this.password, 10).then((hash) => {
+      this.password = hash;
+      next();
+    });
+  } else {
+    next();
+  }
+});
 
 
 userSchema.methods.checkPassword = function (passwordToCheck) {

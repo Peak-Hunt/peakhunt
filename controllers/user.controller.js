@@ -2,6 +2,8 @@ const User = require('../models/User.model');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const createError = require('http-errors');
+const mailer = require('../config/mailer.config');
+
 
 
 
@@ -11,7 +13,6 @@ module.exports.register = (req, res, next) => {
 
 module.exports.doRegister = (req, res, next) => {
   function renderWithErrors(errors) {
-      console.log('hola')
     res.status(400).render("users/register", {
       user: req.body,
       errors: errors,
@@ -23,9 +24,8 @@ module.exports.doRegister = (req, res, next) => {
     if (user) {
       renderWithErrors({ email: 'Email is already registered' });
     } else {
-        User.create(req.body)
+        return User.create(req.body)
         .then(() => res.redirect("/"))
-        .catch(next)
     }
   })
   .catch((error) => {
@@ -48,6 +48,8 @@ module.exports.doLogin = (req, res, next) => {
     if (error) {
       next(error);
     } else if (!user) {
+        console.log(error, validations)
+
       res
         .status(400)
         .render("users/login", { user: req.body, errors: validations });
@@ -74,3 +76,9 @@ module.exports.loginWithGoogle = (req, res, next) => {
       }
     })(req, res, next);
   }
+
+  module.exports.logout = (req, res, next) => {
+    req.logout();
+    res.redirect('/login');
+  };
+  
