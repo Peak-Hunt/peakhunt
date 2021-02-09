@@ -7,7 +7,7 @@ module.exports.list = (req, res, next) => {
     const filters = req.query;
     const { location, sport, difficulty } = req.query;
     const criterial = Object.keys(filters)
-        .filter((key => filters[key] !== 'All'))
+        .filter((key => filters[key] !== 'all'))
         .reduce((criterial, filter) => {
             if (filters[filter]) criterial[filter] = filters[filter];
             return criterial;
@@ -67,9 +67,12 @@ module.exports.doCreate = (req, res, next) => {
         .then(() => res.redirect('/routes'))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
+                console.log(error)
                 res.render('routes/new', {
                     errors: error.errors,
-                    route
+                    route,
+                    sports: constants.SPORTS,
+                    difficulties: constants.DIFFICULTIES
                 })
             } else next(error);
         })

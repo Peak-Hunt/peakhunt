@@ -10,7 +10,7 @@ const routeSchema = new Schema({
     },
     sport: {
         type: String,
-        enum: constants.SPORTS,
+        enum: constants.SPORTS.map(sport => sport.key),
         required: 'Please, select a sport.'
     },
     difficulty: {
