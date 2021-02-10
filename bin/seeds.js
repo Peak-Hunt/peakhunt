@@ -5,7 +5,7 @@ require('../config/db.config');
 const routes = [
     {
         title: 'Säntis via Lisengrat',
-        sport: 'Hiking',
+        sport: 'hiking',
         difficulty: 'Medium',
         location: 'Appenzell, Switzerland',
         duration: 5,
@@ -14,7 +14,7 @@ const routes = [
     },
     {
         title: 'Matterhorn via Hörnli Ridge',
-        sport: 'Mountaineering',
+        sport: 'mountaineering',
         difficulty: 'Expert',
         location: 'Zermatt, Switzerland',
         duration: 16,
@@ -24,7 +24,7 @@ const routes = [
     },
     {
         title: 'Mont Blanc via Gouter',
-        sport: 'Mountaineering',
+        sport: 'mountaineering',
         difficulty: 'Expert',
         location: 'Chamonix, Switzerland',
         duration: 16,

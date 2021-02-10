@@ -280,6 +280,18 @@ section {
     padding: 20px;
     text-align: left;
 }
+.badge {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 8px 15px 8px 15px;
+    font-size: 13px;
+    font-weight: 600;
+}
+.card-emoji {
+    height: 18px;
+    width: 18px;
+}
 
 /* Badge colors */
 .hiking-badge {
@@ -302,6 +314,23 @@ section {
     background-color: #FFF1DB;
     color: #624C00;
 }
+.Easy-badge {
+    background-color: #D9E9D7;
+    color: #50744d;
+}
+.Medium-badge {
+    background-color: #FFF1C0;
+    color: #DD8500;
+}
+.Hard-badge {
+    background-color: #FFCFCF;
+    color: #9B0000;
+}
+.Expert-badge {
+    background-color: #EFD4FF;
+    color: #6700A4;
+}
+
 
 
 /* Rating */

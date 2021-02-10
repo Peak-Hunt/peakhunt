@@ -37,6 +37,27 @@
             <div class="invalid-feedback">Please enter the route's duration.</div>
             {{/if}}
         </div>
+        <div class="form-floating col-2 mb-3">
+            <input type="number" value="{{ route.elevationGained }}" name="elevationGained" class="form-control {{#if errors.elevationGained}}is-invalid{{/if}}" id="elevationGained"></input>
+            <label for="elevationGained">Elevation gained (m)</label> {{!-- TODO --}}
+            {{#if errors.elevationGained}}
+            <div class="invalid-feedback">Please enter the route's elevation gained.</div>
+            {{/if}}
+        </div>
+        <div class="form-floating col-2 mb-3">
+            <input type="number" value="{{ route.elevationLost }}" name="elevationLost" class="form-control {{#if errors.elevationLost}}is-invalid{{/if}}" id="elevationLost"></input>
+            <label for="elevationLost">Elevation lost (m)</label> {{!-- TODO --}}
+            {{#if errors.duration}}
+            <div class="invalid-feedback">Please enter the route's elevation lost.</div>
+            {{/if}}
+        </div>
+        <div class="form-floating col-2 mb-3">
+            <input type="number" value="{{ route.distance }}" name="distance" class="form-control {{#if errors.distance}}is-invalid{{/if}}" id="distance"></input>
+            <label for="distance">Distance (km)</label> {{!-- TODO --}}
+            {{#if errors.duration}}
+            <div class="invalid-feedback">Please enter the route's distance.</div>
+            {{/if}}
+        </div>
         <div class="form-floating col-6 mb-3">
             <textarea style="height: auto;" name="description" class="form-control {{#if errors.description}}is-invalid{{/if}}"
                 id="description">{{ route.description }}</textarea>
