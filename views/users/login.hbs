@@ -1,0 +1,39 @@
+<div class="custom-container">
+    <h1 class="text-center m-4 text-success">Education</h1>
+    <div class="jumbotron">
+        <h3 class="text-center text-primary">Login Form</h3>
+        <br>
+
+        {{#if errors}}
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>{{ errors.email }}</strong>
+            <button class="close" data-dismiss="alert"><span>&times;</span></button>
+        </div>
+        {{/if}}
+
+        <form action="/login" id="login" method="POST">
+            <div class="form-group">
+                <label for="email">Email <span class="text-danger">*</span></label>
+                <input type="text" class="form-control {{#if errors.email}}is-invalid{{/if}} " name="email" id="email"
+                    placeholder="Enter your email" {{errors.email}}>
+            </div>
+            <div class="form-group">
+                <label for="password">Password <span class="text-danger">*</span></label>
+                <input type="password" class="form-control {{#if errors.password}}is-invalid{{/if}} " name="password"
+                    id="password" placeholder="Enter Your Password" {{errors.email}}>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-info btn-block">
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-8">
+                        New user? Register <a href="/register">here</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <a class="btn btn-secondary btn-block" href="/authenticate/google"><i class="fa fa-google"></i> Login with
+            Google</a>
+    </div>
+</div>
