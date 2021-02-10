@@ -98,8 +98,9 @@
                                 <p><i class="far fa-clock me-2"></i>{{ route.duration }}h</p>
                             </div>
                             <p><i class="fas fa-location-arrow me-2 mb-4"></i>{{ route.location }}</p>
-                            <span class="badge bg-secondary">{{ route.sport }}</span>
+                            <span class="badge {{ route.sport }}-badge">{{sportKeyToName  route.sport }}</span>
                             <span class="badge bg-secondary">{{ route.difficulty }}</span>
+                            
                         </div>
                     </div>
                 </div>

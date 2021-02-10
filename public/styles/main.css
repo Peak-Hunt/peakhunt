@@ -281,6 +281,29 @@ section {
     text-align: left;
 }
 
+/* Badge colors */
+.hiking-badge {
+    background-color: #D9E9D7;
+    color: #50744d;
+}
+.mountaineering-badge {
+    background-color: #E0D4FF;
+    color: #005541;
+}
+.climbing-badge {
+    background-color: #E9E9E9;
+    color: #313131;
+}
+.ski-badge {
+    background-color: #0057FF;
+    color: #DDE4FF;
+}
+.mtb-badge {
+    background-color: #FFF1DB;
+    color: #624C00;
+}
+
+
 /* Rating */
 
 /****** Style Star Rating Widget *****/
