@@ -1,5 +1,7 @@
-module.exports.home = (req, res, next) => {
-    console.log(process.env.G_CLIENT_ID)
+const constants = require('../public/js/constants');
 
-    res.render('common/home');
+module.exports.home = (req, res, next) => {
+    res.render('common/home', {
+        sportOptions: constants.SPORT_OPTIONS
+    });
 }

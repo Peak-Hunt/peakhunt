@@ -1,0 +1,58 @@
+<div class="container" style="margin-top: 100px;">
+    <form method="POST" action="/route/{{ route.id }}/edit">
+        <div class="form-floating col-6 mb-3">
+            <input type="text" class="form-control {{#if errors.title}}is-invalid{{/if}}" name="title" value="{{ route.title }}" id="routeTitle">
+            <label for="routeTitle">Title</label>
+            {{#if errors.title}}
+            <div class="invalid-feedback">Please enter a route title.</div>
+            {{/if}}
+        </div>
+        <div class="form-floating col-3 mb-3">
+            <select name="sport" class="form-select" id="floatingSelect">
+                {{#each sports as |sport|}}
+                {{option ../route.sport sport}}
+                {{/each}}
+            </select>
+            <label for="floatingSelect">Sport</label>
+        </div>
+        <div class="form-floating col-2 mb-3">
+            <select name="difficulty" class="form-select" id="floatingSelect">
+                {{#each difficulties as |difficulty|}}
+                {{option ../route.difficulty difficulty}}
+                {{/each}}
+            </select>
+            <label for="floatingSelect">Difficulty</label>
+        </div>
+        <div class="form-floating col-4 mb-3">
+            <input value="{{ route.location }}" name="location" class="form-control {{#if errors.location}}is-invalid{{/if}}" id="location"></input>
+            <label for="location">Location</label>
+            {{#if errors.location}}
+            <div class="invalid-feedback">Please enter the route's location.</div>
+            {{/if}}
+        </div>
+        <div class="form-floating col-2 mb-3">
+            <input value="{{ route.duration }}" name="duration" class="form-control {{#if errors.duration}}is-invalid{{/if}}" id="duration"></input>
+            <label for="duration">Duration (hours)</label> {{!-- TODO --}}
+            {{#if errors.duration}}
+            <div class="invalid-feedback">Please enter the route's duration.</div>
+            {{/if}}
+        </div>
+        <div class="form-floating col-6 mb-3">
+            <textarea style="height: auto;" name="description" class="form-control {{#if errors.description}}is-invalid{{/if}}"
+                id="description">{{ route.description }}</textarea>
+            <label for="description">Description</label> {{!-- TODO --}}
+            {{#if errors.description}}
+            <div class="invalid-feedback">Please enter a description of the route.</div>
+            {{/if}}
+        </div>
+        <div class="form-floating col-6 mb-3">
+            <input value="{{ route.video }}" name="video" class="form-control" id="video"></input>
+            <label for="video">Video URL</label>
+        </div>
+        <div class="form-floating col-6 mb-3">
+            <input value="{{ route.image }}" name="image" class="form-control" id="image"></input>
+            <label for="image">Image URL</label>
+        </div>
+        <button class="btn btn-dark" type="submit">Edit route</button>
+    </form>
+</div>

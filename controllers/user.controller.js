@@ -1,11 +1,8 @@
-const User = require('../models/User.model');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const createError = require('http-errors');
 const mailer = require('../config/mailer.config');
-
-
-
+const User = require('../models/user.model');
 
 module.exports.register = (req, res, next) => {
   res.render("users/register");

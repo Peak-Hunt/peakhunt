@@ -1,0 +1,119 @@
+<div class="container" style="margin-top: 100px;">
+    <div class="main-img img" style="background-image: url({{ route.image }});">
+        <div onclick="location.href='#';" class="action-label me-3">
+            <span class="material-icons">bookmark_border</span>
+            <p>Save route</p>
+        </div>
+        <div onclick="location.href='#';" class="action-label">
+            <span class="material-icons">ios_share</span>
+            <p>Share route</p>
+        </div>
+        <div onclick="location.href='/route/{{ route.id }}/edit';" class="action-label ms-3">
+            <span class="material-icons">create</span>
+            <p>Edit route</p>
+        </div>
+        <form action="/route/{{ route.id }}/delete" method="POST" id="delete">
+            <div onclick="document.getElementById('delete').submit();" class="action-label ms-3">
+                <span class="material-icons">delete_outline</span>
+                <p>Delete route</p>
+            </div>
+        </form>
+    </div>
+    <div class="mt-5 mb-5">
+        <h1 class="d-flex align-items-center">
+            <span class="badge bg-dark me-3">{{ route.ratingsAverage }}
+                <span class="material-icons">grade</span>
+            </span> {{ route.title }}
+        </h1>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-9">
+            <div class="content-container">
+                <h3>Description</h3>
+                <p>{{ route.description }}</p>
+            </div>
+            {{#if route.video}}
+            <div class="content-container">
+                <h3>Video</h3>
+                <iframe width="560" height="315" src={{ route.video }} frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+            {{/if}}
+        </div>
+        <div class="col-3">
+            <div class="details-container mb-5">
+                <div class="detail d-flex p-3">
+                    <span class="material-icons me-3">hiking</span>
+                    <p><b>Sport: </b>{{ route.sport }}</p>
+                </div>
+                <hr>
+                <div class="detail d-flex p-3">
+                    <span class="material-icons me-3">bolt</span>
+                    <p><b>Difficulty: </b>{{ route.difficulty }}</p>
+                </div>
+                <hr>
+                <div class="detail d-flex p-3">
+                    <span class="material-icons me-3">schedule</span>
+                    <p><b>Duration: </b>{{ route.duration }}h</p>
+                </div>
+                <hr>
+                <div class="detail d-flex p-3">
+                    <span class="material-icons me-3">room</span>
+                    <p><b>Location: </b>{{ route.location }}</p>
+                </div>
+            </div>
+            <div class="ratings mb-5">
+                <h4>Rate this route</h4>
+                <form class="mt-3" method="POST" action="/route/{{ route.id }}/reviews">
+                    <div class="form-floating mt-3 mb-3">
+                        <textarea name="description" class="form-control {{#if errors.description}}is-invalid{{/if}}"
+                            id="ratingDescription" style="height: 100px">{{ review.description }}</textarea>
+                        <label for="ratingDescription">Description</label>
+                        {{#if errors.description}}
+                        <div class="invalid-feedback">{{errors.description}}</div>
+                        {{/if}}
+                    </div>
+                    <fieldset class="rating" style="width: 100%;">
+                        <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5"
+                            title="Awesome - 5 stars"></label>
+                        <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half"
+                            for="star4half" title="Pretty good - 4.5 stars"></label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4"
+                            title="Pretty good - 4 stars"></label>
+                        <input type="radio" id="star3half" name="rating" value="3.5" /><label class="half"
+                            for="star3half" title="Meh - 3.5 stars"></label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3"
+                            title="Meh - 3 stars"></label>
+                        <input type="radio" id="star2half" name="rating" value="2.5" /><label class="half"
+                            for="star2half" title="Kinda bad - 2.5 stars"></label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2"
+                            title="Kinda bad - 2 stars"></label>
+                        <input type="radio" id="star1half" name="rating" value="1.5" /><label class="half"
+                            for="star1half" title="Meh - 1.5 stars"></label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1"
+                            title="Sucks big time - 1 star"></label>
+                        <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half"
+                            for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                    </fieldset>
+                    <button type="submit" class="btn btn-dark">Submit review</button>
+                </form>
+                <div class="reviews mt-5">
+                    <h3>Reviews</h3>
+                    {{#each route.reviews as |review|}}
+                    <div class="review mt-3 mb-3 d-flex flex-direction-row p-3"
+                        style="border: 1px solid #a4a4a48f; border-radius: 10px;">
+                        <p class="review d-inline me-3">{{ review.rating }}</p>
+                        <p class="d-inline">{{ review.description }}</p>
+                        <a href="/review/{{ review.id }}/edit">Edit</a>
+                        <form class="ms-3" action="/review/{{ review.id }}/delete" method="POST">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+    </div>

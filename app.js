@@ -5,7 +5,7 @@ const favicon = require('serve-favicon');
 const path = require('path');
 const passport = require('passport');
 const session = require('./config/session.config');
-
+const createError = require('http-errors');
 require('./config/hbs.config');
 require('./config/db.config');
 require('./config/passport.config');
@@ -13,8 +13,9 @@ require('./config/passport.config');
 const app = express();
 
 /* Middlewares */
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.use(session);
 app.use(passport.initialize());
@@ -29,6 +30,10 @@ app.set('view engine', 'hbs');
 /* Routes */
 const router = require('./config/routes.config');
 app.use('/', router);
+
+app.use((req, res, next) => {
+	next(createError(404, 'Page not found'))
+})
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
