@@ -7,51 +7,50 @@ html * {
     padding: 0;
 }
 
+/* Colors */
 ::selection {
     background: #ffdc00;
   }
-
-.navbar {
-    position: absolute;
-    left: 0;
-    top: 0;
-    padding: 10px 0 10px 0;
+p, h1, h2, h3, h4, h5, h6 {
+    color: #202930;
+}
+.bg-ph-dark {
+    background-color: #202930;
+    color: white;
+}
+.ph-primary {
+    color: #5171F1;
+}
+.bg-ph-primary {
+    background-color: #5171F1;
+    color: white;
+}
+.bg-ph-dark:hover, .bg-ph-primary:hover {
+    color: white;
+}
+.ph-secondary {
+    color: #F8A931;
+}
+.bg-ph-secondary {
+    background-color: #F8A931;
+}
+.ph-tertiary {
+    color: #DAEFFF;
+}
+.bg-ph-tertiary {
+    background-color: #DAEFFF;
+}
+.blur-overlay {
     width: 100%;
-    z-index: 99999;
-    background-color: white;
-  }
-
-.navbar-brand {
-    font-weight: 700;
-}
-
-.navbar button {
-    margin-left: 20px;
-}
-
-.home-header {
-    height: 100vh;
-    background-image: url('https://images.unsplash.com/photo-1544198365-f5d60b6d8190?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80');
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.home-form-container {
-    background-color: white;
-    width: 500px;
-    padding: 40px;
+    height: 100%;
+    background-color: rgba(218,239,255,0.76);
     border-radius: 10px;
-    box-shadow: 10px 10px 85px 4px rgba(0,0,0,0.47);
--webkit-box-shadow: 10px 10px 85px 4px rgba(0,0,0,0.47);
--moz-box-shadow: 10px 10px 85px 4px rgba(0,0,0,0.47);
+    backdrop-filter: blur(10px);
 }
 
+/* Font size */
 h1 {
-    font-size: 38px;
-    font-weight: 700;
+    font-weight: 900;
 }
 h2 {
     font-weight: 700;
@@ -67,58 +66,109 @@ h5 {
     font-weight: 600;
 }
 
-input {
-    height: 60px;
+  /* Navbar */
+.navbar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-top: 20px;
+    width: 100%;
+    z-index: 99999;
+    background-color: rgba(255, 255, 255, 0);
+}
+.navbar-brand {
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 24px;
+    display: flex;
+    align-items: flex-end;
+}
+.navbar li, .user-area, a {
+    font-size: 16px;
+}
+.navbar button {
+    margin-left: 20px;
+}
+.user-area {
+    display: flex;
+    align-items: center;
 }
 
+/* Home */
+/* Header */
+.home-header {
+    height: 600px;
+    margin-bottom: 150px;
+}
+.home-header {
+    padding-top: 130px;
+}
+.header-bg {
+    width: 100%;
+    height: 500px;
+    background-image: url('/images/home-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+}
+.header-container {
+    padding: 60px 60px 0 100px;
+}
+.header-container h1 {
+    font-size: 72px;    
+    margin-top: 50px;
+    max-width: 300px;
+}
+.no-gutter>[class^="col-"]{
+    padding-left: 0;
+    padding-right: 0;
+}
+.header-container .form-container {
+    margin-top: 70px;
+    width: 620px;
+}
+.form-container {
+    height: fit-content;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+.form-container button {
+    height: 100%;
+    width: 100%;
+}
+.hero-img {
+    width: 100%;
+    height: 500px;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: 300%;
+    background-position-x: -500px;
+    background-position-y: -100px;
+    background-image: url('/images/home-bg.jpg');
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+
+/* Other home sections */
 section {
     padding-top: 60px;
     padding-bottom: 30px;
 }
-
-.category-container {
-    width: fit-content;
-}
-
 .img {
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 10px;
     background-position: center;
 }
-
+.img:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
 .category-img {
     height: 300px;
-    width: 220px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width: 100%;
     margin-bottom: 15px;
     cursor: pointer;
 }
-
-.category-img:hover {
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-}
-.location-img:hover {
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-}
-
-.ski-img {
-    background-image: url('https://images.unsplash.com/photo-1565992441121-4367c2967103?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80');
-}
-.climbing-img {
-    background-image: url('https://images.unsplash.com/photo-1524786842735-a4096ed01353?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=634&q=80');
-}
-.hiking-img {
-    background-image: url('https://images.unsplash.com/photo-1501554728187-ce583db33af7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80');
-}
-.mountaineering-img {
-    background-image: url('https://images.unsplash.com/photo-1597251000118-e702d0828392?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=634&q=80');
-    background-size: 200%;
-}
-.mtb-img {
-    background-image: url('https://images.unsplash.com/photo-1574117482334-14b040604998?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80');
-}
-
 .location-img {
     height: 100%;
     display: flex;
@@ -130,7 +180,6 @@ section {
 .location-img h4 {
     color: white;
 }
-
 .chamonix-img {
     background-image: url('https://images.unsplash.com/photo-1591942397307-78802c663e6c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80');
 }
@@ -144,91 +193,69 @@ section {
     background-image: url('https://images.unsplash.com/photo-1603979649806-5299879db16b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1502&q=80');
 }
 
-.routes-banner {
-    background-image: url('https://images.unsplash.com/photo-1593245394126-6b01cc3967f6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); 
+
+
+/* List */
+.list-container {
+    margin-top: 140px;
+}
+.list-container .form-container {
+    position: sticky;
+    top: 20px;
+}
+.form-container a {
+    color: #888888;
+    text-decoration: none;
+    font-size: 14px;
+}
+.form-container label {
+    font-size: 15px;
+}
+
+/* Card */
+.route-card {
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.route-card-img {
+    height: 150px;
+    width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
-    width: 100%;
-    padding: 200px;
-    height: 350px;
-}
-
-.routes-banner h2 {
-    color: white;
-}
-
-.search-filter {
-    background-color: white;
-    margin-top: 90px;
-    width: 80%;
     border-radius: 10px;
-    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 30px 10px 30px 10px;
+    background-position: center;
 }
-
-.search-results-number {
-    margin-bottom: 50px;
-    font-weight: 700;
+.route-card-rating {
+    background-color: #FFF5DA;
+    height: fit-content;
+    padding: 4px 10px 4px 10px;
+    border-radius: 15px;
 }
-
-.routes-container::after {
-    content: "";
-    width: 400px;
-}
-
-.card {
-    border: none;
-    width: 400px;
-    margin-bottom: 50px;
-}
-
-.card-img {
-    height: 200px;
-    padding: 15px;
-    cursor: pointer;
-}
-.badge {
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
-}
-.card-row {
-    display: flex;
-    justify-content: space-between;
-}
-.review {
-    display: flex;
-    color: #f2b01e;
-}
-.card-rating .material-icons {
-    margin-right: 5px;
-    font-size: 20px;
-}
-.card-rating-num {
-    font-size: 16px;
-    font-weight: 500;
-}
-.card-title {
-    margin-right: 15px;
-}
-.card-detail-container {
-    display: flex;
-    justify-content: flex-start;
-    color: #a4a4a4;
-}
-.card-detail-container .material-icons {
-    font-size: 20px;
-}
-.card-details {
+.route-card-rating p, .route-card-rating i {
+    color: #f8c303;
     font-size: 14px;
+}
+.route-card-details>div {
+    margin-bottom: 7px;
+}
+.route-card-details p, .route-card-details i {
+    font-size: 14px;
+    color: #888888;
+}
+.route-card-details>.badge {
+    padding: 10px;
     font-weight: 500;
 }
-
-.order-by {
-    width: 200px;
-    height: 40px;
+.route-card h5 {
+    height: 25px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.route-card a {
+    text-decoration: none;
 }
 
 .main-img {
@@ -269,11 +296,60 @@ section {
     padding: 20px;
     text-align: left;
 }
+.badge {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 8px 15px 8px 15px;
+    font-size: 13px;
+    font-weight: 600;
+}
+.card-emoji {
+    height: 18px;
+    width: 18px;
+}
+
+/* Badge colors */
+.hiking-badge {
+    background-color: #D9E9D7;
+    color: #50744d;
+}
+.mountaineering-badge {
+    background-color: #E0D4FF;
+    color: #005541;
+}
+.climbing-badge {
+    background-color: #E9E9E9;
+    color: #313131;
+}
+.ski-badge {
+    background-color: #0057FF;
+    color: #DDE4FF;
+}
+.mtb-badge {
+    background-color: #FFF1DB;
+    color: #624C00;
+}
+.Easy-badge {
+    background-color: #D9E9D7;
+    color: #50744d;
+}
+.Medium-badge {
+    background-color: #FFF1C0;
+    color: #DD8500;
+}
+.Hard-badge {
+    background-color: #FFCFCF;
+    color: #9B0000;
+}
+.Expert-badge {
+    background-color: #EFD4FF;
+    color: #6700A4;
+}
+
+
 
 /* Rating */
-fieldset, label { margin: 0; padding: 0; }
-body{ margin: 20px; }
-h1 { font-size: 1.5em; margin: 10px; }
 
 /****** Style Star Rating Widget *****/
 

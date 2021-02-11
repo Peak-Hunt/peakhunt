@@ -18,7 +18,17 @@ const reviewSchema = new Schema({
         ref: 'Route',
         required: 'Review must belong to a route.'
     }
-}, { timestamps: true });
+}, {
+    timestamps: true,
+    toObject: {
+        transform: (doc, ret) => {
+            ret.id = doc._id;
+            delete ret._id;
+            delete ret.__v;
+            return ret;
+        }
+    }
+});
 
 reviewSchema.statics.calcAverageRatings = async function(route) {
     const stats = await this.aggregate([
@@ -33,7 +43,6 @@ reviewSchema.statics.calcAverageRatings = async function(route) {
             }
         }
     ]);
-    console.log(stats);
     if (stats.length > 0) {
         await Route.findByIdAndUpdate(route, {
             ratingsQuantity: stats[0].nRating,

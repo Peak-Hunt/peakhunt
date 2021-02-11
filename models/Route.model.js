@@ -10,7 +10,7 @@ const routeSchema = new Schema({
     },
     sport: {
         type: String,
-        enum: constants.SPORTS,
+        enum: constants.SPORTS.map(sport => sport.key),
         required: 'Please, select a sport.'
     },
     difficulty: {
@@ -25,6 +25,18 @@ const routeSchema = new Schema({
     duration: {
         type: Number,
         required: 'Please, enter the duration of this route.'
+    },
+    elevationGained: {
+        type: Number,
+        required: 'Please enter the elevation gained.'
+    },
+    elevationLost: {
+        type: Number,
+        required: 'Please enter the elevation lost.'
+    },
+    distance: {
+        type: Number,
+        required: 'Please enter the distance of this route.'
     },
     description: {
         type: String,

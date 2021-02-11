@@ -4,10 +4,22 @@ const createError = require('http-errors');
 const constants = require('../public/js/constants');
 
 module.exports.list = (req, res, next) => {
-    const filters = req.query;
-    const { location, sport, difficulty } = req.query;
+    const filters = {...req.query};
+    if (filters['elevationGained']) minAndMaxQuery('elevationGained');
+    if (filters['duration']) minAndMaxQuery('duration');
+    if (filters['distance']) minAndMaxQuery('distance');
+
+    function minAndMaxQuery (attribute) {
+        if (filters[attribute].length > 0) {
+            filters[attribute] = {
+                $gte: filters[attribute][0] || 0,
+                $lte: filters[attribute][1] || 1000000,
+            }
+        }
+    }
+    
     const criterial = Object.keys(filters)
-        .filter((key => filters[key] !== 'All'))
+        .filter((key => filters[key] !== 'All' && filters[key] !== 'all'))
         .reduce((criterial, filter) => {
             if (filters[filter]) criterial[filter] = filters[filter];
             return criterial;
@@ -15,11 +27,10 @@ module.exports.list = (req, res, next) => {
 
     Route.find(criterial)
         .then(routes => {
+            console.log(req.query)
             res.render('routes/list', {
                 routes,
-                location,
-                sport,
-                difficulty,
+                form: req.query,
                 sportOptions: constants.SPORT_OPTIONS,
                 difficultyOptions: constants.DIFFICULTY_OPTIONS
             })
@@ -66,9 +77,12 @@ module.exports.doCreate = (req, res, next) => {
         .then(() => res.redirect('/routes'))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
+                console.log(error)
                 res.render('routes/new', {
                     errors: error.errors,
-                    route
+                    route,
+                    sports: constants.SPORTS,
+                    difficulties: constants.DIFFICULTIES
                 })
             } else next(error);
         })

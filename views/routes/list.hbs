@@ -1,73 +1,141 @@
-<div class="routes-banner text-center">
-    <h2>Routes > Hiking > Expert</h2>
-    <div class="container d-flex justify-content-center">
-        <form class="search-filter d-flex">
-            <div class="form-floating col-4">
-                <input value="{{ location }}" name="location" class="form-control" id="location"></input>
-                <label for="location">Location</label>
-            </div>
-            <div class="form-floating col-3">
-                <select name="sport" class="form-select" id="floatingSelect">
-                    {{#each sportOptions as |sportOption|}}
-                    {{option ../sport sportOption}}
-                    {{/each}}
-                </select>
-                <label for="floatingSelect">Sport</label>
-            </div>
-            <div class="form-floating col-2">
-                <select name="difficulty" class="form-select" id="floatingSelect">
-                    {{#each difficultyOptions as |difficultyOption|}}
-                    {{option ../difficulty difficultyOption}}
-                    {{/each}}
-                </select>
-                <label for="floatingSelect">Difficulty</label>
-            </div>
-            <button type="submit" class="btn btn-dark col-2" style="height: 58px;">Search</button>
-        </form>
-    </div>
-</div>
-
-<div class="container" style="margin-top: 100px; margin-bottom: 150px;">
-    <div class="d-flex justify-content-between mb-1">
-        <h4 style="width: fit-content;" class="search-results-number">12 Results</h4> {{!-- TODO --}}
-        <select class="form-select order-by" aria-label="Default select example">
-            <option selected disabled>Order by</option>
-            <option value="top-rated">Rating: Top Rated</option>
-            <option value="longest">Duration: Longest</option>
-            <option value="shortest">Duration: Shortest</option>
-            <option value="shortest">Difficulty: Most Difficult</option>
-            <option value="shortest">Difficulty: Easiest</option>
-        </select>
-    </div>
-    <div class="routes-container d-flex justify-content-between flex-wrap">
-        {{#each routes as |route|}}
-        <div class="card h-100">
-            <div class="img card-img"
-                onclick="location.href='/route/{{ route.id }}';"
-                style="background-image: url('{{ route.image }}');">
-                <span class="badge bg-dark">{{ route.sport }}</span>
-                <span class="badge bg-warning">{{ route.difficulty }}</span>
-            </div>
-            <div class="card-body">
-                <div class="card-row">
-                    <h5 class="card-title">{{ route.title }}</h5>
-                    <div class="card-rating d-flex">
-                        <span class="material-icons">grade</span>
-                        <p class="card-rating-num">{{ route.ratingsAverage }}</p> {{!-- TODO --}}
+<div class="d-flex justify-content-center">
+    <div class="list-container container-fluid ps-5 pe-5 row row-cols-10" style="max-width: 1600px;">
+        <div class="col-3">
+            <div class="form-container p-4">
+                <form class="mb-1 mt-3 text-center">
+                    <div class="form-floating mb-2">
+                        <input type="text" value="{{ form.location }}" name="location" class="form-control"
+                            id="location"></input>
+                        <label for="location">Location</label>
                     </div>
-                </div>
-                <div class="card-row mt-1">
-                    <div class="card-detail-container">
-                        <span class="me-2 material-icons">location_on</span>
-                        <p class="card-details card-location">{{ route.location }}</p>
+                    <div class="row">
+                        <div class="col-6 pe-1">
+                            <div class="form-floating mb-2 col">
+                                <select name="sport" class="form-select" id="floatingSelect">
+                                    {{#each sportOptions as |sportOption|}}
+                                    {{objOption ../form.sport sportOption}}
+                                    {{/each}}
+                                </select>
+                                <label for="floatingSelect">Sport</label>
+                            </div>
+                        </div>
+                        <div class="col-6 ps-1">
+                            <div class="form-floating mb-2">
+                                <select name="difficulty" class="form-select" id="floatingSelect">
+                                    {{#each difficultyOptions as |difficultyOption|}}
+                                    {{option ../form.difficulty difficultyOption}}
+                                    {{/each}}
+                                </select>
+                                <label for="floatingSelect">Difficulty</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-detail-container">
-                        <span class="me-2 material-icons">schedule</span>
-                        <p class="card-details card-duration">Duration: {{ route.duration }}h</p> {{!-- TODO --}}
+                    <div class="row">
+                        <div class="col-6 pe-1">
+                            <div class="form-floating mb-2">
+                                <input type="number" min="0" value="{{ form.elevationGained.[0] }}" name="elevationGained" class="form-control"
+                                    id="minElevation"></input>
+                                <label for="minElevation">Min elevation</label>
+                            </div>
+                        </div>
+                        <div class="col-6 ps-1">
+                            <div class="form-floating mb-2">
+                                <input type="number" value="{{ form.elevationGained.[1] }}" min="0" name="elevationGained" class="form-control"
+                                    id="maxElevation"></input>
+                                <label for="maxElevation">Max elevation</label>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col-6 pe-1">
+                            <div class="form-floating mb-2">
+                                <input type="number" min="0" value="{{ form.duration.[0] }}" name="duration" class="form-control"
+                                    id="minDuration"></input>
+                                <label for="minDuration">Min duration</label>
+                            </div>
+                        </div>
+                        <div class="col-6 ps-1">
+                            <div class="form-floating mb-2">
+                                <input type="number" min="0" value="{{ form.duration.[1] }}" name="duration" class="form-control"
+                                    id="maxDuration"></input>
+                                <label for="maxDuration">Max duration</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 pe-1">
+                            <div class="form-floating mb-2">
+                                <input type="number" min="0" value="{{ form.distance.[0] }}" name="distance" class="form-control"
+                                    id="minDistance"></input>
+                                <label for="minDistance">Min distance</label>
+                            </div>
+                        </div>
+                        <div class="col-6 ps-1">
+                            <div class="form-floating mb-2">
+                                <input type="number" min="0" value="{{ form.distance.[1] }}" name="distance" class="form-control"
+                                    id="maxDistance"></input>
+                                <label for="maxDistance">Max distance</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-floating">
+                        <select class="form-select mb-2" id="floatingSelect" aria-label="Floating label select example">
+                            <option value="top-rated">Rating: Top Rated</option>
+                            <option value="longest">Duration: Longest</option>
+                            <option value="shortest">Duration: Shortest</option>
+                            <option value="shortest">Difficulty: Most Difficult</option>
+                            <option value="shortest">Difficulty: Easiest</option>
+                        </select>
+                        <label for="floatingSelect">Order by</label>
+                    </div>
+                    <button type="submit" class="btn bg-ph-primary mb-2" style="height: 58px;"><i
+                            class="fas fa-search me-3"></i>Search</button>
+                    <a href="/routes"><i class="fas fa-redo me-2"></i>Reset filters</a>
+                </form>
             </div>
         </div>
-        {{/each}}
+        <div class="col">
+            <div class="row row-cols-3">
+                {{#each routes as |route|}}
+                <div class="col mb-4">
+                    <div class="route-card">
+                        <div class="route-card-img mb-2 p-2 d-flex justify-content-end"
+                            style="background-image: url({{ route.image }});">
+                            {{#if route.ratingsAverage}}
+                            <div class="route-card-rating">
+                                <p><i class="fas fa-star me-1"></i>{{ route.ratingsAverage }}</p>
+                            </div>
+                            {{/if}}
+                        </div>
+                        <div class="p-2">
+                            <div class="route-card-title">
+                                <a href="/route/{{ route.id }}"><h5>{{ route.title }}</h5></a>
+                            </div>
+                            <div class="route-card-details mt-3">
+                                <div class="row row-cols-3">
+                                    <p class="me-4 col"><i class="fas fa-chevron-up me-2"></i>{{ route.elevationGained}}m</p>
+                                    <p class="col"><i class="fas fa-chevron-down me-2"></i>{{ route.elevationLost }}m
+                                    </p>
+                                </div>
+                                <div class="row row-cols-3">
+                                    <p class="me-4 col"><i class="fas fa-hiking me-2"></i>{{ route.distance }} km</p>
+                                    <p class="col"><i class="far fa-clock me-2"></i>{{ route.duration }} h</p>
+                                </div>
+                                <p><i class="fas fa-location-arrow me-2 mb-4"></i>{{ route.location }}</p>
+                                <div class="d-flex">
+                                    <span class="badge {{ route.sport }}-badge me-1">
+                                        <img class="card-emoji me-2" src="./images/{{ route.sport }}-emoji.png"
+                                            alt="{{ route.sport }} emoji">
+                                        {{sportKeyToName route.sport }}
+                                    </span>
+                                    <span class="badge {{ route.difficulty }}-badge">{{ route.difficulty }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
     </div>
 </div>
