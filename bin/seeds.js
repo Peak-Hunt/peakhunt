@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Route = require("../models/Route.model");
+const Route = require("../models/route.model");
 require('../config/db.config');
 
 const routes = [
