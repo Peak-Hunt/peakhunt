@@ -199,10 +199,17 @@ section {
 .list-container {
     margin-top: 140px;
 }
+.list-container .form-container {
+    position: sticky;
+    top: 20px;
+}
 .form-container a {
     color: #888888;
     text-decoration: none;
     font-size: 14px;
+}
+.form-container label {
+    font-size: 15px;
 }
 
 /* Card */
@@ -210,7 +217,6 @@ section {
     border-radius: 10px;
     padding: 15px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    cursor: pointer;
 }
 .route-card-img {
     height: 150px;
@@ -240,6 +246,16 @@ section {
 .route-card-details>.badge {
     padding: 10px;
     font-weight: 500;
+}
+.route-card h5 {
+    height: 25px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.route-card a {
+    text-decoration: none;
 }
 
 .main-img {

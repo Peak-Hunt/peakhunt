@@ -1,100 +1,104 @@
-<div class="home-header">
-    <div class="header-bg">
-        <div class="header-container blur-overlay">
-            <div class="row">
-                <div class="col">
-                    <h1>Discover mountains nearby</h1>
-                    <form action="/routes">
-                        <div class="form-container p-4 row no-gutter">
-                            <div class="col-6 pe-3">
-                                <div class="form-floating">
-                                    <input name="location" class="form-control" id="location"></input>
-                                    <label for="location">Location</label>
+<div class="container">
+    <div class="home-header">
+        <div class="header-bg">
+            <div class="header-container blur-overlay">
+                <div class="row">
+                    <div class="col">
+                        <h1>Discover mountains nearby</h1>
+                        <form action="/routes">
+                            <div class="form-container p-4 row no-gutter">
+                                <div class="col-6 pe-3">
+                                    <div class="form-floating">
+                                        <input name="location" class="form-control" id="location"></input>
+                                        <label for="location">Location</label>
+                                    </div>
+                                </div>
+                                <div class="col-4 pe-3">
+                                    <div class="form-floating">
+                                        <select name="sport" class="form-select" id="floatingSelect">
+                                            {{#each sportOptions as |sportOption|}}
+                                            {{objOption ../sport sportOption}}
+                                            {{/each}}
+                                        </select>
+                                        <label for="floatingSelect">Sport</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn bg-ph-primary" type="submit"><i
+                                            class="fas fa-search"></i></button>
                                 </div>
                             </div>
-                            <div class="col-4 pe-3">
-                                <div class="form-floating">
-                                    <select name="sport" class="form-select" id="floatingSelect">
-                                        {{#each sportOptions as |sportOption|}}
-                                        {{objOption ../sport sportOption}}
-                                        {{/each}}
-                                    </select>
-                                    <label for="floatingSelect">Sport</label>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <button class="btn bg-ph-primary" type="submit"><i class="fas fa-search"></i></button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-4 d-flex justify-content-center">
-                    <div class="hero-img"></div>
+                        </form>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                        <div class="hero-img"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <section id="sports">
+        <div class="text-center">
+            <h2>Search by Sport</h2>
+        </div>
+        <div class="row row-cols-10 mt-5"> {{!-- TODO --}}
+            <div class="col">
+                <div onclick="location.href='/routes?location=&sport=Hiking';" class="img category-img"
+                    style="background-image: url('./images/hiking.jpg');"></div>
+                <h5 class="text-center">Hiking</h5>
+            </div>
+            <div class="col">
+                <div onclick="location.href='/routes?location=&sport=Mountaineering';" class="img category-img"
+                    style="background-image: url('./images/mountaineering.jpg');"></div>
+                <h5 class="text-center">Mountaineering</h5>
+            </div>
+            <div class="col">
+                <div onclick="location.href='/routes?location=&sport=Ski';" class="img category-img"
+                    style="background-image: url('./images/ski.jpg');"></div>
+                <h5 class="text-center">Ski</h5>
+            </div>
+            <div class="col">
+                <div onclick="location.href='/routes?location=&sport=Climbing';" class="img category-img"
+                    style="background-image: url('./images/climbing.jpg');"></div>
+                <h5 class="text-center">Climbing</h5>
+            </div>
+            <div class="col">
+                <div onclick="location.href='/routes?location=&sport=Mountain%20biking';" class="img category-img"
+                    style="background-image: url('./images/mtb.jpg');"></div>
+                <h5 class="text-center">Mountain biking</h5>
+            </div>
+        </div>
+    </section>
+
+    <section id="trending">
+        <div class="text-center">
+            <h2>Trending locations</h2>
+            <div class="row mt-5" style="height: 500px;">
+                <div class="col-5">
+                    <div onclick="location.href='#';" class="img location-img chamonix-img">
+                        <h4>Chamonix, France</h4>
+                    </div>
+                </div>
+                <div class="col d-flex flex-column justify-content-between" style="height: 500px;">
+                    <div onclick="location.href='#';" class="img location-img valais-img" style="height: 240px;">
+                        <h4>Valais, Switzerland</h4>
+                    </div>
+                    <div class="row" style="height: 240px;">
+                        <div class="col">
+                            <div onclick="location.href='#';" class="img location-img dolomites-img"
+                                style="height: 100%;">
+                                <h4>Dolomites, Italy</h4>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div onclick="location.href='#';" class="img location-img bern-img" style="height: 100%;">
+                                <h4>Bern, Switzerland</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
-
-<section id="sports">
-    <div class="text-center">
-        <h2>Search by Sport</h2>
-    </div>
-    <div class="row row-cols-10 mt-5"> {{!-- TODO --}}
-        <div class="col">
-            <div onclick="location.href='/routes?location=&sport=Hiking';" class="img category-img"
-                style="background-image: url('./images/hiking.jpg');"></div>
-            <h5 class="text-center">Hiking</h5>
-        </div>
-        <div class="col">
-            <div onclick="location.href='/routes?location=&sport=Mountaineering';" class="img category-img"
-                style="background-image: url('./images/mountaineering.jpg');"></div>
-            <h5 class="text-center">Mountaineering</h5>
-        </div>
-        <div class="col">
-            <div onclick="location.href='/routes?location=&sport=Ski';" class="img category-img"
-                style="background-image: url('./images/ski.jpg');"></div>
-            <h5 class="text-center">Ski</h5>
-        </div>
-        <div class="col">
-            <div onclick="location.href='/routes?location=&sport=Climbing';" class="img category-img"
-                style="background-image: url('./images/climbing.jpg');"></div>
-            <h5 class="text-center">Climbing</h5>
-        </div>
-        <div class="col">
-            <div onclick="location.href='/routes?location=&sport=Mountain%20biking';" class="img category-img"
-                style="background-image: url('./images/mtb.jpg');"></div>
-            <h5 class="text-center">Mountain biking</h5>
-        </div>
-    </div>
-</section>
-
-<section id="trending">
-    <div class="text-center">
-        <h2>Trending locations</h2>
-        <div class="row mt-5" style="height: 500px;">
-            <div class="col-5">
-                <div onclick="location.href='#';" class="img location-img chamonix-img">
-                    <h4>Chamonix, France</h4>
-                </div>
-            </div>
-            <div class="col d-flex flex-column justify-content-between" style="height: 500px;">
-                <div onclick="location.href='#';" class="img location-img valais-img" style="height: 240px;">
-                    <h4>Valais, Switzerland</h4>
-                </div>
-                <div class="row" style="height: 240px;">
-                    <div class="col">
-                        <div onclick="location.href='#';" class="img location-img dolomites-img" style="height: 100%;">
-                            <h4>Dolomites, Italy</h4>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div onclick="location.href='#';" class="img location-img bern-img" style="height: 100%;">
-                            <h4>Bern, Switzerland</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
