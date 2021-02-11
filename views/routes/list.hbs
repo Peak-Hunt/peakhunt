@@ -4,7 +4,7 @@
             <div class="form-container p-4">
                 <form class="mb-1 mt-3 text-center">
                     <div class="form-floating mb-2">
-                        <input type="text" value="{{ location }}" name="location" class="form-control"
+                        <input type="text" value="{{ form.location }}" name="location" class="form-control"
                             id="location"></input>
                         <label for="location">Location</label>
                     </div>
@@ -13,7 +13,7 @@
                             <div class="form-floating mb-2 col">
                                 <select name="sport" class="form-select" id="floatingSelect">
                                     {{#each sportOptions as |sportOption|}}
-                                    {{objOption ../sport sportOption}}
+                                    {{objOption ../form.sport sportOption}}
                                     {{/each}}
                                 </select>
                                 <label for="floatingSelect">Sport</label>
@@ -23,7 +23,7 @@
                             <div class="form-floating mb-2">
                                 <select name="difficulty" class="form-select" id="floatingSelect">
                                     {{#each difficultyOptions as |difficultyOption|}}
-                                    {{option ../difficulty difficultyOption}}
+                                    {{option ../form.difficulty difficultyOption}}
                                     {{/each}}
                                 </select>
                                 <label for="floatingSelect">Difficulty</label>
@@ -33,14 +33,14 @@
                     <div class="row">
                         <div class="col-6 pe-1">
                             <div class="form-floating mb-2">
-                                <input type="number" min="0" name="minElevation" class="form-control"
+                                <input type="number" min="0" value="{{ form.elevationGained.[0] }}" name="elevationGained" class="form-control"
                                     id="minElevation"></input>
                                 <label for="minElevation">Min elevation</label>
                             </div>
                         </div>
                         <div class="col-6 ps-1">
                             <div class="form-floating mb-2">
-                                <input type="number" min="0" name="maxElevation" class="form-control"
+                                <input type="number" value="{{ form.elevationGained.[1] }}" min="0" name="elevationGained" class="form-control"
                                     id="maxElevation"></input>
                                 <label for="maxElevation">Max elevation</label>
                             </div>
@@ -49,16 +49,32 @@
                     <div class="row">
                         <div class="col-6 pe-1">
                             <div class="form-floating mb-2">
-                                <input type="number" min="0" name="minDuration" class="form-control"
+                                <input type="number" min="0" value="{{ form.duration.[0] }}" name="duration" class="form-control"
                                     id="minDuration"></input>
                                 <label for="minDuration">Min duration</label>
                             </div>
                         </div>
                         <div class="col-6 ps-1">
                             <div class="form-floating mb-2">
-                                <input type="number" min="0" name="maxDuration" class="form-control"
+                                <input type="number" min="0" value="{{ form.duration.[1] }}" name="duration" class="form-control"
                                     id="maxDuration"></input>
                                 <label for="maxDuration">Max duration</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 pe-1">
+                            <div class="form-floating mb-2">
+                                <input type="number" min="0" value="{{ form.distance.[0] }}" name="distance" class="form-control"
+                                    id="minDistance"></input>
+                                <label for="minDistance">Min distance</label>
+                            </div>
+                        </div>
+                        <div class="col-6 ps-1">
+                            <div class="form-floating mb-2">
+                                <input type="number" min="0" value="{{ form.distance.[1] }}" name="distance" class="form-control"
+                                    id="maxDistance"></input>
+                                <label for="maxDistance">Max distance</label>
                             </div>
                         </div>
                     </div>
@@ -74,7 +90,7 @@
                     </div>
                     <button type="submit" class="btn bg-ph-primary mb-2" style="height: 58px;"><i
                             class="fas fa-search me-3"></i>Search</button>
-                    <a href=""><i class="fas fa-redo me-2"></i>Reset filters</a>
+                    <a href="/routes"><i class="fas fa-redo me-2"></i>Reset filters</a>
                 </form>
             </div>
         </div>
