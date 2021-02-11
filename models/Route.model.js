@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const constants = require('../public/js/constants');
 const Schema = mongoose.Schema;
 
 const routeSchema = new Schema({
@@ -9,12 +10,12 @@ const routeSchema = new Schema({
     },
     sport: {
         type: String,
-        enum: ['Hiking', 'Mountaineering', 'Climbing', 'Ski', 'Mountain biking'],
+        enum: constants.SPORTS,
         required: 'Please, select a sport.'
     },
     difficulty: {
         type: String,
-        enum: ['Easy', 'Medium', 'Hard', 'Expert'],
+        enum: constants.DIFFICULTIES,
         required: 'Please, enter the difficulty of this route.'
     },
     location: {
@@ -35,8 +36,33 @@ const routeSchema = new Schema({
     },
     video: {
         type: String
+    },
+    ratingsAverage: {
+        type: Number,
+        min: [1, 'Rating must be above 1.0'],
+        max: [5, 'Rating must be below 5.0']
+    },
+    ratingsQuantity: {
+        type: Number,
+        default: 0
+    }
+}, {
+    timestamps: true,
+    toObject: {
+        transform: (doc, ret) => {
+            ret.id = doc._id;
+            delete ret._id;
+            delete ret.__v;
+            return ret;
+        }
     }
 });
+
+routeSchema.virtual('reviews', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'route'
+})
 
 const Route = mongoose.model('Route', routeSchema);
 module.exports = Route;

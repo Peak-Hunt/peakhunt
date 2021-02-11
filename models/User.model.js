@@ -4,18 +4,16 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const URL_PATTERN = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+const PASSWORD_PATTERN = /^.{8,}$/;
 
 const userSchema = new Schema({
     username: {
       type: String,
-      required: [true, 'Name is required'],
       minlength: [3, 'Name needs at last 3 chars'],
-      unique: true,
       trim: true,
     },
     name: {
       type: String,
-      required: 'Full Name is required',
       minlength: [3, 'Name needs at last 3 chars'],
       trim: true,
     },
@@ -54,6 +52,23 @@ const userSchema = new Schema({
   },
   { timestamps: true },
 );
+
+userSchema.pre('save', function (next) {
+
+    if (this.isModified('password')) {
+    bcrypt.hash(this.password, 10).then((hash) => {
+      this.password = hash;
+      next();
+    });
+  } else {
+    next();
+  }
+});
+
+
+userSchema.methods.checkPassword = function (passwordToCheck) {
+  return bcrypt.compare(passwordToCheck, this.password);
+};
 
 
 const User = mongoose.model('User', userSchema);
