@@ -19,8 +19,11 @@ const routeSchema = new Schema({
         required: 'Please, enter the difficulty of this route.'
     },
     location: {
-        type: String,
-        required: 'Please, enter the location of this route.'
+        type: {
+            type: String,
+            default: 'Point',
+        },
+        coordinates: [Number]
     },
     duration: {
         type: Number,

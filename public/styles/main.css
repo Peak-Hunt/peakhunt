@@ -258,6 +258,18 @@ section {
     text-decoration: none;
 }
 
+#map a {
+    font-size: 10px;
+}
+.marker {
+    background-image: url('/images/peakhunt.png');
+    background-size: cover;
+    background-position: center;
+    width: 33px;
+    height: 33px;
+    cursor: pointer;
+}
+
 .main-img {
     height: 450px;
     width: 100%;

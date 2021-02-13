@@ -1,31 +1,22 @@
-function initMap() {
-    const mapContainer = document.getElementById('map');
-    if (mapContainer) new
-}
+const routeLocation = JSON.parse(document.getElementById('map').dataset.location);
+console.log('locations', location);
 
-class RouteMap {
-    constructor(container) {
-        const center = {
-            lat: 47.42309799791316, 
-            lng: 9.369663480592965
-        }
+mapboxgl.accessToken = 'pk.eyJ1IjoiYXNpZXJiYXlvbiIsImEiOiJja2w0NW0wOGwxNm9yMnFvNGJoa3hleWYyIn0.tStWnu8Y2c9X9cqyDhGVpw';
 
-        this.map = new loginWithGoogle.maps.Map(container, {
-            zoom: 13,
-            center: stGallen
-        });
-    }
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/asierbayon/ckl468ovn32wm17rm9h60p16s',
+    center: routeLocation.coordinates,
+    zoom: 11,
+    scrollZoom: false
+});
 
-    centerOnBrowser() {
-        if (!navigator.geolocation) return 
+map.addControl(nav, 'top-left')
 
-        navigator.geolocation.getCurrentPosition(function (position) {
-            const center = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
+const el = document.createElement('div');
+el.className = 'marker'
 
-            this.map.setCenter(center)
-        });
-    }
-}
+new mapboxgl.Marker({
+    element: el,
+    anchor: 'bottom'
+}).setLngLat(routeLocation.coordinates).addTo(map);

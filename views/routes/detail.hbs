@@ -33,9 +33,14 @@
                 <h3>Description</h3>
                 <p>{{ route.description }}</p>
             </div>
+            <div class="content-container">
+                <h3>Map</h3>
+                <div style="width: 100%; height: 300px;" id="map" data-location="{{stringifyLocation route.location}}"></div>
+            </div>
             {{#if route.video}}
             <div class="content-container">
                 <h3>Video</h3>
+                <p>{{ route.video }}</p>
                 <iframe width="560" height="315" src={{ route.video }} frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>

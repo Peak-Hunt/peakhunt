@@ -24,7 +24,7 @@
             <label for="floatingSelect">Difficulty</label>
         </div>
         <div class="form-floating col-4 mb-3">
-            <input value="{{ route.location }}" name="location" class="form-control {{#if errors.location}}is-invalid{{/if}}" id="location"></input>
+            <input value="{{ route.location.description }}" name="location" class="form-control {{#if errors.location}}is-invalid{{/if}}" id="location"></input>
             <label for="location">Location</label>
             {{#if errors.location}}
             <div class="invalid-feedback">Please enter the route's location.</div>
