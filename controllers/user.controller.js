@@ -92,7 +92,7 @@ module.exports.activate = (req, res, next) => {
     { runValidators: true }
   ).then(user => {
     if (!user) {
-      next(httpError(404, 'Invalid activation token or expired'))
+      next(createError(404, 'Invalid activation token or expired'))
     } else {
       res.redirect('/login');
     }
