@@ -13,8 +13,7 @@ const transport = nodemailer.createTransport({
 });
 
 module.exports.sendValidationEmail = (email, activationToken, name) => {
-  transport
-    .sendMail({
+  transport.sendMail({
       to: email,
       from: `PeakHunt <${user}>`,
       subject: 'Activate your account',

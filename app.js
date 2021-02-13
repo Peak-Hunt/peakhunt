@@ -6,6 +6,8 @@ const path = require('path');
 const passport = require('passport');
 const session = require('./config/session.config');
 const createError = require('http-errors');
+const flash = require('connect-flash');
+
 require('./config/hbs.config');
 require('./config/db.config');
 require('./config/passport.config');
@@ -18,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.use(session);
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 

@@ -23,6 +23,7 @@ router.get('/review/:reviewId/edit', reviewsController.edit);
 router.post('/review/:reviewId/edit', reviewsController.doEdit);
 router.post('/review/:reviewId/delete', reviewsController.delete);
 
+router.get('/activate', userController.activate);
 router.get('/register', userController.register);
 router.post('/register', userController.doRegister);
 router.get('/login', userController.login);
