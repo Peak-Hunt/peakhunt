@@ -249,6 +249,8 @@ section {
 }
 .route-card h5 {
     height: 25px;
+}
+.card-text-overflow {
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -258,6 +260,7 @@ section {
     text-decoration: none;
 }
 
+/* Map */
 #map a {
     font-size: 10px;
 }
@@ -269,6 +272,8 @@ section {
     height: 33px;
     cursor: pointer;
 }
+
+
 
 .main-img {
     height: 450px;

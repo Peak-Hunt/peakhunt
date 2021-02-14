@@ -49,11 +49,13 @@ module.exports.edit = (req, res, next) => {
 }
 
 module.exports.doEdit = (req, res, next) => {
-    Object.assign(req.route, req.body);
-    req.route.save()
+    req.body.location = { type: 'Point', coordinates: (req.body.location).split(',').map(x => +x)}
+    const route = Object.assign(req.route, req.body);
+    route.save()
         .then(route => res.redirect(`/route/${route.id}`))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
+                console.log(error)
                 res.render('routes/edit', {
                     route: req.route,
                     sports: constants.SPORTS,
