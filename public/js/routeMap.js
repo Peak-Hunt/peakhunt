@@ -11,12 +11,6 @@ var map = new mapboxgl.Map({
     scrollZoom: false
 });
 
-map.addControl(new mapboxgl.NavigationControl(), 'top-left')
+map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
-const el = document.createElement('div');
-el.className = 'marker'
-
-new mapboxgl.Marker({
-    element: el,
-    anchor: 'bottom'
-}).setLngLat(routeLocation.coordinates).addTo(map);
+new mapboxgl.Marker().setLngLat(routeLocation.coordinates).addTo(map);
