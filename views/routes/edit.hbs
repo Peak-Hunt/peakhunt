@@ -23,9 +23,9 @@
             </select>
             <label for="floatingSelect">Difficulty</label>
         </div>
-        <div id="formMap" class="mb-3" style="width: 100%; height: 300px;">
-            <input type="hidden" id="location" name="location">
-            <input type="hidden" id="locationAddress" name="locationAddress">
+        <div id="formMap" class="mb-3" style="width: 100%; height: 300px;" data-location="{{stringifyLocation route.location}}">
+            <input type="hidden" id="location" name="location" value="{{ route.location.coordinates }}">
+            <input type="hidden" id="locationAddress" name="locationAddress" value="{{ route.locationAddress }}">
         </div>
         <div class="form-floating col-2 mb-3">
             <input value="{{ route.duration }}" name="duration" class="form-control {{#if errors.duration}}is-invalid{{/if}}" id="duration"></input>
