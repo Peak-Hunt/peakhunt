@@ -25,6 +25,9 @@ const routeSchema = new Schema({
         },
         coordinates: [Number]
     },
+    locationAddress: {
+        type: String
+    },
     duration: {
         type: Number,
         required: 'Please, enter the duration of this route.'

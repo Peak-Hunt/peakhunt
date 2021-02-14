@@ -73,6 +73,7 @@ module.exports.create = (req, res, next) => {
 
 module.exports.doCreate = (req, res, next) => {
     const route = req.body;
+    route.location = { type: 'Point', coordinates: (req.body.location).split(',').map(x => +x)}
     Route.create(route)
         .then(() => res.redirect('/routes'))
         .catch(error => {

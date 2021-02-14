@@ -23,12 +23,9 @@
             </select>
             <label for="floatingSelect">Difficulty</label>
         </div>
-        <div class="form-floating col-4 mb-3">
-            <input value="{{ route.location.description }}" name="location" class="form-control {{#if errors.location}}is-invalid{{/if}}" id="location"></input>
-            <label for="location">Location</label>
-            {{#if errors.location}}
-            <div class="invalid-feedback">Please enter the route's location.</div>
-            {{/if}}
+        <div id="formMap" class="mb-3" style="width: 100%; height: 300px;">
+            <input type="hidden" id="location" name="location">
+            <input type="hidden" id="locationAddress" name="locationAddress">
         </div>
         <div class="form-floating col-2 mb-3">
             <input type="number" value="{{ route.duration }}" name="duration" class="form-control {{#if errors.duration}}is-invalid{{/if}}" id="duration"></input>
@@ -77,3 +74,5 @@
         <button class="btn btn-dark" type="submit">Post route</button>
     </form>
 </div>
+
+ <script src="/js/formMap.js"></script>
