@@ -11,7 +11,7 @@ var map = new mapboxgl.Map({
     scrollZoom: false
 });
 
-map.addControl(nav, 'top-left')
+map.addControl(new mapboxgl.NavigationControl(), 'top-left')
 
 const el = document.createElement('div');
 el.className = 'marker'
