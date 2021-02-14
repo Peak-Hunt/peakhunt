@@ -82,5 +82,13 @@ routeSchema.virtual('reviews', {
     foreignField: 'route'
 })
 
+routeSchema.pre('save', function (next) {
+    if (this.video) {
+        const videoCode = this.video.split('?v=')[1];
+        this.video = `http://www.youtube.com/embed/${videoCode}`;
+        next();
+    } else next();
+})
+
 const Route = mongoose.model('Route', routeSchema);
 module.exports = Route;
