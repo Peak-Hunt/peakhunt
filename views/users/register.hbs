@@ -3,6 +3,13 @@
 
     <form method="POST" action="/register">
         <div class="form-floating mb-3">
+            <input type="text" class="form-control {{#if errors.name}}is-invalid{{/if}}" id="floatingInput"
+                placeholder="Name" name="name" value="{{user.name}}">
+            <label for="floatingInput">Username</label>
+            <div class="invalid-feedback">{{errors.name}} </div>
+        </div>
+
+        <div class="form-floating mb-3">
             <input type="text" class="form-control {{#if errors.email}}is-invalid{{/if}}" id="floatingInput"
                 placeholder="name@example.com" name="email" value="{{user.email}}">
             <label for="floatingInput">Email address</label>

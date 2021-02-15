@@ -7,6 +7,8 @@ const commonController = require('../controllers/common.controller');
 const routesController = require('../controllers/routes.controller');
 const userController = require('../controllers/user.controller');
 const reviewsController = require('../controllers/reviews.controller');
+const secure = require('../middlewares/secure.middleware');
+
 
 
 router.get('/', commonController.home);
@@ -30,5 +32,7 @@ router.get('/login', userController.login);
 router.post('/login', userController.doLogin);
 router.get('/authenticate/google', passport.authenticate('google-auth', { scope: GOOGLE_SCOPES }))
 router.get('/authenticate/google/cb', userController.loginWithGoogle)
+router.get('/profile', secure.isAuthenticated, userController.profile);
+router.post('/profile', secure.isAuthenticated, userController.doProfile); //storage avatar//
 
 module.exports = router;
