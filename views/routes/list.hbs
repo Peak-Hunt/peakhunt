@@ -3,11 +3,7 @@
         <div class="col-3">
             <div class="form-container p-4">
                 <form class="mb-1 mt-3 text-center">
-                    <div class="form-floating mb-2">
-                        <input type="text" value="{{ form.location }}" name="location" class="form-control"
-                            id="location"></input>
-                        <label for="location">Location</label>
-                    </div>
+                    <div id="geocoder" class="geocoder"></div>
                     <div class="row">
                         <div class="col-6 pe-1">
                             <div class="form-floating mb-2 col">
@@ -139,3 +135,5 @@
         </div>
     </div>
 </div>
+
+<script type="module" src="/js/geocoder.js"></script>

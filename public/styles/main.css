@@ -272,6 +272,14 @@ section {
     height: 33px;
     cursor: pointer;
 }
+#geocoder {
+    z-index: 1;
+    width: 100%;
+    height: 100px;
+    }
+.mapboxgl-ctrl-geocoder {
+    min-width: 100%;
+}
 
 
 
