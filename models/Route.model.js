@@ -26,7 +26,8 @@ const routeSchema = new Schema({
         coordinates: [Number]
     },
     locationAddress: {
-        type: String
+        type: String,
+        required: 'Please, select a location'
     },
     duration: {
         type: Number,

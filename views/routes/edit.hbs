@@ -27,6 +27,9 @@
             <input type="hidden" id="location" name="location" value="{{ route.location.coordinates }}">
             <input type="hidden" id="locationAddress" name="locationAddress" value="{{ route.locationAddress }}">
         </div>
+        {{#if errors.locationAddress}}
+        <p class="mb-3" style="color: red;">{{ errors.locationAddress }}</p>
+        {{/if}}
         <div class="form-floating col-2 mb-3">
             <input value="{{ route.duration }}" name="duration" class="form-control {{#if errors.duration}}is-invalid{{/if}}" id="duration"></input>
             <label for="duration">Duration (hours)</label> {{!-- TODO --}}

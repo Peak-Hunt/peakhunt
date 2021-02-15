@@ -1,4 +1,11 @@
-const routeLocation = JSON.parse(document.getElementById('formMap').dataset.location);
+const defaultLocation = { coordinates: [7.752261277369426, 46.02250468893015] }
+
+const data = document.getElementById('formMap').dataset.location;
+let routeLocation = defaultLocation;
+console.log('data', data)
+
+if (data.length > 35) routeLocation = JSON.parse(data);
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXNpZXJiYXlvbiIsImEiOiJja2w0NW0wOGwxNm9yMnFvNGJoa3hleWYyIn0.tStWnu8Y2c9X9cqyDhGVpw';
 
 var map = new mapboxgl.Map({
