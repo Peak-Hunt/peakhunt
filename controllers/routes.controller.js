@@ -96,3 +96,23 @@ module.exports.delete = (req, res, next) => {
         .then(() => res.redirect('/routes'))
         .catch(next)
 }
+
+module.exports.routesWithin = (req, res, next) => {
+    const { distance, latlng, unit } = req.params;
+    const [lat, lng] = latlng.split(',');
+    const radius = distance / 6378.1; //Radius of the Earth
+
+    if (!lat || !lng) next(error); //TODO
+
+    const routes = Route.find({ location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }})
+    .then(routes => {
+        console.log(req.query)
+        res.render('routes/list', {
+            routes,
+            form: req.query,
+            sportOptions: constants.SPORT_OPTIONS,
+            difficultyOptions: constants.DIFFICULTY_OPTIONS
+        })
+    })
+    .catch(next)
+}

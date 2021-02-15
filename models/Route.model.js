@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { route } = require('../config/routes.config');
 const constants = require('../public/js/constants');
 const Schema = mongoose.Schema;
 
@@ -76,6 +77,8 @@ const routeSchema = new Schema({
         }
     }
 });
+
+routeSchema.index({ location: '2dsphere' })
 
 routeSchema.virtual('reviews', {
     ref: 'Review',
