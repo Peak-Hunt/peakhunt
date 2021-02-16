@@ -4,13 +4,13 @@ const createError = require('http-errors');
 const constants = require('../public/js/constants');
 
 module.exports.list = (req, res, next) => {
-    const { location, distanceFromLocation, locationAddress } = req.query
-    let [lng, lat] = [0, 0];
+    const { location, distanceFromLocation, locationAddress } = req.query;
+    let lng, lat;
     if (location) [lng, lat] = location.split(',');
-    const radius = distanceFromLocation / 6378.1; //Radius of the Earth
-    delete req.query.distanceFromLocation;
+    const radius = distanceFromLocation / 6378.1; // Radius of the Earth
 
     const filters = {...req.query};
+    delete filters.distanceFromLocation;
     if (filters['elevationGained']) minAndMaxQuery('elevationGained');
     if (filters['duration']) minAndMaxQuery('duration');
     if (filters['distance']) minAndMaxQuery('distance');
@@ -34,16 +34,14 @@ module.exports.list = (req, res, next) => {
     if (locationAddress) delete criterial.locationAddress;
 
     if (location && radius) criterial.location =  { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
-    console.log('radius', radius)
-    console.log(req.query)
-    console.log('criterial', criterial)
     const routes = Route.find(criterial)
     .then(routes => {
         res.render('routes/list', {
             routes,
             form: req.query,
             sportOptions: constants.SPORT_OPTIONS,
-            difficultyOptions: constants.DIFFICULTY_OPTIONS
+            difficultyOptions: constants.DIFFICULTY_OPTIONS,
+            withinOptions: constants.DISTANCES_WITHIN_OPTIONS,
         })
     })
     .catch(next)

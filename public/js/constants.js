@@ -48,5 +48,27 @@ module.exports = {
             key: 'mtb'
         }
     ],
-    DIFFICULTY_OPTIONS: ['All', 'Easy', 'Medium', 'Hard', 'Expert']
+    DIFFICULTY_OPTIONS: ['All', 'Easy', 'Medium', 'Hard', 'Expert'],
+    DISTANCES_WITHIN_OPTIONS: [
+        {
+            name: '+ 5km',
+            key: 5
+        },
+        {
+            name: '+ 10km',
+            key: 10
+        },
+        {
+            name: '+ 20km',
+            key: 20
+        },
+        {
+            name: '+ 30km',
+            key: 30
+        },
+        {
+            name: '+ 40km',
+            key: 40
+        },
+    ]
 }
