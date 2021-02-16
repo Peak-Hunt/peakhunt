@@ -2,7 +2,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYXNpZXJiYXlvbiIsImEiOiJja2w0NW0wOGwxNm9yMnFvN
 
 var geocoder = new MapboxGeocoder({
     accessToken: mapboxgl.accessToken,
-    language: 'en'
+    language: 'en',
 });
 geocoder.addTo('#geocoder');
 

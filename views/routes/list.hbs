@@ -3,7 +3,17 @@
         <div class="col-3">
             <div class="form-container p-4">
                 <form class="mb-1 mt-3 text-center">
-                    <div id="geocoder" class="geocoder"></div>
+                    <div id="geocoder" class="geocoder mb-3">
+                        <input type="hidden" id="location" name="location" value="{{ route.location.coordinates }}">
+                        <input type="hidden" id="locationAddress" name="locationAddress" value="{{ route.locationAddress }}">
+                    </div>
+                    <div class="col pe-1">
+                            <div class="form-floating mb-2">
+                                <input type="number" min="0" value="{{ form.distanceFromLocation }}" name="distanceFromLocation" class="form-control"
+                                    id="radius"></input>
+                                <label for="radius">Routes within (km)</label>
+                            </div>
+                        </div>
                     <div class="row">
                         <div class="col-6 pe-1">
                             <div class="form-floating mb-2 col">

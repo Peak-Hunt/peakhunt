@@ -4,6 +4,12 @@ const createError = require('http-errors');
 const constants = require('../public/js/constants');
 
 module.exports.list = (req, res, next) => {
+    const { location, distanceFromLocation, locationAddress } = req.query
+    let [lng, lat] = [0, 0];
+    if (location) [lng, lat] = location.split(',');
+    const radius = distanceFromLocation / 6378.1; //Radius of the Earth
+    delete req.query.distanceFromLocation;
+
     const filters = {...req.query};
     if (filters['elevationGained']) minAndMaxQuery('elevationGained');
     if (filters['duration']) minAndMaxQuery('duration');
@@ -24,18 +30,23 @@ module.exports.list = (req, res, next) => {
             if (filters[filter]) criterial[filter] = filters[filter];
             return criterial;
         }, {});
+    
+    if (locationAddress) delete criterial.locationAddress;
 
-    Route.find(criterial)
-        .then(routes => {
-            console.log(req.query)
-            res.render('routes/list', {
-                routes,
-                form: req.query,
-                sportOptions: constants.SPORT_OPTIONS,
-                difficultyOptions: constants.DIFFICULTY_OPTIONS
-            })
+    if (location && radius) criterial.location =  { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
+    console.log('radius', radius)
+    console.log(req.query)
+    console.log('criterial', criterial)
+    const routes = Route.find(criterial)
+    .then(routes => {
+        res.render('routes/list', {
+            routes,
+            form: req.query,
+            sportOptions: constants.SPORT_OPTIONS,
+            difficultyOptions: constants.DIFFICULTY_OPTIONS
         })
-        .catch(next)
+    })
+    .catch(next)
 }
 
 module.exports.detail = (req, res, next) => {
@@ -95,24 +106,4 @@ module.exports.delete = (req, res, next) => {
     Route.findByIdAndDelete(req.route.id)
         .then(() => res.redirect('/routes'))
         .catch(next)
-}
-
-module.exports.routesWithin = (req, res, next) => {
-    const { distance, latlng, unit } = req.params;
-    const [lat, lng] = latlng.split(',');
-    const radius = distance / 6378.1; //Radius of the Earth
-
-    if (!lat || !lng) next(error); //TODO
-
-    const routes = Route.find({ location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }})
-    .then(routes => {
-        console.log(req.query)
-        res.render('routes/list', {
-            routes,
-            form: req.query,
-            sportOptions: constants.SPORT_OPTIONS,
-            difficultyOptions: constants.DIFFICULTY_OPTIONS
-        })
-    })
-    .catch(next)
 }
