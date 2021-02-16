@@ -64,7 +64,6 @@ module.exports.doEdit = (req, res, next) => {
         .then(route => res.redirect(`/route/${route.id}`))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
-                console.log(error)
                 res.render('routes/edit', {
                     route: req.route,
                     sports: constants.SPORTS,
@@ -89,7 +88,6 @@ module.exports.doCreate = (req, res, next) => {
         .then(() => res.redirect('/routes'))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
-                console.log(error)
                 res.render('routes/new', {
                     errors: error.errors,
                     route,
