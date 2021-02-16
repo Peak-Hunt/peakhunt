@@ -1,5 +1,5 @@
 
-mapboxgl.accessToken = process.env.MB_CLIENT_ID;
+mapboxgl.accessToken = 'pk.eyJ1IjoiYXNpZXJiYXlvbiIsImEiOiJja2w0NW0wOGwxNm9yMnFvNGJoa3hleWYyIn0.tStWnu8Y2c9X9cqyDhGVpw'
 let routeLocation = { coordinates: [7.752261277369426, 46.02250468893015] }
 
 

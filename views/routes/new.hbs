@@ -59,12 +59,7 @@
             {{/if}}
         </div>
         <div class="form-floating col-6 mb-3">
-            <textarea style="height: auto;" name="description" class="form-control {{#if errors.description}}is-invalid{{/if}}"
-                id="description">{{ route.description }}</textarea>
-            <label for="description">Description</label> {{!-- TODO --}}
-            {{#if errors.description}}
-            <div class="invalid-feedback">Please enter a description of the route.</div>
-            {{/if}}
+            <div id="editor"></div>
         </div>
         <div class="form-floating col-6 mb-3">
             <input value="{{ route.video }}" name="video" class="form-control" id="video"></input>
@@ -79,3 +74,4 @@
 </div>
 
  <script src="/js/newRouteMap.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
