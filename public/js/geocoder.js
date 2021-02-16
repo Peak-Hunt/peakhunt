@@ -1,4 +1,4 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiYXNpZXJiYXlvbiIsImEiOiJja2w0NW0wOGwxNm9yMnFvNGJoa3hleWYyIn0.tStWnu8Y2c9X9cqyDhGVpw';
+mapboxgl.accessToken = process.env.MB_CLIENT_ID;
 const formLocation = document.getElementById('locationAddress').value;
 
 var geocoder = new MapboxGeocoder({
