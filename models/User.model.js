@@ -38,9 +38,6 @@ const userSchema = new Schema({
       type: String,
       trim: true,
     },
-    location: {
-      type: String,
-    },
     website: {
       type: String,
       match: [URL_PATTERN, 'Invalid URL'],
