@@ -272,6 +272,13 @@ section {
     min-width: 100%;
 }
 
+/* CKEditor */
+#editor {
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0 20px 0 30px;
+}
 
 
 .main-img {
