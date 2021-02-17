@@ -11,7 +11,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'ironhack-cp/user-avatars',
+    folder: 'peakhunt-avatars',
     format: 'jpeg'
   }
 });
