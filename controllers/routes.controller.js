@@ -4,7 +4,13 @@ const createError = require('http-errors');
 const constants = require('../public/js/constants');
 
 module.exports.list = (req, res, next) => {
+    const { location, distanceFromLocation, locationAddress } = req.query;
+    let lng, lat;
+    if (location) [lng, lat] = location.split(',');
+    const radius = distanceFromLocation / 6378.1; // Radius of the Earth
+
     const filters = {...req.query};
+    delete filters.distanceFromLocation;
     if (filters['elevationGained']) minAndMaxQuery('elevationGained');
     if (filters['duration']) minAndMaxQuery('duration');
     if (filters['distance']) minAndMaxQuery('distance');
@@ -24,18 +30,21 @@ module.exports.list = (req, res, next) => {
             if (filters[filter]) criterial[filter] = filters[filter];
             return criterial;
         }, {});
+    
+    if (locationAddress) delete criterial.locationAddress;
 
-    Route.find(criterial)
-        .then(routes => {
-            console.log(req.query)
-            res.render('routes/list', {
-                routes,
-                form: req.query,
-                sportOptions: constants.SPORT_OPTIONS,
-                difficultyOptions: constants.DIFFICULTY_OPTIONS
-            })
+    if (location && radius) criterial.location =  { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
+    const routes = Route.find(criterial)
+    .then(routes => {
+        res.render('routes/list', {
+            routes,
+            form: req.query,
+            sportOptions: constants.SPORT_OPTIONS,
+            difficultyOptions: constants.DIFFICULTY_OPTIONS,
+            withinOptions: constants.DISTANCES_WITHIN_OPTIONS,
         })
-        .catch(next)
+    })
+    .catch(next)
 }
 
 module.exports.detail = (req, res, next) => {
@@ -49,8 +58,9 @@ module.exports.edit = (req, res, next) => {
 }
 
 module.exports.doEdit = (req, res, next) => {
-    Object.assign(req.route, req.body);
-    req.route.save()
+    req.body.location = { type: 'Point', coordinates: (req.body.location).split(',').map(x => +x)}
+    const route = Object.assign(req.route, req.body);
+    route.save()
         .then(route => res.redirect(`/route/${route.id}`))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
@@ -73,11 +83,11 @@ module.exports.create = (req, res, next) => {
 
 module.exports.doCreate = (req, res, next) => {
     const route = req.body;
+    route.location = { type: 'Point', coordinates: (req.body.location).split(',').map(x => +x)}
     Route.create(route)
         .then(() => res.redirect('/routes'))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
-                console.log(error)
                 res.render('routes/new', {
                     errors: error.errors,
                     route,

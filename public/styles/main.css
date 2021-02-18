@@ -249,6 +249,8 @@ section {
 }
 .route-card h5 {
     height: 25px;
+}
+.card-text-overflow {
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -257,6 +259,27 @@ section {
 .route-card a {
     text-decoration: none;
 }
+
+/* Map */
+#map a {
+    font-size: 10px;
+}
+#geocoder {
+    z-index: 1;
+    width: 100%;
+    }
+.mapboxgl-ctrl-geocoder {
+    min-width: 100%;
+}
+
+/* CKEditor */
+#editor {
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0 20px 0 30px;
+}
+
 
 .main-img {
     height: 450px;

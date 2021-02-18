@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { route } = require('../config/routes.config');
 const constants = require('../public/js/constants');
 const Schema = mongoose.Schema;
 
@@ -19,8 +20,15 @@ const routeSchema = new Schema({
         required: 'Please, enter the difficulty of this route.'
     },
     location: {
+        type: {
+            type: String,
+            default: 'Point',
+        },
+        coordinates: [Number]
+    },
+    locationAddress: {
         type: String,
-        required: 'Please, enter the location of this route.'
+        required: 'Please, select a location'
     },
     duration: {
         type: Number,
@@ -70,10 +78,20 @@ const routeSchema = new Schema({
     }
 });
 
+routeSchema.index({ location: '2dsphere' })
+
 routeSchema.virtual('reviews', {
     ref: 'Review',
     localField: '_id',
     foreignField: 'route'
+})
+
+routeSchema.pre('save', function (next) {
+    if (this.video) {
+        const videoCode = this.video.split('?v=')[1];
+        this.video = `http://www.youtube.com/embed/${videoCode}`;
+        next();
+    } else next();
 })
 
 const Route = mongoose.model('Route', routeSchema);
