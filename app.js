@@ -24,7 +24,13 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+app.use((req, res, next) => {
+	res.locals.path = req.path;
+  
+	res.locals.currentUser = req.user;
+  
+	next();
+  });
 
 /* View setup */
 app.set('views', path.join(__dirname, 'views'));

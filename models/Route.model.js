@@ -64,8 +64,14 @@ const routeSchema = new Schema({
     },
     ratingsQuantity: {
         type: Number,
-        default: 0
-    }
+        default: 0,
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
+    
+    
 }, {
     timestamps: true,
     toObject: {
@@ -78,13 +84,14 @@ const routeSchema = new Schema({
     }
 });
 
-routeSchema.index({ location: '2dsphere' })
 
 routeSchema.virtual('reviews', {
     ref: 'Review',
     localField: '_id',
-    foreignField: 'route'
+    foreignField: 'route',
 })
+
+routeSchema.index({ location: '2dsphere' }),
 
 routeSchema.pre('save', function (next) {
     if (this.video) {
