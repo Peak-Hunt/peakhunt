@@ -5,6 +5,7 @@ module.exports.loadRoute = (req, res, next) => {
 
     Route.findById(routeId || id) //CheckRoll--> Admin mirar la clase Passport class (un martes)
         .populate('reviews')
+        .populate('user')
         .then(route => {
             if (route) {
                 req.route = route;

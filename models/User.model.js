@@ -53,12 +53,18 @@ const userSchema = new Schema({
           Math.random().toString(36).substr(2) +
           Math.random().toString(36).substr(2) +
           Math.random().toString(36).substr(2),
-      },
-
+      }
     }
+
   },
   { timestamps: true },
 );
+
+userSchema.virtual('routes', {
+  ref: 'Route',
+  localField: '_id', 
+  foreignField: 'user',
+})
 
 userSchema.pre('save', function (next) {
 

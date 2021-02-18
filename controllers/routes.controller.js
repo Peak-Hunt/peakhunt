@@ -48,7 +48,10 @@ module.exports.list = (req, res, next) => {
 }
 
 module.exports.detail = (req, res, next) => {
+    console.log(req.route)
+
     res.render('routes/detail', { route: req.route });
+
 }
 
 module.exports.edit = (req, res, next) => {
@@ -82,7 +85,13 @@ module.exports.create = (req, res, next) => {
 }
 
 module.exports.doCreate = (req, res, next) => {
-    const route = req.body;
+    
+    const route = {
+        ...req.body,
+        user: req.user.id
+    } 
+    console.log(route)
+
     route.location = { type: 'Point', coordinates: (req.body.location).split(',').map(x => +x)}
     Route.create(route)
         .then(() => res.redirect('/routes'))
