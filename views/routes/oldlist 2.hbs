@@ -1,0 +1,73 @@
+<div class="routes-banner text-center">
+    <h2>Routes > Hiking > Expert</h2>
+    <div class="container d-flex justify-content-center">
+        <form class="search-filter d-flex">
+            <div class="form-floating col-4">
+                <input value="{{ location }}" name="location" class="form-control" id="location"></input>
+                <label for="location">Location</label>
+            </div>
+            <div class="form-floating col-3">
+                <select name="sport" class="form-select" id="floatingSelect">
+                    {{#each sportOptions as |sportOption|}}
+                    {{option ../sport sportOption}}
+                    {{/each}}
+                </select>
+                <label for="floatingSelect">Sport</label>
+            </div>
+            <div class="form-floating col-2">
+                <select name="difficulty" class="form-select" id="floatingSelect">
+                    {{#each difficultyOptions as |difficultyOption|}}
+                    {{option ../difficulty difficultyOption}}
+                    {{/each}}
+                </select>
+                <label for="floatingSelect">Difficulty</label>
+            </div>
+            <button type="submit" class="btn btn-dark col-2" style="height: 58px;">Search</button>
+        </form>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 100px; margin-bottom: 150px;">
+    <div class="d-flex justify-content-between mb-1">
+        <h4 style="width: fit-content;" class="search-results-number">12 Results</h4> {{!-- TODO --}}
+        <select class="form-select order-by" aria-label="Default select example">
+            <option selected disabled>Order by</option>
+            <option value="top-rated">Rating: Top Rated</option>
+            <option value="longest">Duration: Longest</option>
+            <option value="shortest">Duration: Shortest</option>
+            <option value="shortest">Difficulty: Most Difficult</option>
+            <option value="shortest">Difficulty: Easiest</option>
+        </select>
+    </div>
+    <div class="routes-container d-flex justify-content-between flex-wrap">
+        {{#each routes as |route|}}
+        <div class="card h-100">
+            <div class="img card-img"
+                onclick="location.href='/route/{{ route.id }}';"
+                style="background-image: url('{{ route.image }}');">
+                <span class="badge bg-dark">{{ route.sport }}</span>
+                <span class="badge bg-warning">{{ route.difficulty }}</span>
+            </div>
+            <div class="card-body">
+                <div class="card-row">
+                    <h5 class="card-title">{{ route.title }}</h5>
+                    <div class="card-rating d-flex">
+                        <span class="material-icons">grade</span>
+                        <p class="card-rating-num">{{ route.ratingsAverage }}</p> {{!-- TODO --}}
+                    </div>
+                </div>
+                <div class="card-row mt-1">
+                    <div class="card-detail-container">
+                        <span class="me-2 material-icons">location_on</span>
+                        <p class="card-details card-location">{{ route.location }}</p>
+                    </div>
+                    <div class="card-detail-container">
+                        <span class="me-2 material-icons">schedule</span>
+                        <p class="card-details card-duration">Duration: {{ route.duration }}h</p> {{!-- TODO --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

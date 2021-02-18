@@ -7,11 +7,6 @@ const URL_PATTERN = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-
 const PASSWORD_PATTERN = /^.{8,}$/;
 
 const userSchema = new Schema({
-    username: {
-      type: String,
-      minlength: [3, 'Name needs at last 3 chars'],
-      trim: true,
-    },
     name: {
       type: String,
       minlength: [3, 'Name needs at last 3 chars'],
@@ -36,7 +31,9 @@ const userSchema = new Schema({
     },
     avatar: {
       type: String,
-      trim: true,
+      default: function() {
+        return `https://i.pravatar.cc/150?u=${this.id}`
+      },
     },
     website: {
       type: String,

@@ -87,14 +87,65 @@ module.exports.logout = (req, res, next) => {
 
 module.exports.activate = (req, res, next) => {
   User.findOneAndUpdate(
-    { 'verified.token': req.query.token },
+    { "verified.token": req.query.token },
     { $set: { verified: { date: new Date(), token: null } } },
     { runValidators: true }
-  ).then(user => {
-    if (!user) {
-      next(createError(404, 'Invalid activation token or expired'))
-    } else {
-      res.redirect('/login');
+  )
+    .then((user) => {
+      if (!user) {
+        next(createError(404, "Invalid activation token or expired"));
+      } else {
+        res.redirect("/login");
+      }
+    })
+    .catch(next);
+};
+
+module.exports.profile = (req, res, next) => {
+  User.findById(req.user.id)
+    .then((user) => res.render("users/profile", { user }))
+    .catch(next);
+};
+
+module.exports.doProfile = (req, res, next) => {
+  function renderWithErrors(error) {
+    console.log(error);
+
+    Object.assign(req.user, req.body);
+    res.status(400).render("users/profile", {
+      user: req.user,
+      errors: error,
+    });
+  }
+
+  const { password, passwordMatch, name } = req.body;
+  if (password && password !== passwordMatch) {
+    renderWithErrors({ passwordMatch: "Passwords do not match" });
+  } else {
+    const updateFields = { name };
+    if (req.file) {
+      updateFields.avatar = req.file.path;
     }
-  }).catch(next);
+    if (password) {
+      updateFields.password = password;
+    }
+
+    Object.assign(req.user, updateFields);
+    req.user
+      .save()
+      .then((user) => {
+        req.login(user, (error) => {
+          if (error) next(error);
+          else res.redirect("/profile");
+        });
+      })
+      .catch((error) => {
+        if (error instanceof mongoose.Error.ValidationError) {
+          console.log(error);
+          renderWithErrors(error.errors);
+        } else {
+          next(error);
+        }
+      });
+  }
 };
