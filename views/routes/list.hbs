@@ -5,7 +5,8 @@
                 <form class="mb-1 mt-3 text-center">
                     <div id="geocoder" class="geocoder mb-3">
                         <input type="hidden" id="location" name="location" value="{{ form.location }}">
-                        <input type="hidden" id="locationAddress" name="locationAddress" value="{{ form.locationAddress }}">
+                        <input type="hidden" id="locationAddress" name="locationAddress"
+                            value="{{ form.locationAddress }}">
                     </div>
                     <div class="col pe-1">
                         <div class="form-floating mb-2">
@@ -108,6 +109,18 @@
                 {{#each routes as |route|}}
                 {{> routeList route=route}}
                 {{/each}}
+            </div>
+            <div class="d-flex justify-content-center p-5">
+                <nav>
+                    <ul class="pagination">
+                        <li class="page-item {{#unless pagination.previous}} disabled {{/unless}}">
+                            <a class="page-link" href="/routes?page={{ pagination.previous.page }}">Previous</a>
+                        </li>
+                        <li class="page-item {{#unless pagination.next}} disabled {{/unless}}">
+                            <a class="page-link" href="/routes?page={{ pagination.next.page }}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

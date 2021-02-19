@@ -3,11 +3,17 @@ const mongoose = require('mongoose');
 const createError = require('http-errors');
 const constants = require('../public/js/constants');
 
-module.exports.list = (req, res, next) => {
+module.exports.list = async (req, res, next) => {
     const { location, distanceFromLocation, locationAddress } = req.query;
     let lng, lat;
     if (location) [lng, lat] = location.split(',');
     const radius = distanceFromLocation / 6378.1; // Radius of the Earth
+
+    const page = parseInt(req.query.page) || 1;
+    delete req.query.page;
+    const limit = 9;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
 
     const filters = { ...req.query };
     delete filters.distanceFromLocation;
@@ -30,15 +36,30 @@ module.exports.list = (req, res, next) => {
             if (filters[filter]) criterial[filter] = filters[filter];
             return criterial;
         }, {});
+    
+    const pagination = {};
+    if (endIndex < await Route.countDocuments().exec()) {
+        pagination.next = {
+            page: page + 1,
+            limit
+        }
+    }
+    if (startIndex > 0) {
+        pagination.previous = {
+            page: page - 1,
+            limit
+        }
+    }
 
     if (locationAddress) delete criterial.locationAddress;
-
     if (location && radius) criterial.location = { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
-    const routes = Route.find(criterial)
+  
+    const routes = await Route.find(criterial).limit(limit).skip(startIndex).exec()
         .then(routes => {
             res.render('routes/list', {
                 routes,
                 form: req.query,
+                pagination,
                 sportOptions: constants.SPORT_OPTIONS,
                 difficultyOptions: constants.DIFFICULTY_OPTIONS,
                 withinOptions: constants.DISTANCES_WITHIN_OPTIONS,
@@ -48,10 +69,7 @@ module.exports.list = (req, res, next) => {
 }
 
 module.exports.detail = (req, res, next) => {
-    console.log(req.route)
-
     res.render('routes/detail', { route: req.route });
-
 }
 
 module.exports.edit = (req, res, next) => {
@@ -85,12 +103,10 @@ module.exports.create = (req, res, next) => {
 }
 
 module.exports.doCreate = (req, res, next) => {
-
     const route = {
         ...req.body,
         user: req.user.id
     }
-    console.log(route)
 
     route.location = { type: 'Point', coordinates: (req.body.location).split(',').map(x => +x) }
     Route.create(route)
