@@ -8,12 +8,24 @@
                         <form action="/routes">
                             <div class="form-container p-4 row no-gutter">
                                 <div class="col-6 pe-3">
-                                    <div class="form-floating">
-                                        <input name="location" class="form-control" id="location"></input>
-                                        <label for="location">Location</label>
+                                    <div id="geocoder" class="geocoder mb-3">
+                                        <input type="hidden" id="location" name="location" value="{{ form.location }}">
+                                        <input type="hidden" id="locationAddress" name="locationAddress"
+                                            value="{{ form.locationAddress }}">
                                     </div>
                                 </div>
-                                <div class="col-4 pe-3">
+                                <div class="col-2 pe-3">
+                                    <div class="form-floating mb-2">
+                                        <select class="form-select mb-2" id="distanceFromLocation"
+                                            name="distanceFromLocation">
+                                            {{#each withinOptions as |withinOption|}}
+                                            {{objOption ../form.distanceFromLocation withinOption}}
+                                            {{/each}}
+                                        </select>
+                                        <label for="distanceFromLocation">Within</label>
+                                    </div>
+                                </div>
+                                <div class="col-3 pe-3">
                                     <div class="form-floating">
                                         <select name="sport" class="form-select" id="floatingSelect">
                                             {{#each sportOptions as |sportOption|}}
@@ -23,7 +35,7 @@
                                         <label for="floatingSelect">Sport</label>
                                     </div>
                                 </div>
-                                <div class="col-2">
+                                <div class="col-1">
                                     <button class="btn bg-ph-primary" type="submit"><i
                                             class="fas fa-search"></i></button>
                                 </div>
@@ -102,3 +114,5 @@
         </div>
     </section>
 </div>
+
+<script type="module" src="/js/geocoder.js"></script>
