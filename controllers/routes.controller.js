@@ -9,9 +9,9 @@ module.exports.list = async (req, res, next) => {
     if (location) [lng, lat] = location.split(',');
     const radius = distanceFromLocation / 6378.1; // Radius of the Earth
 
-    const page = parseInt(req.query.page);
+    const page = parseInt(req.query.page) || 1;
     delete req.query.page;
-    const limit = 3;
+    const limit = 9;
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
@@ -54,10 +54,8 @@ module.exports.list = async (req, res, next) => {
     if (locationAddress) delete criterial.locationAddress;
 
     if (location && radius) criterial.location = { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
-    console.log(criterial)
     const routes = await Route.find(criterial).limit(limit).skip(startIndex).exec()
         .then(routes => {
-            console.log(pagination)
             res.render('routes/list', {
                 routes,
                 form: req.query,
@@ -71,10 +69,7 @@ module.exports.list = async (req, res, next) => {
 }
 
 module.exports.detail = (req, res, next) => {
-    console.log(req.route)
-
     res.render('routes/detail', { route: req.route });
-
 }
 
 module.exports.edit = (req, res, next) => {
@@ -113,7 +108,6 @@ module.exports.doCreate = (req, res, next) => {
         ...req.body,
         user: req.user.id
     }
-    console.log(route)
 
     route.location = { type: 'Point', coordinates: (req.body.location).split(',').map(x => +x) }
     Route.create(route)
