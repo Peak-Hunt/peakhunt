@@ -21,7 +21,7 @@ router.post('/route/:id/edit', routesMid.loadRoute, routesController.doEdit);
 router.get('/routes/new', routesController.create);
 router.post('/routes', routesController.doCreate);
 router.post('/route/:id/delete', routesMid.loadRoute, routesController.delete);
-router.get('/my-routes', routesController.myRoutes);
+router.get('/my-routes', secure.isAuthenticated, routesController.myRoutes);
 
 router.post('/route/:routeId/reviews', routesMid.loadRoute, reviewsController.doCreate);
 router.get('/review/:reviewId/edit', reviewsController.edit);
