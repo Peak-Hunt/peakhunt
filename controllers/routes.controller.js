@@ -52,8 +52,8 @@ module.exports.list = async (req, res, next) => {
     }
 
     if (locationAddress) delete criterial.locationAddress;
-
     if (location && radius) criterial.location = { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
+  
     const routes = await Route.find(criterial).limit(limit).skip(startIndex).exec()
         .then(routes => {
             res.render('routes/list', {
@@ -103,7 +103,6 @@ module.exports.create = (req, res, next) => {
 }
 
 module.exports.doCreate = (req, res, next) => {
-
     const route = {
         ...req.body,
         user: req.user.id
@@ -127,5 +126,13 @@ module.exports.doCreate = (req, res, next) => {
 module.exports.delete = (req, res, next) => {
     Route.findByIdAndDelete(req.route.id)
         .then(() => res.redirect('/routes'))
+        .catch(next)
+}
+
+module.exports.myRoutes = (req, res, next) => {
+    Route.find( { user: { $eq: req.user.id }})
+        .then(routes => res.render('routes/myRoutes', {
+            routes
+        }))
         .catch(next)
 }
