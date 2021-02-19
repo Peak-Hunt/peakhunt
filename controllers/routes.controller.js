@@ -9,13 +9,13 @@ module.exports.list = (req, res, next) => {
     if (location) [lng, lat] = location.split(',');
     const radius = distanceFromLocation / 6378.1; // Radius of the Earth
 
-    const filters = {...req.query};
+    const filters = { ...req.query };
     delete filters.distanceFromLocation;
     if (filters['elevationGained']) minAndMaxQuery('elevationGained');
     if (filters['duration']) minAndMaxQuery('duration');
     if (filters['distance']) minAndMaxQuery('distance');
 
-    function minAndMaxQuery (attribute) {
+    function minAndMaxQuery(attribute) {
         if (filters[attribute].length > 0) {
             filters[attribute] = {
                 $gte: filters[attribute][0] || 0,
@@ -23,28 +23,28 @@ module.exports.list = (req, res, next) => {
             }
         }
     }
-    
+
     const criterial = Object.keys(filters)
         .filter((key => filters[key] !== 'All' && filters[key] !== 'all'))
         .reduce((criterial, filter) => {
             if (filters[filter]) criterial[filter] = filters[filter];
             return criterial;
         }, {});
-    
+
     if (locationAddress) delete criterial.locationAddress;
 
-    if (location && radius) criterial.location =  { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
+    if (location && radius) criterial.location = { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
     const routes = Route.find(criterial)
-    .then(routes => {
-        res.render('routes/list', {
-            routes,
-            form: req.query,
-            sportOptions: constants.SPORT_OPTIONS,
-            difficultyOptions: constants.DIFFICULTY_OPTIONS,
-            withinOptions: constants.DISTANCES_WITHIN_OPTIONS,
+        .then(routes => {
+            res.render('routes/list', {
+                routes,
+                form: req.query,
+                sportOptions: constants.SPORT_OPTIONS,
+                difficultyOptions: constants.DIFFICULTY_OPTIONS,
+                withinOptions: constants.DISTANCES_WITHIN_OPTIONS,
+            })
         })
-    })
-    .catch(next)
+        .catch(next)
 }
 
 module.exports.detail = (req, res, next) => {
@@ -61,7 +61,7 @@ module.exports.edit = (req, res, next) => {
 }
 
 module.exports.doEdit = (req, res, next) => {
-    req.body.location = { type: 'Point', coordinates: (req.body.location).split(',').map(x => +x)}
+    req.body.location = { type: 'Point', coordinates: (req.body.location).split(',').map(x => +x) }
     const route = Object.assign(req.route, req.body);
     route.save()
         .then(route => res.redirect(`/route/${route.id}`))
@@ -85,14 +85,14 @@ module.exports.create = (req, res, next) => {
 }
 
 module.exports.doCreate = (req, res, next) => {
-    
+
     const route = {
         ...req.body,
         user: req.user.id
-    } 
+    }
     console.log(route)
 
-    route.location = { type: 'Point', coordinates: (req.body.location).split(',').map(x => +x)}
+    route.location = { type: 'Point', coordinates: (req.body.location).split(',').map(x => +x) }
     Route.create(route)
         .then(() => res.redirect('/routes'))
         .catch(error => {
@@ -110,5 +110,13 @@ module.exports.doCreate = (req, res, next) => {
 module.exports.delete = (req, res, next) => {
     Route.findByIdAndDelete(req.route.id)
         .then(() => res.redirect('/routes'))
+        .catch(next)
+}
+
+module.exports.myRoutes = (req, res, next) => {
+    Route.find( { user: { $eq: req.user.id }})
+        .then(routes => res.render('routes/myRoutes', {
+            routes
+        }))
         .catch(next)
 }

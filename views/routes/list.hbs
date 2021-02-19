@@ -106,47 +106,7 @@
         <div class="col">
             <div class="row row-cols-3">
                 {{#each routes as |route|}}
-                <div class="col mb-4">
-                    <div class="route-card">
-                        <div class="route-card-img mb-2 p-2 d-flex justify-content-end"
-                            style="background-image: url({{ route.image }});">
-                            {{#if route.ratingsAverage}}
-                            <div class="route-card-rating">
-                                <p><i class="fas fa-star me-1"></i>{{ route.ratingsAverage }}</p>
-                            </div>
-                            {{/if}}
-                        </div>
-                        <div class="p-2">
-                            <div class="route-card-title">
-                                <a href="/route/{{ route.id }}">
-                                    <h5 class="card-text-overflow">{{ route.title }}</h5>
-                                </a>
-                            </div>
-                            <div class="route-card-details mt-3">
-                                <div class="row row-cols-3">
-                                    <p class="me-4 col"><i class="fas fa-chevron-up me-2"></i>{{
-                                        route.elevationGained}}m</p>
-                                    <p class="col"><i class="fas fa-chevron-down me-2"></i>{{ route.elevationLost }}m
-                                    </p>
-                                </div>
-                                <div class="row row-cols-3">
-                                    <p class="me-4 col"><i class="fas fa-hiking me-2"></i>{{ route.distance }} km</p>
-                                    <p class="col"><i class="far fa-clock me-2"></i>{{ route.duration }} h</p>
-                                </div>
-                                <p class="card-text-overflow"><i class="fas fa-location-arrow me-2 mb-4"></i>{{
-                                    route.locationAddress }}</p>
-                                <div class="d-flex">
-                                    <span class="badge {{ route.sport }}-badge me-1">
-                                        <img class="card-emoji me-2" src="./images/{{ route.sport }}-emoji.png"
-                                            alt="{{ route.sport }} emoji">
-                                        {{sportKeyToName route.sport }}
-                                    </span>
-                                    <span class="badge {{ route.difficulty }}-badge">{{ route.difficulty }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{> routeList route=route}}
                 {{/each}}
             </div>
         </div>
