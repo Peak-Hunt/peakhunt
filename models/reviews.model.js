@@ -17,8 +17,15 @@ const reviewSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Route',
         required: 'Review must belong to a route.'
-    }
+    },
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        require: 'Review must belong to a user'
+    },
 }, {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
     timestamps: true,
     toObject: {
         transform: (doc, ret) => {
@@ -30,16 +37,16 @@ const reviewSchema = new Schema({
     }
 });
 
-reviewSchema.statics.calcAverageRatings = async function(route) {
+reviewSchema.statics.calcAverageRatings = async function (route) {
     const stats = await this.aggregate([
         {
-            $match: {route}
+            $match: { route }
         },
         {
             $group: {
                 _id: '$route',
                 nRating: { $sum: 1 },
-                avgRating: {$avg: '$rating'}
+                avgRating: { $avg: '$rating' }
             }
         }
     ]);
@@ -56,16 +63,16 @@ reviewSchema.statics.calcAverageRatings = async function(route) {
     }
 }
 
-reviewSchema.post('save', function(next) {
+reviewSchema.post('save', function (next) {
     this.constructor.calcAverageRatings(this.route);
 });
 
-reviewSchema.pre(/^findOneAnd/, async function(next) {
+reviewSchema.pre(/^findOneAnd/, async function (next) {
     this.r = await this.findOne();
     next();
 })
 
-reviewSchema.post(/^findOneAnd/, async function() {
+reviewSchema.post(/^findOneAnd/, async function () {
     await this.r.constructor.calcAverageRatings(this.r.route);
 })
 
