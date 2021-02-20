@@ -17,7 +17,7 @@ hbs.registerHelper('objOption', function (selectedValue, value) {
 hbs.registerHelper('sportKeyToName', function (sportKey) {
     const result = constants.SPORTS.filter(sport => sport.key === sportKey);
     return result.length > 0 ? result[0].name : '';
-})
+});
 
 hbs.registerHelper('stringifyLocation', function (location) {
     return JSON.stringify(location)
