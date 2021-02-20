@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Route = require('./route.model');
+const Route = require('./routes.model');
 const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({

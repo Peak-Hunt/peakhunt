@@ -4,12 +4,12 @@ const express = require('express');
 const favicon = require('serve-favicon');
 const path = require('path');
 const passport = require('passport');
-const session = require('./config/session.config');
 const createError = require('http-errors');
 const flash = require('connect-flash');
 
 require('./config/hbs.config');
 require('./config/db.config');
+const session = require('./config/session.config');
 require('./config/passport.config');
 
 const app = express();
