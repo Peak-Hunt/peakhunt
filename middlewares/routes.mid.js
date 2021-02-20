@@ -2,7 +2,7 @@ const Route = require("../models/routes.model");
 
 module.exports.loadRoute = (req, res, next) => {
     const { routeId, id } = req.params;
-    Route.findById(routeId || id) //CheckRoll--> Admin mirar la clase Passport class (un martes)
+    Route.findById(routeId || id)
         .populate('user')
         .populate({
             path: 'reviews',

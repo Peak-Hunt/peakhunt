@@ -142,8 +142,6 @@ module.exports.delete = (req, res, next) => {
 
 module.exports.myRoutes = (req, res, next) => {
     Route.find({ user: { $eq: req.user.id } })
-        .then(routes => res.render('routes/myRoutes', {
-            routes
-        }))
+        .then(routes => res.render('routes/myRoutes', { routes }))
         .catch(next)
 }
