@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const createError = require("http-errors");
 const mailer = require("../config/mailer.config");
-const User = require("../models/user.model");
+const User = require("../models/users.model");
 const flash = require("connect-flash");
 
 module.exports.register = (req, res, next) => {
