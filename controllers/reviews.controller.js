@@ -39,9 +39,9 @@ module.exports.edit = (req, res, next) => {
 }
 
 module.exports.doEdit = (req, res, next) => {
-    Review.findByIdAndUpdate(req.params.reviewId, { $set: req.body }, { runValidators: true })
+    Review.findOneAndUpdate({ _id: req.params.reviewId, user: req.user.id }, { $set: req.body }, { runValidators: true })
         .then(review => {
-            if (review) res.redirect(`/route/${review.route._id}`); // Doesn't work with just id
+            if (review) res.redirect(`/route/${review.route._id}`);
             else next(createError(404, 'Review does not exist'));
         })
         .catch(error => {
