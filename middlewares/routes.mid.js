@@ -1,4 +1,4 @@
-const Route = require("../models/route.model");
+const Route = require("../models/routes.model");
 
 module.exports.loadRoute = (req, res, next) => {
     const { routeId, id } = req.params;

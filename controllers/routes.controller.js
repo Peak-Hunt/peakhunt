@@ -1,4 +1,4 @@
-const Route = require('../models/route.model');
+const Route = require('../models/routes.model');
 const mongoose = require('mongoose');
 const createError = require('http-errors');
 const constants = require('../public/js/constants');
