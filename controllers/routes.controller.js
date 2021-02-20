@@ -76,9 +76,12 @@ module.exports.detail = (req, res, next) => {
 }
 
 module.exports.edit = (req, res, next) => {
+    if (req.route.user.id === req.user.id) {
         const sports = constants.SPORTS;
         const difficulties = constants.DIFFICULTIES;
         res.render('routes/edit', { route: req.route, sports, difficulties });
+    } else res.redirect(`/route/${req.route.id}`);
+        
 }
 
 module.exports.doEdit = (req, res, next) => {
