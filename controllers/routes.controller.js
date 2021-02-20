@@ -127,8 +127,11 @@ module.exports.doCreate = (req, res, next) => {
 }
 
 module.exports.delete = (req, res, next) => {
-    Route.findByIdAndDelete(req.route.id)
-        .then(() => res.redirect('/routes'))
+    Route.findOneAndDelete({ _id: req.route.id, user: req.user.id })
+        .then(route => {
+            if (route) res.redirect('/routes');
+            else res.redirect(`/route/${req.route.id}`);
+        })
         .catch(next)
 }
 
