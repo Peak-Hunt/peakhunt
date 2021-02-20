@@ -4,6 +4,7 @@ const createError = require('http-errors');
 const constants = require('../public/js/constants');
 
 module.exports.list = async (req, res, next) => {
+    try {
     const { location, distanceFromLocation, locationAddress } = req.query;
     let lng, lat;
     if (location) [lng, lat] = location.split(',');
@@ -55,7 +56,7 @@ module.exports.list = async (req, res, next) => {
     if (location && radius) criterial.location = { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
   
     const routes = await Route.find(criterial).limit(limit).skip(startIndex).exec()
-        .then(routes => {
+        if (routes) {
             res.render('routes/list', {
                 routes,
                 form: req.query,
@@ -64,8 +65,10 @@ module.exports.list = async (req, res, next) => {
                 difficultyOptions: constants.DIFFICULTY_OPTIONS,
                 withinOptions: constants.DISTANCES_WITHIN_OPTIONS,
             })
-        })
-        .catch(next)
+        }
+    } catch(error) {
+        next(error);
+    }
 }
 
 module.exports.detail = (req, res, next) => {
