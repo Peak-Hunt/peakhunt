@@ -14,8 +14,8 @@ const storage = require('../config/storage.config');
 
 
 router.get('/', commonController.home);
-router.get('/routes', secure.isAuthenticated, routesController.list);
-router.get('/route/:id', secure.isAuthenticated, routesMid.loadRoute, routesController.detail);
+router.get('/routes', routesController.list);
+router.get('/route/:id', routesMid.loadRoute, routesController.detail);
 router.get('/route/:id/edit', secure.isAuthenticated, routesMid.loadRoute, routesController.edit);
 router.post('/route/:id/edit', secure.isAuthenticated, routesMid.loadRoute, routesController.doEdit);
 router.get('/routes/new', secure.isAuthenticated, routesController.create);
