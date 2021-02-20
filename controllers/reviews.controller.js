@@ -28,10 +28,12 @@ module.exports.edit = (req, res, next) => {
     Review.findById(reviewId)
         .populate('route')
         .then(review => {
-            if (review) {
+            if (JSON.stringify(review.user) == JSON.stringify(req.user.id)) {
                 res.render('reviews/edit', { review })
+            } else if (review) {
+                res.redirect(`/route/${review.route.id}`)
             } else {
-                next(createError(404, 'Route not found'));
+                next(createError(404, 'Review not found'));
             }
         }).catch(next);
 }
