@@ -76,9 +76,9 @@ module.exports.detail = (req, res, next) => {
 }
 
 module.exports.edit = (req, res, next) => {
-    const sports = constants.SPORTS;
-    const difficulties = constants.DIFFICULTIES;
-    res.render('routes/edit', { route: req.route, sports, difficulties });
+        const sports = constants.SPORTS;
+        const difficulties = constants.DIFFICULTIES;
+        res.render('routes/edit', { route: req.route, sports, difficulties });
 }
 
 module.exports.doEdit = (req, res, next) => {
