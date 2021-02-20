@@ -11,9 +11,11 @@
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="/">Home</a>
       </li>
+      {{#if currentUser}}
       <li class="nav-item">
         <a class="nav-link" aria-current="page" href="/routes">Routes</a>
       </li>
+     {{/if}}
       <div class="user-area ms-3">
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="/login">Login</a>
@@ -22,6 +24,7 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="/register">Register</a>
         </li>
+        {{#if currentUser}}
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="/profile">My Profile</a>
         </li>
@@ -30,6 +33,7 @@
         </li>
       </div>
       <a class="btn btn-dark bg-ph-dark ms-3" href="/routes/new" role="button">List a route</a>
+       {{/if}}
     </ul>
   </div>
 </nav>
