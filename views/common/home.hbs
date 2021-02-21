@@ -7,16 +7,17 @@
                         <h1>Discover mountains nearby</h1>
                         <form action="/routes">
                             <div class="form-container p-4 row no-gutter">
-                                <div class="col-6 pe-3">
-                                    <div id="geocoder" class="geocoder mb-3">
+                                <div class="col-5 pe-2 m-0 p-0">
+                                    <div id="geocoder" class="geocoder">
+                                        <p class="location-label">Location</p>
                                         <input type="hidden" id="location" name="location" value="{{ form.location }}">
                                         <input type="hidden" id="locationAddress" name="locationAddress"
                                             value="{{ form.locationAddress }}">
                                     </div>
                                 </div>
-                                <div class="col-2 pe-3">
-                                    <div class="form-floating mb-2">
-                                        <select class="form-select mb-2" id="distanceFromLocation"
+                                <div class="col-3 pe-2">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="distanceFromLocation"
                                             name="distanceFromLocation">
                                             {{#each withinOptions as |withinOption|}}
                                             {{objOption ../form.distanceFromLocation withinOption}}
@@ -25,7 +26,7 @@
                                         <label for="distanceFromLocation">Within</label>
                                     </div>
                                 </div>
-                                <div class="col-3 pe-3">
+                                <div class="col-3 pe-2">
                                     <div class="form-floating">
                                         <select name="sport" class="form-select" id="floatingSelect">
                                             {{#each sportOptions as |sportOption|}}
@@ -36,7 +37,7 @@
                                     </div>
                                 </div>
                                 <div class="col-1">
-                                    <button class="btn bg-ph-primary" type="submit"><i
+                                    <button class="btn bg-ph-primary" style="height: 58px;" type="submit"><i
                                             class="fas fa-search"></i></button>
                                 </div>
                             </div>
