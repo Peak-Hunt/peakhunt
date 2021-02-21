@@ -8,6 +8,7 @@ module.exports.doCreate = (req, res, next) => {
         rating: review.rating,
         description: review.description,
         route: req.route.id,
+        user: req.user.id
     }).then(() => res.redirect(`/route/${req.route.id}`))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
@@ -27,18 +28,20 @@ module.exports.edit = (req, res, next) => {
     Review.findById(reviewId)
         .populate('route')
         .then(review => {
-            if (review) {
+            if (JSON.stringify(review.user) == JSON.stringify(req.user.id)) {
                 res.render('reviews/edit', { review })
+            } else if (review) {
+                res.redirect(`/route/${review.route.id}`)
             } else {
-                next(createError(404, 'Route not found'));
+                next(createError(404, 'Review not found'));
             }
         }).catch(next);
 }
 
 module.exports.doEdit = (req, res, next) => {
-    Review.findByIdAndUpdate(req.params.reviewId, { $set: req.body }, { runValidators: true })
+    Review.findOneAndUpdate({ _id: req.params.reviewId, user: req.user.id }, { $set: req.body }, { runValidators: true })
         .then(review => {
-            if (review) res.redirect(`/route/${review.route._id}`); // Doesn't work with just id
+            if (review) res.redirect(`/route/${review.route._id}`);
             else next(createError(404, 'Review does not exist'));
         })
         .catch(error => {
@@ -54,10 +57,13 @@ module.exports.doEdit = (req, res, next) => {
 }
 
 module.exports.delete = (req, res, next) => {
-    Review.findByIdAndDelete(req.params.reviewId)
-        .populate()
+    const { routeId } = req.params;
+    Review.findOneAndDelete({ _id: req.params.reviewId, user: req.user.id })
         .then(review => {
-            if (review) res.redirect(`/route/${review.route._id}`);
+            if (review) res.redirect(`/route/${review.route}`);
             else next(createError(404, 'Review does not exist'));
-        }).catch(next)
+        })
+        .catch(() => {
+            res.redirect(`/route/${routeId}`);
+        })
 }

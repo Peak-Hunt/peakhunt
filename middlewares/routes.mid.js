@@ -3,10 +3,15 @@ const createError = require('http-errors');
 
 module.exports.loadRoute = (req, res, next) => {
     const { routeId, id } = req.params;
-
+    
     Route.findById(routeId || id)
-        .populate('reviews')
         .populate('user')
+        .populate({
+            path: 'reviews',
+            populate: {
+                path: 'user',
+            },
+        })
         .then(route => {
             if (route) {
                 req.route = route;

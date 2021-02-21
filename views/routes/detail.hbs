@@ -113,10 +113,11 @@
                     {{#each route.reviews as |review|}}
                     <div class="review mt-3 mb-3 d-flex flex-direction-row p-3"
                         style="border: 1px solid #a4a4a48f; border-radius: 10px;">
+                        <p>@{{ review.user.name }}</p>
                         <p class="review d-inline me-3">{{ review.rating }}</p>
                         <p class="d-inline">{{ review.description }}</p>
                         <a href="/review/{{ review.id }}/edit">Edit</a>
-                        <form class="ms-3" action="/review/{{ review.id }}/delete" method="POST">
+                        <form class="ms-3" action="/route/{{ review.route }}/review/{{ review.id }}/delete" method="POST">
                             <button type="submit">Delete</button>
                         </form>
                     </div>

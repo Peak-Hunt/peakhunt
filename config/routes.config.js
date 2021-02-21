@@ -12,7 +12,6 @@ const storage = require('../config/storage.config');
 
 
 
-
 router.get('/', commonController.home);
 router.get('/routes', routesController.list);
 router.get('/route/:id', routesMid.loadRoute, routesController.detail);
@@ -26,7 +25,7 @@ router.get('/my-routes', secure.isAuthenticated, routesController.myRoutes);
 router.post('/route/:routeId/reviews', secure.isAuthenticated, routesMid.loadRoute, reviewsController.doCreate);
 router.get('/review/:reviewId/edit', secure.isAuthenticated, reviewsController.edit);
 router.post('/review/:reviewId/edit', secure.isAuthenticated, reviewsController.doEdit);
-router.post('/review/:reviewId/delete', secure.isAuthenticated, reviewsController.delete);
+router.post('/route/:routeId/review/:reviewId/delete', secure.isAuthenticated, reviewsController.delete);
 
 router.get('/activate', userController.activate);
 router.get('/register', userController.register);
