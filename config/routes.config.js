@@ -7,7 +7,7 @@ const commonController = require('../controllers/common.controller');
 const routesController = require('../controllers/routes.controller');
 const userController = require('../controllers/user.controller');
 const reviewsController = require('../controllers/reviews.controller');
-const secure = require('../middlewares/secure.middleware');
+const secure = require('../middlewares/secure.mid');
 const storage = require('../config/storage.config');
 
 
