@@ -1,12 +1,11 @@
 <div class="container" style="margin-top: 100px;">
     <div class="user-banner img" style="background-image: url({{ user.banner }});">
-        <a href="/settings"><div class="edit-banner"><i class="fas fa-pen"></i></div></a>
         <div class="user-info">
             <div class="avatar" style="background-image: url({{ user.avatar }});"></div>
             <h4>Check the routes from {{ user.name }}!</h4>
         </div>
     </div>
-    <div class="routes-container row row-cols-4">
+    <div class="row row-cols-4">
         {{#each routes as |route|}}
         {{> routeList route=route}}
         {{/each}}

@@ -357,7 +357,7 @@ section {
     background-position: center;
 }
 
-/* User page */
+/* Profile page */
 .user-banner {
     height: 200px;
     width: 100%;
@@ -365,6 +365,7 @@ section {
     background-position: center;
     background-repeat: no-repeat;
     padding: 20px;
+    margin-bottom: 200px;
     display: flex;
     justify-content: center;
     position: relative;
@@ -387,21 +388,34 @@ section {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    position: relative;
 }
-.routes-container {
-    margin-top: 200px;
-}
-.edit-banner {
-    height: 40px;
-    width: 40px;
+.edit {
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: white;
     position: absolute;
-    right: 30px;
     color: black;
+    cursor: pointer;
+}
+.edit-banner {
+    height: 40px;
+    width: 40px;
+    right: 30px;
+}
+.edit-avatar {
+    height: 30px;
+    width: 30px;
+    right: 0;
+    top: 5px;
+    font-size: 14px;
+}
+
+/* Settings */
+.settings-container {
+    width: 300px;
 }
 
 
