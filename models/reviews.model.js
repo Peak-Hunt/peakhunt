@@ -37,6 +37,8 @@ const reviewSchema = new Schema({
     }
 });
 
+reviewSchema.index({ route: 1, user: 1 }, { unique: true });
+
 reviewSchema.statics.calcAverageRatings = async function (route) {
     const stats = await this.aggregate([
         {

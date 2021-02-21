@@ -18,7 +18,12 @@ module.exports.doCreate = (req, res, next) => {
                     errors: error.errors
                 });
             } else {
-                next(error);
+                error.duplicate = 'You can only post one review per route.'
+                res.render('routes/detail', {
+                    route: req.route,
+                    review: req.body,
+                    errors: error
+                })
             }
         });
 }

@@ -77,11 +77,14 @@
                 <h4>Rate this route</h4>
                 <form class="mt-3" method="POST" action="/route/{{ route.id }}/reviews">
                     <div class="form-floating mt-3 mb-3">
-                        <textarea name="description" class="form-control {{#if errors.description}}is-invalid{{/if}}"
+                        <textarea name="description" class="form-control {{#if errors}}is-invalid{{/if}}"
                             id="ratingDescription" style="height: 100px">{{ review.description }}</textarea>
                         <label for="ratingDescription">Description</label>
                         {{#if errors.description}}
                         <div class="invalid-feedback">{{errors.description}}</div>
+                        {{/if}}
+                        {{#if errors.duplicate}}
+                        <div class="invalid-feedback">{{errors.duplicate}}</div>
                         {{/if}}
                     </div>
                     <fieldset class="rating" style="width: 100%;">
