@@ -1,9 +1,10 @@
 const Route = require("../models/routes.model");
+const createError = require('http-errors');
 
 module.exports.loadRoute = (req, res, next) => {
     const { routeId, id } = req.params;
 
-    Route.findById(routeId || id) //CheckRoll--> Admin mirar la clase Passport class (un martes)
+    Route.findById(routeId || id)
         .populate('reviews')
         .populate('user')
         .then(route => {
