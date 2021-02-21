@@ -88,15 +88,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-floating">
-                        <select class="form-select mb-2" id="floatingSelect" aria-label="Floating label select example">
-                            <option value="top-rated">Rating: Top Rated</option>
-                            <option value="longest">Duration: Longest</option>
-                            <option value="shortest">Duration: Shortest</option>
-                            <option value="shortest">Difficulty: Most Difficult</option>
-                            <option value="shortest">Difficulty: Easiest</option>
+                    <div class="form-floating mb-2">
+                        <select name="sort" class="form-select" id="floatingSelect">
+                            {{#each sortOptions as |sortOption|}}
+                            {{objOption ../form.sort sortOption}}
+                            {{/each}}
                         </select>
-                        <label for="floatingSelect">Order by</label>
+                        <label for="floatingSelect">Sort by</label>
                     </div>
                     <button type="submit" class="btn bg-ph-primary mb-2" style="height: 58px;"><i
                             class="fas fa-search me-3"></i>Search</button>
