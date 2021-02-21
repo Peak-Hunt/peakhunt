@@ -3,12 +3,13 @@
         <div class="col-3">
             <div class="form-container p-4">
                 <form class="mb-1 mt-3 text-center">
-                    <div id="geocoder" class="geocoder mb-3">
+                    <div id="geocoder" class="geocoder mb-2">
+                        <p class="location-label">Location</p>
                         <input type="hidden" id="location" name="location" value="{{ form.location }}">
                         <input type="hidden" id="locationAddress" name="locationAddress"
                             value="{{ form.locationAddress }}">
                     </div>
-                    <div class="col pe-1">
+                    <div class="col">
                         <div class="form-floating mb-2">
                             <select class="form-select mb-2" id="distanceFromLocation" name="distanceFromLocation">
                                 {{#each withinOptions as |withinOption|}}

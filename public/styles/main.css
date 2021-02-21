@@ -132,7 +132,8 @@ h5 {
     width: 620px;
 }
 .form-container {
-    height: fit-content;
+    margin: 0;
+    padding: 0;
     background-color: white;
     border-radius: 10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
@@ -274,6 +275,42 @@ section {
     }
 .mapboxgl-ctrl-geocoder {
     min-width: 100%;
+}
+
+/* Geocoder */
+.mapboxgl-ctrl-geocoder {
+    box-shadow: none;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    height: 58px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: flex-end;
+    padding: 1px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+}
+.mapboxgl-ctrl-geocoder--pin-right,  .mapboxgl-ctrl-geocoder--icon-search {
+    display: none;
+}
+.mapboxgl-ctrl-geocoder--icon-search {
+    top: 18px;
+}
+.mapboxgl-ctrl-geocoder--input {
+    color: black;
+    padding-left: 13px;
+}
+.location-label {
+    position: absolute;
+    z-index: 9999;
+    padding: 6px 0 0 15px;
+    font-size: 13px;
+    font-weight: 300;
+    color: #4d4d4d;
+}
+.suggestions-wrapper {
+    text-align: left;
 }
 
 /* CKEditor */
