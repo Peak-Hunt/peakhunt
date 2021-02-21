@@ -1,40 +1,37 @@
-<div class="custom-container">
-    <h1 class="text-center m-4 text-success">Education</h1>
-    <div class="jumbotron">
-        <h3 class="text-center text-primary">Login Form</h3>
-        <br>
+<section class="row" style="height: 100vh; margin: 0; padding: 0">
+    <div class="col-4 d-flex flex-column align-items-center justify-content-center">
+        <div class="login-form-container">
+            <h2 class="mb-2">Login to your account</h2>
+            <p>Welcome back!</p>
+            <div class="d-flex flex-column mt-5">
+                <a class="social-login-button mb-4 ph-primary" href="/authenticate/google">Continue with Google<span
+                        class="google-icon"></span></i></a>
+                <p class="comment" style="text-align: center;">- Or continue using your email -</p>
 
-        {{#if errors}}
-        <div class="alert alert-danger alert-dismissible fade show">
-            <strong>{{ errors.email }}</strong>
-            <button class="close" data-dismiss="alert"><span>&times;</span></button>
-        </div>
-        {{/if}}
-
-        <form action="/login" id="login" method="POST">
-            <div class="form-group">
-                <label for="email">Email <span class="text-danger">*</span></label>
-                <input type="text" class="form-control {{#if errors.email}}is-invalid{{/if}} " name="email" id="email"
-                    placeholder="Enter your email" {{errors.email}}>
-            </div>
-            <div class="form-group">
-                <label for="password">Password <span class="text-danger">*</span></label>
-                <input type="password" class="form-control {{#if errors.password}}is-invalid{{/if}} " name="password"
-                    id="password" placeholder="Enter Your Password" {{errors.email}}>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-info btn-block">
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-8">
-                        New user? Register <a href="/register">here</a>
+                <form class="mt-5" action="/login" id="login" method="POST">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control {{#if errors.email}}is-invalid{{/if}}" name="email"
+                            id="email" placeholder="Enter your email">
+                        <label for="email">Email</label>
+                        {{#if errors.email}}
+                        <div class="invalid-feedback">{{ errors.email }}</div>
+                        {{/if}}
                     </div>
-                </div>
+                    <div class="form-floating mb-2">
+                        <input type="password" class="form-control {{#if errors.password}}is-invalid{{/if}} "
+                            name="password" id="password" placeholder="Enter Your Password">
+                        <label for="password">Password</label>
+                        {{#if errors.email}}
+                        <div class="invalid-feedback"> {{ errors.password }}</div>
+                        {{/if}}
+                    </div>
+                    <a href="#" class="form-link ph-primary">Forgot password?</a>
+                    <button class="btn bg-ph-primary p-3 mt-5 mb-3" style="width: 100%;" type="submit">Login</button>
+                    <p class="comment" style="text-align: center; font-size: 15px;">Don't have an account? <a
+                            class="form-link ph-primary" style="font-size: 15px;" href="/register">Register</a></p>
+                </form>
             </div>
-        </form>
-        <a class="btn btn-secondary btn-block" href="/authenticate/google"><i class="fa fa-google"></i> Login with
-            Google</a>
-        <a class="btn btn-secondary btn-block" href="/forget"><i class=""></i> Forget your password?</a>
+        </div>
     </div>
-</div>
+    <div class="col login-img"></div>
+</section>
