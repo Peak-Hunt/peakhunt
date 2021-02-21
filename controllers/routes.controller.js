@@ -18,6 +18,7 @@ module.exports.list = async (req, res, next) => {
 
         const filters = { ...req.query };
         delete filters.distanceFromLocation;
+        delete filters.sort;
         if (filters['elevationGained']) minAndMaxQuery('elevationGained');
         if (filters['duration']) minAndMaxQuery('duration');
         if (filters['distance']) minAndMaxQuery('distance');
@@ -51,11 +52,20 @@ module.exports.list = async (req, res, next) => {
                 limit
             }
         }
+        
+        let sortBy = req.query.sort || [['ratingsAverage', -1]];
+        if (sortBy === 'rating') sortBy = [['ratingsAverage', -1]];
+        else if (sortBy === 'duration_longest') sortBy = [['duration', -1]];
+        else if (sortBy === 'duration_shortest') sortBy = 'duration';
+        else if (sortBy === 'distance_longest') sortBy = [['distance', -1]];
+        else if (sortBy === 'distance_shortest') sortBy = 'distance';
+        else if (sortBy === 'highest') sortBy = [['elevationGained', -1]];
+        else if (sortBy === 'smallest') sortBy = 'elevationGained';
 
         if (locationAddress) delete criterial.locationAddress;
         if (location && radius) criterial.location = { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
 
-        const routes = await Route.find(criterial).limit(limit).skip(startIndex).exec()
+        const routes = await Route.find(criterial).sort(sortBy).limit(limit).skip(startIndex).exec()
         if (routes) {
             res.render('routes/list', {
                 routes,
@@ -64,6 +74,7 @@ module.exports.list = async (req, res, next) => {
                 sportOptions: constants.SPORT_OPTIONS,
                 difficultyOptions: constants.DIFFICULTY_OPTIONS,
                 withinOptions: constants.DISTANCES_WITHIN_OPTIONS,
+                sortOptions: constants.SORT_OPTIONS,
             })
         }
     } catch (error) {

@@ -70,5 +70,35 @@ module.exports = {
             name: '+ 40km',
             key: 40
         },
-    ]
+    ],
+    SORT_OPTIONS: [
+        {
+            name: 'Rating: Top Rated',
+            key: 'rating'
+        },
+        {
+            name: 'Duration: Longest',
+            key: 'duration_longest'
+        },
+        {
+            name: 'Duration: Shortest',
+            key: 'duration_shortest'
+        },
+        {
+            name: 'Distance: Longest',
+            key: 'distance_longest'
+        },
+        {
+            name: 'Distance: Shortest',
+            key: 'distance_shortest'
+        },
+        {
+            name: 'Elevation gained: Greatest',
+            key: 'highest'
+        },
+        {
+            name: 'Elevation gained: Lowest',
+            key: 'smallest'
+        },
+    ],
 }
