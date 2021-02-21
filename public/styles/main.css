@@ -67,7 +67,7 @@ h5 {
 }
 .comment {
     color: #a4a4a4;
-    font-size: 15px;
+    font-size: 14px;
 }
 
   /* Navbar */
@@ -286,7 +286,7 @@ section {
 
 /* Login */
 .login-form-container {
-    max-width: 400px;
+    width: 400px;
 }
 .social-login-button {
     background-color: #e7e7e7;
