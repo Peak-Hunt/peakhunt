@@ -37,6 +37,10 @@ const userSchema = new Schema({
         return `https://i.pravatar.cc/150?u=${this.id}`
       },
     },
+    banner: {
+        type: String,
+        default: '../images/default-banner.jpg' 
+    },
     website: {
       type: String,
       match: [URL_PATTERN, 'Invalid URL'],
