@@ -3,13 +3,15 @@ const Schema = mongoose.Schema;
 
 const bcrypt = require('bcrypt');
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const URL_PATTERN = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+const URL_PATTERN = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+const NAME_PATTERN = /^\S*$/;
 const PASSWORD_PATTERN = /^.{8,}$/;
 
 const userSchema = new Schema({
     name: {
       type: String,
-      minlength: [3, 'Name needs at last 3 chars'],
+      minlength: [3, 'Your username needs to be at least 3 characters long.'],
+      match: [NAME_PATTERN, 'Your username should not contain spaces.'],
       trim: true,
     },
     email: {
@@ -34,6 +36,10 @@ const userSchema = new Schema({
       default: function() {
         return `https://i.pravatar.cc/150?u=${this.id}`
       },
+    },
+    banner: {
+        type: String,
+        default: '../images/default-banner.jpg' 
     },
     website: {
       type: String,

@@ -24,10 +24,10 @@
         </li>
         {{#if currentUser}}
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/profile">My Profile</a>
+          <a class="nav-link" aria-current="page" href="/user/{{ currentUser.name }}">My Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/my-routes">My Routes</a>
+          <a class="nav-link" aria-current="page" href="/settings">Settings</a>
         </li>
       </div>
       <a class="btn btn-dark bg-ph-dark ms-3" href="/routes/new" role="button">List a route</a>

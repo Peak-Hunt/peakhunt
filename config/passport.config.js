@@ -57,7 +57,7 @@ passport.use('local-auth', new LocalStrategy({
         .then(user => {
             if(!user) {
                 user = new User({
-                    name,
+                    name: email.split('@')[0],
                     email,
                     social: {
                         google: googleId
