@@ -102,18 +102,18 @@ module.exports.activate = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.profile = (req, res, next) => {
+module.exports.settings = (req, res, next) => {
   User.findById(req.user.id)
-    .then((user) => res.render("users/profile", { user }))
+    .then((user) => res.render("users/settings", { user }))
     .catch(next);
 };
 
-module.exports.doProfile = (req, res, next) => {
+module.exports.doSettings = (req, res, next) => {
   function renderWithErrors(error) {
     console.log(error);
 
     Object.assign(req.user, req.body);
-    res.status(400).render("users/profile", {
+    res.status(400).render("users/settings", {
       user: req.user,
       errors: error,
     });
@@ -137,12 +137,11 @@ module.exports.doProfile = (req, res, next) => {
       .then((user) => {
         req.login(user, (error) => {
           if (error) next(error);
-          else res.redirect("/profile");
+          else res.redirect("/settings");
         });
       })
       .catch((error) => {
         if (error instanceof mongoose.Error.ValidationError) {
-          console.log(error);
           renderWithErrors(error.errors);
         } else {
           next(error);
@@ -150,3 +149,13 @@ module.exports.doProfile = (req, res, next) => {
       });
   }
 };
+
+module.exports.profile = (req, res, next) => {
+    console.log(req.params.username)
+    User.findOne({ name: req.params.username })
+        .then(user => {
+            console.log(user)
+            res.render('users/profile', { user });
+        })
+        .catch(next);
+}

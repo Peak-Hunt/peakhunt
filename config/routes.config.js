@@ -34,8 +34,9 @@ router.get('/login', userController.login);
 router.post('/login', userController.doLogin);
 router.get('/authenticate/google', passport.authenticate('google-auth', { scope: GOOGLE_SCOPES }))
 router.get('/authenticate/google/cb', userController.loginWithGoogle)
-router.get('/profile', secure.isAuthenticated, userController.profile);
-router.post('/profile', secure.isAuthenticated, storage.single('avatar'), userController.doProfile); 
+router.get('/settings', secure.isAuthenticated, userController.settings);
+router.post('/settings', secure.isAuthenticated, storage.single('avatar'), userController.doSettings);
+router.get('/user/:username', userController.profile);
 router.get('/logout', secure.isAuthenticated, userController.logout);
 
 module.exports = router;
