@@ -6,8 +6,6 @@ BalloonEditor
             'bold',
             'italic',
             'link',
-            'bulletedList',
-            'numberedList',
             'undo',
             'redo'
         ]
