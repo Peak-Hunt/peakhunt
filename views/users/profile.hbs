@@ -5,6 +5,9 @@
             <h4>Check the routes from {{ user.name }}!</h4>
         </div>
     </div>
+    {{#unless routes}}
+    <p class="comment" style="text-align: center;">This user didn't publish any routes yet.</p>
+    {{/unless}}
     <div class="row row-cols-4">
         {{#each routes as |route|}}
         {{> routeList route=route}}
