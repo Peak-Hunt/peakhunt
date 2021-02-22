@@ -6,6 +6,7 @@ const User = require("../models/users.model");
 const Route = require("../models/routes.model");
 const flash = require("connect-flash");
 const constants = require('../public/js/constants');
+const crypto = require("crypto");
 
 module.exports.register = (req, res, next) => {
     res.render("users/register");
@@ -172,3 +173,46 @@ module.exports.profile = (req, res, next) => {
         })
         .catch(next);
 }
+
+module.exports.forgot = (req, res, next) => {
+    res.render('users/forgot', {
+      user: req.user
+    });
+  };
+
+  module.exports.forgot = (req, res, next) => {
+    const tokenSinString = crypto.randomBytes(20)
+    var token = tokenSinString.toString('hex')
+    User.findOne({
+        email: req.body.email
+      })
+      .then(user => {
+        if (!user) {
+          res.status(400).render('users/forgot', {
+            email: req.body.email,
+          })
+        } else {
+          user.resetPasswordToken = token;
+          user.resetPasswordExpires = Date.now() + 3600000;
+          User.findById(user.id, )
+            .then(user => {
+              const token = user.resetPasswordToken
+              const email = user.email
+              mailer.sendForgotMail(token, email);
+              res.render('users/forgot', {
+                user: user,
+                verification: true
+              })
+            })
+        }
+      })
+      .catch((error) => {
+        if (error instanceof mongoose.Error.ValidationError) {
+          renderWithErrors(error.errors);
+        } else {
+          next(error);
+        };
+      });
+  };
+
+  
