@@ -39,4 +39,8 @@ router.post('/settings', secure.isAuthenticated, storage.single('avatar'), userC
 router.get('/user/:username', userController.profile);
 router.get('/logout', secure.isAuthenticated, userController.logout);
 
+router.get('/forgot', userController.forgot) 
+router.post('/forgot', userController.forgot) 
+
+
 module.exports = router;

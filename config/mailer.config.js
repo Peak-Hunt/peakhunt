@@ -28,3 +28,22 @@ module.exports.sendValidationEmail = (email, activationToken, name) => {
     })
     .catch(console.error);
 };
+
+module.exports.sendForgotMail = (token, email) => {
+  console.log('transport:', token);
+  console.log('mail:', email);
+  transport
+    .sendMail({
+      to: email,
+      from: `Peakhunt<${user}>`,
+      subject: 'Password Reset',
+      text: `You are receiving this because you (or someone else) have requested the reset of the password for your account 
+        Please click on the following link, or paste this into your browser to complete the process
+        <a href=${appUrl}/reset?token=${token} style="padding: 10px 20px; color: white; background-color: pink; border-radius: 5px;">Click here</a>`
+          })
+    .then(() => {
+      console.log('Forgot email sent');
+    })
+    .catch(console.error);
+}
+
