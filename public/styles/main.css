@@ -635,8 +635,16 @@ section {
     color: #6700A4;
 }
 .duration-badge {
-    background-color: rgba(100, 148, 237, 0.39);
-    color:rgb(9, 61, 202)
+    background-color: rgba(100, 148, 237, 0.274);
+    color:rgb(9, 61, 202);
+}
+.distance-badge {
+    background-color: rgba(164, 206, 164, 0.479);
+    color:rgb(16, 98, 13);
+}
+.elevation-badge {
+    background-color: rgba(233, 178, 107, 0.342);
+    color:rgb(119, 77, 0);
 }
 
 
