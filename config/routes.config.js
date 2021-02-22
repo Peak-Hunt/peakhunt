@@ -28,10 +28,10 @@ router.post('/review/:reviewId/edit', secure.isAuthenticated, reviewsController.
 router.post('/route/:routeId/review/:reviewId/delete', secure.isAuthenticated, reviewsController.delete);
 
 router.get('/activate', userController.activate);
-router.get('/register', userController.register);
-router.post('/register', userController.doRegister);
-router.get('/login', userController.login);
-router.post('/login', userController.doLogin);
+router.get('/register', secure.isNotAuthenticated, userController.register);
+router.post('/register', secure.isNotAuthenticated, userController.doRegister);
+router.get('/login', secure.isNotAuthenticated, userController.login);
+router.post('/login', secure.isNotAuthenticated, userController.doLogin);
 router.get('/authenticate/google', passport.authenticate('google-auth', { scope: GOOGLE_SCOPES }))
 router.get('/authenticate/google/cb', userController.loginWithGoogle)
 router.get('/settings', secure.isAuthenticated, userController.settings);
