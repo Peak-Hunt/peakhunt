@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const routeSchema = new Schema({
     title: {
         type: String,
-        required: 'Please, enter a title.',
+        required: 'Please, enter a title for this route.',
         maxlength: 80,
     },
     sport: {
@@ -32,7 +32,7 @@ const routeSchema = new Schema({
     },
     duration: {
         type: Number,
-        required: 'Please, enter the duration of this route.'
+        required: 'Duration is required.'
     },
     elevationGained: {
         type: Number,

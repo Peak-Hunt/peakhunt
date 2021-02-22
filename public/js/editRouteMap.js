@@ -2,7 +2,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXNpZXJiYXlvbiIsImEiOiJja2w0NW0wOGwxNm9yMnFvNGJoa3hleWYyIn0.tStWnu8Y2c9X9cqyDhGVpw'
 let routeLocation = { coordinates: [7.752261277369426, 46.02250468893015] }
 
-
+const locationAddress = document.getElementById('locationAddress').value || 'Set the starting point';
 
 const data = document.getElementById('formMap').dataset.location;
 if (data.length > 35) routeLocation = JSON.parse(data);
@@ -11,7 +11,7 @@ var map = new mapboxgl.Map({
     container: 'formMap',
     style: 'mapbox://styles/asierbayon/ckl468ovn32wm17rm9h60p16s',
     center: routeLocation.coordinates, // [lng, lat]
-    zoom: 3,
+    zoom: 11,
 });
 
 var geolocate = new mapboxgl.GeolocateControl({
@@ -20,15 +20,12 @@ var geolocate = new mapboxgl.GeolocateControl({
   },
     trackUserLocation: true,
 });
-map.addControl(geolocate); 
-map.on('load', function() {
-    geolocate.trigger();
-})
+map.addControl(geolocate);
 
 var geocoder = new MapboxGeocoder({
     accessToken: mapboxgl.accessToken,
     mapboxgl: mapboxgl,
-    placeholder: 'Set the starting point',
+    placeholder: locationAddress,
     language: 'en',
     position: 'top-left'
 });

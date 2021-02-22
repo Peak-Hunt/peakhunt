@@ -75,7 +75,7 @@
                     <a {{#if errors}}style="visibility: hidden;"{{/if}} class="btn bg-ph-primary" id="showForm">Submit a review</a>
                 </div>
                 {{/if}}
-                <div id="reviewForm" class="review-form mt-4 mb-5" style="display: {{#if errors}}block;"{{else}}none;"{{/if}}>
+                <div id="reviewForm" class="review-form mt-4 mb-5" {{#if errors}}style="display: block;"{{else}}style="display: none;"{{/if}}>
                     <div id="close" class="d-flex justify-content-end">
                         <i class="fas fa-times"></i>
                     </div>
