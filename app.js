@@ -42,7 +42,12 @@ app.use('/', router);
 
 app.use((req, res, next) => {
 	next(createError(404, 'Page not found'))
-})
+});
+
+app.use((error, req, res, next) => {
+	res.status(error.status);
+	res.render('errors/error', {error});
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
