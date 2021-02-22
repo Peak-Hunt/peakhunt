@@ -76,6 +76,10 @@ h5 {
     color: #a4a4a4;
     font-size: 14px;
 }
+.error {
+    color: #dc3545;
+    font-size: 14px;
+}
 
   /* Navbar */
 .navbar {
