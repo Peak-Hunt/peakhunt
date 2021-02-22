@@ -1,22 +1,52 @@
-<div class="container" style="margin-top: 100px; width: 500px;">
+<div class="container" style="margin-top: 15%; width: 500px;">
     <h4>Edit your review</h4>
-    <form class="mt-3" method="POST" action="/review/{{ review.id }}/edit">
-        <select name="rating" class="form-select" size="5">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-        <div class="form-floating mt-3 mb-3">
-            <textarea name="description" class="form-control {{#if errors.description}}is-invalid{{/if}}"
-                placeholder="Leave a rating here" id="ratingDescription"
-                style="height: 100px">{{ review.description }}</textarea>
-            <label for="ratingDescription">Description</label>
-            {{#if errors.description}}
-            <div class="invalid-feedback">{{ errors.description }}</div>
-            {{/if}}
+    <div id="reviewForm-" class="review-form mt-4 mb-5">
+        <div id="close" class="d-flex justify-content-end">
         </div>
-        <button type="submit" class="btn btn-dark">Edit review</button>
-    </form>
+        <form class="mt-3" method="POST" action="/review/{{ review.id }}/edit">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5>Your rating</h5>
+                <fieldset class="rating" style="width: 100%;">
+                    <input type="radio" id="star5" name="rating" value="5" {{setChecked '5' review.rating}} /><label
+                        class="full" for="star5"></label>
+                    <input type="radio" id="star4half" name="rating" value="4.5" {{setChecked '4.5'
+                        review.rating}} /><label class="half" for="star4half"></label>
+                    <input type="radio" id="star4" name="rating" value="4" {{setChecked '4' review.rating}} /><label
+                        class="full" for="star4"></label>
+                    <input type="radio" id="star3half" name="rating" value="3.5" {{setChecked '3.5'
+                        review.rating}} /><label class="half" for="star3half"></label>
+                    <input type="radio" id="star3" name="rating" value="3" {{setChecked '3' review.rating}} /><label
+                        class="full" for="star3"></label>
+                    <input type="radio" id="star2half" name="rating" value="2.5" {{setChecked '2.5'
+                        review.rating}} /><label class="half" for="star2half"></label>
+                    <input type="radio" id="star2" name="rating" value="2" {{setChecked '2' review.rating}} /><label
+                        class="full" for="star2"></label>
+                    <input type="radio" id="star1half" name="rating" value="1.5" {{setChecked '1.5'
+                        review.rating}} /><label class="half" for="star1half"></label>
+                    <input type="radio" id="star1" name="rating" value="1" {{setChecked '1' review.rating}} /><label
+                        class="full" for="star1"></label>
+                    <input type="radio" id="starhalf" name="rating" value="0.5" {{setChecked '0.5'
+                        review.rating}} /><label class="half" for="starhalf"></label>
+                </fieldset>
+            </div>
+            {{#if errors.rating}}
+            <p class="error mt-2">{{ errors.rating }}</p>
+            {{/if}}
+            <div class="description">
+                <div class="form-floating mt-5 mb-3">
+                    <textarea name="description" class="form-control {{#if errors}}is-invalid{{/if}}"
+                        id="ratingDescription" style="height: 100px">{{ review.description }}</textarea>
+                    <label for="ratingDescription">Description</label>
+                    {{#if errors.description}}
+                    <div class="invalid-feedback">{{errors.description}}</div>
+                    {{/if}}
+                    {{#if errors.duplicate}}
+                    <div class="invalid-feedback">{{errors.duplicate}}</div>
+                    {{/if}}
+                </div>
+
+            </div>
+            <button type="submit" class="btn bg-ph-primary p-3">Edit review</button>
+        </form>
+    </div>
 </div>

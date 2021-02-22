@@ -497,7 +497,6 @@ section {
 }
 .review-form {
     position: relative;
-    display: none;
 }
 .review-form h5 {
     z-index: 999;
