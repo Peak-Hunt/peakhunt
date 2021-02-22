@@ -12,6 +12,7 @@ module.exports.doCreate = (req, res, next) => {
     }).then(() => res.redirect(`/route/${req.route.id}`))
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
+                console.log(error)
                 res.render('routes/detail', {
                     route: req.route,
                     review: req.body,

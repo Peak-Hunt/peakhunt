@@ -22,3 +22,11 @@ hbs.registerHelper('sportKeyToName', function (sportKey) {
 hbs.registerHelper('stringifyLocation', function (location) {
     return JSON.stringify(location)
 })
+
+hbs.registerHelper ("setChecked", function (value, currentValue) {
+    if ( value == currentValue ) {
+       return "checked";
+    } else {
+       return "";
+    }
+ });
