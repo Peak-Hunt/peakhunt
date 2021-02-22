@@ -83,6 +83,7 @@ module.exports.list = async (req, res, next) => {
 }
 
 module.exports.detail = (req, res, next) => {
+    console.log(req.route)
     res.render('routes/detail', { route: req.route });
 }
 
