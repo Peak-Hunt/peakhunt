@@ -1,6 +1,6 @@
 <div class="container" style="margin-top: 100px; margin-bottom: 100px;">
     <div class="route-header">
-        <div class="main-img img d-flex justify-content-between" style="background-image: url({{ route.image }});">
+        <div class="main-img img d-flex justify-content-end" style="background-image: url({{ route.image }});">
 
             <div onclick="location.href='/route/{{ route.id }}/edit';" class="action-label">
                 <i class="fas fa-pen"></i>
@@ -13,7 +13,7 @@
                     <h1>{{ route.title }}</h1>
                     <div class="d-flex mt-4">
                         <span class="badge {{ route.sport }}-badge me-2">
-                            <img class="card-emoji me-2" src="../images/{{ route.sport }}-emoji.png"
+                            <img class="card-emoji me-2" src="https://res.cloudinary.com/asiertoni/image/upload/v1613999382/{{ route.sport }}-emoji.png"
                                 alt="{{ route.sport }} emoji">
                             {{sportKeyToName route.sport }}
                         </span>
