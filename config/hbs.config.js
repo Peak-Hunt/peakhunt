@@ -23,10 +23,16 @@ hbs.registerHelper('stringifyLocation', function (location) {
     return JSON.stringify(location)
 })
 
-hbs.registerHelper ("setChecked", function (value, currentValue) {
-    if ( value == currentValue ) {
-       return "checked";
+hbs.registerHelper("setChecked", function (value, currentValue) {
+    if (value == currentValue) {
+        return "checked";
     } else {
-       return "";
+        return "";
     }
- });
+});
+
+hbs.registerHelper('checkIfOwner', function(owner, currentUser) {
+    if (owner !== currentUser) {
+        return new hbs.SafeString('style="visibility: hidden;"');
+    }
+})

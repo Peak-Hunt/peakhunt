@@ -1,8 +1,7 @@
 <div class="container" style="margin-top: 100px; margin-bottom: 100px;">
     <div class="route-header">
         <div class="main-img img d-flex justify-content-end" style="background-image: url({{ route.image }});">
-
-            <div onclick="location.href='/route/{{ route.id }}/edit';" class="action-label">
+            <div {{checkIfOwner route.user.name currentUser.name}} onclick="location.href='/route/{{ route.id }}/edit';" class="action-label">
                 <i class="fas fa-pen"></i>
                 <p>Edit route</p>
             </div>
@@ -147,7 +146,7 @@
                                 <h6 class="ph-primary"><i class="fas fa-star ms-4 me-1"></i> {{ review.rating }}
                                 </h6>
                             </div>
-                            <div class="review-tools d-flex align-items-center">
+                            <div {{checkIfOwner review.user.name ../currentUser.name}} class="review-tools d-flex align-items-center">
                                 <a href="/review/{{ review.id }}/edit"><i class="fas fa-pen me-3"></i></a>
                                 <form method="POST" action="/route/{{ review.route }}/review/{{ review.id }}/delete"
                                     id="deleteReview">
