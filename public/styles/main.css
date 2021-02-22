@@ -486,6 +486,9 @@ section {
 }
 .review-tools * {
     cursor: pointer;
+    color: #ced4da;
+}
+.review-tools *:hover {
     color: #202930;
 }
 .review-form {
