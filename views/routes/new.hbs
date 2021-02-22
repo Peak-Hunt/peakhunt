@@ -1,85 +1,121 @@
-<div class="container" style="margin-top: 100px;">
+<div class="container" style="margin-top: 100px; margin-bottom: 100px;">
     <form method="POST" action="/routes">
-        <div class="form-floating col-6 mb-3">
-            <input type="text" class="form-control {{#if errors.title}}is-invalid{{/if}}" name="title"
-                value="{{ route.title }}" id="routeTitle">
-            <label for="routeTitle">Title</label>
-            {{#if errors.title}}
-            <div class="invalid-feedback">Please enter a route title.</div>
-            {{/if}}
+        <div class="route-header">
+            <div class="main-img img d-flex justify-content-end" style="background-color: #e7e7e7;"></div>
+            <div class="ps-5 pb-5 pe-5">
+                <div class="row mt-5 d-flex align-items-center justify-content-between">
+                    <div class="col-6">
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control {{#if errors.title}}is-invalid{{/if}}" name="title"
+                                value="{{ route.title }}" id="routeTitle">
+                            <label for="routeTitle">Title</label>
+                            {{#if errors.title}}
+                            <div class="invalid-feedback">{{ errors.title }}</div>
+                            {{/if}}
+                        </div>
+                        <div class="d-flex">
+                            <div class="form-floating col-3 me-2">
+                                <select name="sport" class="form-select" id="floatingSelect">
+                                    {{#each sports as |sport|}}
+                                    {{objOption ../route.sport sport}}
+                                    {{/each}}
+                                </select>
+                                <label for="floatingSelect">Sport</label>
+                            </div>
+                            <div class="form-floating col-3 me-2">
+                                <select name="difficulty" class="form-select" id="floatingSelect">
+                                    {{#each difficulties as |difficulty|}}
+                                    {{option ../route.difficulty difficulty}}
+                                    {{/each}}
+                                </select>
+                                <label for="floatingSelect">Difficulty</label>
+                            </div>
+                            <div class="form-floating col-3 me-2">
+                                <input value="{{ route.duration }}" name="duration"
+                                    class="form-control {{#if errors.duration}}is-invalid{{/if}}" id="duration"></input>
+                                <label for="duration">Duration (h)</label>
+                                {{#if errors.duration}}
+                                <div class="invalid-feedback">{{ errors.duration }}</div>
+                                {{/if}}
+                            </div>
+                            <div class="form-floating col-3 me-2">
+                                <input type="number" value="{{ route.distance }}" name="distance"
+                                    class="form-control {{#if errors.distance}}is-invalid{{/if}}" id="distance"></input>
+                                <label for="distance">Distance (km)</label> {{!-- TODO --}}
+                                {{#if errors.duration}}
+                                <div class="invalid-feedback">Please enter the route's distance.</div>
+                                {{/if}}
+                            </div>
+                            <div class="form-floating col-4 me-2">
+                                <input type="number" value="{{ route.elevationGained }}" name="elevationGained"
+                                    class="form-control {{#if errors.elevationGained}}is-invalid{{/if}}"
+                                    id="elevationGained"></input>
+                                <label for="elevationGained">Elevation gained (m)</label> {{!-- TODO --}}
+                                {{#if errors.elevationGained}}
+                                <div class="invalid-feedback">Please enter the route's elevation gained.</div>
+                                {{/if}}
+                            </div>
+                            <div class="form-floating col-4 me-2">
+                                <input type="number" value="{{ route.elevationLost }}" name="elevationLost"
+                                    class="form-control {{#if errors.elevationLost}}is-invalid{{/if}}"
+                                    id="elevationLost"></input>
+                                <label for="elevationLost">Elevation lost (m)</label> {{!-- TODO --}}
+                                {{#if errors.duration}}
+                                <div class="invalid-feedback">Please enter the route's elevation lost.</div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-floating col-3 mb-3">
-            <select name="sport" class="form-select" id="floatingSelect">
-                {{#each sports as |sport|}}
-                {{objOption ../route.sport sport}}
-                {{/each}}
-            </select>
-            <label for="floatingSelect">Sport</label>
+
+        <div class="row">
+            <div class="col-8">
+                <div class="content-container">
+                    <h3>Description</h3>
+                    <div class="form-floating">
+                        <div style="{{#if errors.description}}border: 1px solid #dc3545;;{{/if}}" id="editor"></div>
+                        <input name="description" type="hidden" id="description" value="{{ route.description }}">
+                    </div>
+                    {{#if errors.description}}
+                    <p class="error mb-3 mt-2">Please, describe the route.</p>
+                    {{/if}}
+                </div>
+                <div class="content-container">
+                    <h3>Starting location</h3>
+                    <div id="formMap" class="mb-3" style="width: 100%; height: 300px;"
+                        data-location="{{stringifyLocation route.location}}">
+                        <input type="hidden" id="location" name="location" value="{{ route.location.coordinates }}">
+                        <input type="hidden" id="locationAddress" name="locationAddress"
+                            value="{{ route.locationAddress }}">
+                    </div>
+                    {{#if errors.locationAddress}}
+                    <p class="error mb-3">{{ errors.locationAddress }}</p>
+                    {{/if}}
+                </div>
+
+            </div>
+            <div class="col">
+                <div class="content-container p-0">
+                    <h3>Media</h3>
+                    <div class="form-floating mb-2">
+                        <input value="{{ route.image }}" name="image"
+                            class="form-control {{#if errors.image}}is-invalid{{/if}}" id="image"></input>
+                        <label for="image">Image URL</label>
+                        {{#if errors.image}}
+                        <div class="invalid-feedback">{{ errors.image }}</div>
+                        {{/if}}
+                    </div>
+                    <div class="form-floating mb-5">
+                        <input value="{{ route.video }}" name="video" class="form-control" id="video"></input>
+                        <label for="video">Video URL</label>
+                    </div>
+                </div>
+                <button id="submit" style="width: 100%;" class="btn bg-ph-primary p-3" type="submit">Create
+                    route</button>
+            </div>
         </div>
-        <div class="form-floating col-2 mb-3">
-            <select name="difficulty" class="form-select" id="floatingSelect">
-                {{#each difficulties as |difficulty|}}
-                {{option ../route.difficulty difficulty}}
-                {{/each}}
-            </select>
-            <label for="floatingSelect">Difficulty</label>
-        </div>
-        <div id="formMap" class="mb-3" style="width: 100%; height: 300px;"
-            data-location="{{stringifyLocation route.location}}">
-            <input type="hidden" id="location" name="location" value="{{ route.location.coordinates }}">
-            <input type="hidden" id="locationAddress" name="locationAddress" value="{{ route.locationAddress }}">
-        </div>
-        {{#if errors.locationAddress}}
-        <p class="mb-3" style="color: red;">{{ errors.locationAddress }}</p>
-        {{/if}}
-        <div class="form-floating col-2 mb-3">
-            <input type="number" value="{{ route.duration }}" name="duration"
-                class="form-control {{#if errors.duration}}is-invalid{{/if}}" id="duration"></input>
-            <label for="duration">Duration (hours)</label> {{!-- TODO --}}
-            {{#if errors.duration}}
-            <div class="invalid-feedback">Please enter the route's duration.</div>
-            {{/if}}
-        </div>
-        <div class="form-floating col-2 mb-3">
-            <input type="number" value="{{ route.elevationGained }}" name="elevationGained"
-                class="form-control {{#if errors.elevationGained}}is-invalid{{/if}}" id="elevationGained"></input>
-            <label for="elevationGained">Elevation gained (m)</label> {{!-- TODO --}}
-            {{#if errors.elevationGained}}
-            <div class="invalid-feedback">Please enter the route's elevation gained.</div>
-            {{/if}}
-        </div>
-        <div class="form-floating col-2 mb-3">
-            <input type="number" value="{{ route.elevationLost }}" name="elevationLost"
-                class="form-control {{#if errors.elevationLost}}is-invalid{{/if}}" id="elevationLost"></input>
-            <label for="elevationLost">Elevation lost (m)</label> {{!-- TODO --}}
-            {{#if errors.duration}}
-            <div class="invalid-feedback">Please enter the route's elevation lost.</div>
-            {{/if}}
-        </div>
-        <div class="form-floating col-2 mb-3">
-            <input type="number" value="{{ route.distance }}" name="distance"
-                class="form-control {{#if errors.distance}}is-invalid{{/if}}" id="distance"></input>
-            <label for="distance">Distance (km)</label> {{!-- TODO --}}
-            {{#if errors.duration}}
-            <div class="invalid-feedback">Please enter the route's distance.</div>
-            {{/if}}
-        </div>
-        <div class="form-floating col-6 mb-3">
-            <div id="editor"></div>
-            <input name="description" type="hidden" id="description" value="{{ route.description }}">
-            {{#if errors.description}}
-            <p class="mb-3" style="color: red;">Please enter the route's description.</p>
-            {{/if}}
-        </div>
-        <div class="form-floating col-6 mb-3">
-            <input value="{{ route.video }}" name="video" class="form-control" id="video"></input>
-            <label for="video">Video URL</label>
-        </div>
-        <div class="form-floating col-6 mb-3">
-            <input value="{{ route.image }}" name="image" class="form-control" id="image"></input>
-            <label for="image">Image URL</label>
-        </div>
-        <button id="submit" class="btn btn-dark" type="submit">Post route</button>
     </form>
 </div>
 

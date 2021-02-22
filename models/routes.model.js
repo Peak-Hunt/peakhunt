@@ -28,7 +28,7 @@ const routeSchema = new Schema({
     },
     locationAddress: {
         type: String,
-        required: 'Please, select a location'
+        required: 'Please, select a location.'
     },
     duration: {
         type: Number,
@@ -36,22 +36,23 @@ const routeSchema = new Schema({
     },
     elevationGained: {
         type: Number,
-        required: 'Please enter the elevation gained.'
+        required: 'Elevation gained is required.'
     },
     elevationLost: {
         type: Number,
-        required: 'Please enter the elevation lost.'
+        required: 'Elevation lost is required.'
     },
     distance: {
         type: Number,
-        required: 'Please enter the distance of this route.'
+        required: 'Distance is required.'
     },
     description: {
         type: String,
-        required: 'Please enter a description for this route.'
+        required: 'Please, enter a description for this route.'
     },
     image: {
         type: String,
+        required: 'Please, provide an image from this rote.',
         default: 'https://images.unsplash.com/photo-1520962880247-cfaf541c8724?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1778&q=80'
     },
     video: {

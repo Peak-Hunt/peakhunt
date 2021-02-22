@@ -132,6 +132,7 @@ module.exports.doCreate = (req, res, next) => {
     Route.create(route)
         .then(() => res.redirect('/routes'))
         .catch(error => {
+            console.log(error)
             if (error instanceof mongoose.Error.ValidationError) {
                 res.render('routes/new', {
                     errors: error.errors,
