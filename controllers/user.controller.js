@@ -39,7 +39,11 @@ module.exports.doRegister = (req, res, next) => {
             if (error instanceof mongoose.Error.ValidationError) {
                 renderWithErrors(error.errors);
             } else {
-                next(error);
+                error.name = 'This username has already been taken'
+                res.render("users/register", {
+                    user: req.body,
+                    errors: error
+                })
             }
         });
 };
