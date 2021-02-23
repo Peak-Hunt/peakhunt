@@ -29,7 +29,7 @@ passport.use('local-auth', new LocalStrategy({
                             if (user.verified && user.verified.date) {
                                 next(null, user)
                             } else {
-                                next(null, null, { email: 'Please check your email' })
+                                next(null, null, { email: 'Please, verify your account before logging in.' })
                             }
                         } else {
                             next(null, null, { email: 'Invalid email or password' })
