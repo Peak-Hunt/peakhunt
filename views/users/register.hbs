@@ -4,41 +4,47 @@
             <h2 class="mb-2">Create an account</h2>
             <p>Welcome to Peakhunt!</p>
             <div class="d-flex flex-column mt-5">
-                <a class="social-login-button mb-4 ph-primary" href="/authenticate/google">Continue with Google<span
-                        class="google-icon"></span></i></a>
-                <p class="comment" style="text-align: center;">- Or continue using your email -</p>
-
-                <form class="mt-5" action="/register" id="login" method="POST">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control {{#if errors.name}}is-invalid{{/if}}" name="name"
-                            id="name" placeholder="Enter your email">
-                        <label for="email">Username</label>
-                        {{#if errors.name}}
-                        <div class="invalid-feedback">{{ errors.name }}</div>
-                        {{/if}}
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control {{#if errors.email}}is-invalid{{/if}}" name="email"
-                            id="email" placeholder="Enter your email">
-                        <label for="email">Email</label>
-                        {{#if errors.email}}
-                        <div class="invalid-feedback">{{ errors.email }}</div>
-                        {{/if}}
-                    </div>
-                    <div class="form-floating mb-2">
-                        <input type="password" class="form-control {{#if errors.password}}is-invalid{{/if}} "
-                            name="password" id="password" placeholder="Enter a password">
-                        <label for="password">Password</label>
-                        {{#if errors.email}}
-                        <div class="invalid-feedback"> {{ errors.password }}</div>
-                        {{/if}}
-                    </div>
-                    <button class="btn bg-ph-primary p-3 mt-5 mb-3" style="width: 100%;" type="submit">Register</button>
-                    <p class="comment" style="text-align: center; font-size: 15px;">Already have an account? <a
-                            class="form-link ph-primary" style="font-size: 15px;" href="/login">Log in</a></p>
-                </form>
+                <a id="google-btn" class="social-login-button mb-4 ph-primary" href="/authenticate/google">Continue with
+                    Google<span class="google-icon"></span></i></a>
+                <p id="or" class="comment mb-4" style="text-align: center;">- or -</p>
+                <div id="showForm" class="email-login-button mb-5">Continue using your email<i
+                        class="far fa-envelope"></i></div>
+                <div id="registerForm" style="display: none;">
+                    <form class="mt-2" action="/register" id="login" method="POST">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control {{#if errors.name}}is-invalid{{/if}}" name="name"
+                                id="name" placeholder="Enter your email">
+                            <label for="email">Username</label>
+                            {{#if errors.name}}
+                            <div class="invalid-feedback">{{ errors.name }}</div>
+                            {{/if}}
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control {{#if errors.email}}is-invalid{{/if}}" name="email"
+                                id="email" placeholder="Enter your email">
+                            <label for="email">Email</label>
+                            {{#if errors.email}}
+                            <div class="invalid-feedback">{{ errors.email }}</div>
+                            {{/if}}
+                        </div>
+                        <div class="form-floating mb-2">
+                            <input type="password" class="form-control {{#if errors.password}}is-invalid{{/if}} "
+                                name="password" id="password" placeholder="Enter a password">
+                            <label for="password">Password</label>
+                            {{#if errors.email}}
+                            <div class="invalid-feedback"> {{ errors.password }}</div>
+                            {{/if}}
+                        </div>
+                        <button class="btn bg-ph-primary p-3 mt-5 mb-3" style="width: 100%;"
+                            type="submit">Register</button>
+                    </form>
+                </div>
+                <p class="comment" style="text-align: center; font-size: 15px;">Already have an account? <a
+                        class="form-link ph-primary" style="font-size: 15px;" href="/login">Log in</a></p>
             </div>
         </div>
     </div>
     <div class="col login-img"></div>
 </section>
+
+<script src="/js/showRegisterForm.js"></script>
