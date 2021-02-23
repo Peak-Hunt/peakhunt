@@ -39,19 +39,7 @@ module.exports.list = async (req, res, next) => {
                 return criterial;
             }, {});
 
-        const pagination = {};
-        if (endIndex < await Route.countDocuments().exec()) {
-            pagination.next = {
-                page: page + 1,
-                limit
-            }
-        }
-        if (startIndex > 0) {
-            pagination.previous = {
-                page: page - 1,
-                limit
-            }
-        }
+        
         
         let sortBy = req.query.sort || 'title';
         if (sortBy === 'rating') sortBy = [['ratingsAverage', -1]];
@@ -63,7 +51,22 @@ module.exports.list = async (req, res, next) => {
         else if (sortBy === 'smallest') sortBy = 'elevationGained';
 
         if (locationAddress) delete criterial.locationAddress;
-        if (location && radius) criterial.location = { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
+        if (location && radius) criterial.location = { $geoWithin: { $centerSphere: [[lng, lat], radius] } };
+        
+        const pagination = {};
+        if (endIndex < await Route.countDocuments(criterial).exec()) {
+            pagination.next = {
+                page: page + 1,
+                limit
+            }
+        }
+        if (startIndex > 0) {
+            pagination.previous = {
+                page: page - 1,
+                limit
+            }
+        }
+
         const routes = await Route.find(criterial).sort(sortBy).limit(limit).skip(startIndex).exec()
         if (routes) {
             res.render('routes/list', {
