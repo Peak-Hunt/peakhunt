@@ -53,7 +53,7 @@ module.exports.list = async (req, res, next) => {
             }
         }
         
-        let sortBy = req.query.sort || [['title', -1]];
+        let sortBy = req.query.sort || 'title';
         if (sortBy === 'rating') sortBy = [['ratingsAverage', -1]];
         else if (sortBy === 'duration_longest') sortBy = [['duration', -1]];
         else if (sortBy === 'duration_shortest') sortBy = 'duration';
