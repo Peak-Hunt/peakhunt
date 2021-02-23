@@ -24,13 +24,8 @@ const userSchema = new Schema({
     },
     password: {
       type: String,
-<<<<<<< HEAD
-      required: 'Password is required.',
-      match: [PASSWORD_PATTERN, 'Password needs to be at least 8 characters  including one uppercase letter, one lowercase letter, and one number or special character.'],
-=======
       required: 'Password is required',
       match: [PASSWORD_PATTERN, 'Password needs at least 8 characters including one uppercase letter, one lowercase letter, and one number or special character.'],
->>>>>>> a157d6eb497598a58f7949d4af1ec02c7959659f
     },
     socialLogin: {
       slack: String,
