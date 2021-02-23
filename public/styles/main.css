@@ -370,8 +370,9 @@ section {
 
 /* Login */
 .login-form-container {
-    width: 400px;
+    max-width: 500px;
 }
+
 .social-login-button {
     background-color: #e7e7e7;
     padding: 20px;
@@ -382,6 +383,19 @@ section {
     text-decoration: none;
     color: black;
     width: 100%;
+}
+.email-login-button {
+    background-color: white;
+    border: 1px solid black;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    cursor: pointer;
 }
 .social-login-button:hover {
     color: black;
@@ -704,4 +718,5 @@ to {
     transform: translateY(-15px);
 }
 }
+
 
