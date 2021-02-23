@@ -17,15 +17,15 @@ const userSchema = new Schema({
     email: {
       type: String,
       required: 'Email is required',
-      match: [EMAIL_PATTERN, 'Invalid email'],
+      match: [EMAIL_PATTERN, 'Invalid email format.'],
       unique: true,
       lowercase: true,
       trim: true,
     },
     password: {
       type: String,
-      required: 'Password is required',
-      match: [PASSWORD_PATTERN, 'Password needs at least 8 chars'],
+      required: 'Password is required.',
+      match: [PASSWORD_PATTERN, 'Password needs to be at least 8 characters  including one uppercase letter, one lowercase letter, and one number or special character.'],
     },
     socialLogin: {
       slack: String,
