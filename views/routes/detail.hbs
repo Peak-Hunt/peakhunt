@@ -74,7 +74,7 @@
                         <h5>{{ route.ratingsQuantity }} reviews</h5>
                         <h5 class="ph-primary"><i class="fas fa-star ms-4 me-1"></i> {{ route.ratingsAverage }}</h5>
                     </div>
-                    <a {{#if errors}}style="visibility: hidden;"{{/if}} class="btn bg-ph-primary" id="showForm">Submit a review</a>
+                    <a {{doNotShowIfOwner route.user.name currentUser.name}} {{#if errors}}style="visibility: hidden;"{{/if}} class="btn bg-ph-primary" id="showForm">Submit a review</a>
                     {{else}}
                     <div class="mt-3">
                         <p class="comment"><span {{doNotShowIfOwner route.user.name currentUser.name}}>This</span><span {{doNotShowIfNoOwner route.user.name currentUser.name}}>Your</span> route hasn't been reviewed yet. <span {{doNotShowIfOwner route.user.name currentUser.name}}>Be the first one to place a review!</span></p>
