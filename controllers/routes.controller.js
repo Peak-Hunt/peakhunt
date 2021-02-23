@@ -53,7 +53,7 @@ module.exports.list = async (req, res, next) => {
             }
         }
         
-        let sortBy = req.query.sort || [['ratingsAverage', -1]];
+        let sortBy = req.query.sort || [['title', -1]];
         if (sortBy === 'rating') sortBy = [['ratingsAverage', -1]];
         else if (sortBy === 'duration_longest') sortBy = [['duration', -1]];
         else if (sortBy === 'duration_shortest') sortBy = 'duration';
@@ -64,7 +64,6 @@ module.exports.list = async (req, res, next) => {
 
         if (locationAddress) delete criterial.locationAddress;
         if (location && radius) criterial.location = { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
-
         const routes = await Route.find(criterial).sort(sortBy).limit(limit).skip(startIndex).exec()
         if (routes) {
             res.render('routes/list', {

@@ -248,6 +248,7 @@ section {
 }
 .page-link {
     color: #5171F1;
+    cursor: pointer;
 }
 
 /* Card */

@@ -73,8 +73,8 @@ module.exports = {
     ],
     SORT_OPTIONS: [
         {
-            name: 'Rating: Top Rated',
-            key: 'rating'
+            name: 'Default: Alphabetically',
+            key: 'title'
         },
         {
             name: 'Duration: Longest',

@@ -2,7 +2,7 @@
     <div class="list-container container-fluid ps-5 pe-5 row row-cols-10" style="max-width: 1600px;">
         <div class="col-3">
             <div class="form-container p-4">
-                <form class="mb-1 mt-3 text-center">
+                <form id="form" class="mb-1 mt-3 text-center">
                     <div id="geocoder" class="geocoder mb-2">
                         <p class="location-label">Location</p>
                         <input type="hidden" id="location" name="location" value="{{ form.location }}">
@@ -100,6 +100,7 @@
                     <button type="submit" class="btn bg-ph-primary mb-2" style="height: 58px;"><i
                             class="fas fa-search me-3"></i>Search</button>
                     <a href="/routes"><i class="fas fa-redo me-2"></i>Reset filters</a>
+                    <input id="page" type="hidden" name="page">
                 </form>
             </div>
         </div>
@@ -112,11 +113,11 @@
             <div class="d-flex justify-content-center p-5">
                 <nav>
                     <ul class="pagination">
-                        <li class="page-item {{#unless pagination.previous}} disabled {{/unless}}">
-                            <a class="page-link" href="/routes?page={{ pagination.previous.page }}">Previous</a>
+                        <li value="{{ pagination.previous.page }}" id="prev" class="page-item {{#unless pagination.previous}} disabled {{/unless}}">
+                            <a class="page-link">Previous</a>
                         </li>
-                        <li class="page-item {{#unless pagination.next}} disabled {{/unless}}">
-                            <a class="page-link" href="/routes?page={{ pagination.next.page }}">Next</a>
+                        <li value="{{ pagination.next.page }}" id="next" class="page-item {{#unless pagination.next}} disabled {{/unless}}">
+                            <a class="page-link">Next</a>
                         </li>
                     </ul>
                 </nav>
@@ -126,3 +127,4 @@
 </div>
 
 <script type="module" src="/js/geocoder.js"></script>
+<script src="/js/pagination.js"></script>
