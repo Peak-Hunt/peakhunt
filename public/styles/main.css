@@ -246,6 +246,9 @@ section {
 .form-container label {
     font-size: 15px;
 }
+.page-link {
+    color: #5171F1;
+}
 
 /* Card */
 .route-card {
