@@ -180,7 +180,7 @@ module.exports.forgot = (req, res, next) => {
     });
   };
 
-  module.exports.forgot = (req, res, next) => {
+module.exports.forgot = (req, res, next) => {
     const tokenSinString = crypto.randomBytes(20)
     var token = tokenSinString.toString('hex')
     User.findOne({
@@ -215,4 +215,6 @@ module.exports.forgot = (req, res, next) => {
       });
   };
 
-  
+module.exports.doForgot = (req, res, next) => {
+    res.render("users/login");
+};
