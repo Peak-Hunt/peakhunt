@@ -55,10 +55,10 @@ module.exports.login = (req, res, next) => {
 
 module.exports.doLogin = (req, res, next) => {
     passport.authenticate("local-auth", (error, user, validations) => {
-        console.log(error)
         if (error) {
             next(error);
         } else if (!user) {
+            console.log(validations)
             res
                 .status(400)
                 .render("users/login", { user: req.body, errors: validations });
