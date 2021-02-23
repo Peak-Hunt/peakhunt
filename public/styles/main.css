@@ -592,6 +592,19 @@ section {
     background-color: white;
     cursor: pointer;
 }
+.delete-label {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 200px;
+    cursor: pointer;
+    border: 1px solid #dc3545;
+    border-radius: 0.3rem;
+    padding: 10px;
+}
+.delete-label p {
+    color: #dc3545;
+}
 .content-container {
     margin-top: 60px;
     margin-bottom: 30px;

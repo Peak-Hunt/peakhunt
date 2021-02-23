@@ -98,11 +98,16 @@ module.exports.edit = (req, res, next) => {
 
 module.exports.doEdit = (req, res, next) => {
     if (req.route.user.id === req.user.id) {
-        req.body.location = { type: 'Point', coordinates: (req.body.location).split(',').map(x => +x) }
+        req.body.location = { type: 'Point', coordinates: (req.body.location).split(',').map(x => +x) };
         const route = Object.assign(req.route, req.body);
+        if (route.ratingsAverage < 1) {
+            route.ratingsAverage = undefined;
+        }
+        console.log('rutita', route)
         route.save()
             .then(route => res.redirect(`/route/${route.id}`))
             .catch(error => {
+                console.log(error)
                 if (error instanceof mongoose.Error.ValidationError) {
                     res.render('routes/edit', {
                         route: req.route,

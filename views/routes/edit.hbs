@@ -1,7 +1,8 @@
 <div class="container" style="margin-top: 100px; margin-bottom: 100px;">
     <form method="POST" action="/route/{{ route.id }}/edit">
         <div class="route-header">
-            <div class="main-img img d-flex justify-content-end" style="background-image: url({{ route.image }});"></div>
+            <div class="main-img img d-flex justify-content-end" style="background-image: url({{ route.image }});">
+            </div>
             <div class="ps-5 pb-5 pe-5">
                 <div class="row mt-5 d-flex align-items-center justify-content-between">
                     <div class="col-6">
@@ -30,12 +31,38 @@
                                 </select>
                                 <label for="floatingSelect">Difficulty</label>
                             </div>
-                            <div class="form-floating col-3 mb-3">
+                            <div class="form-floating col-3 me-2">
                                 <input value="{{ route.duration }}" name="duration"
                                     class="form-control {{#if errors.duration}}is-invalid{{/if}}" id="duration"></input>
                                 <label for="duration">Duration (h)</label>
                                 {{#if errors.duration}}
                                 <div class="invalid-feedback">{{ errors.duration }}</div>
+                                {{/if}}
+                            </div>
+                            <div class="form-floating col-3 me-2">
+                                <input type="number" value="{{ route.distance }}" name="distance"
+                                    class="form-control {{#if errors.distance}}is-invalid{{/if}}" id="distance"></input>
+                                <label for="distance">Distance (km)</label> {{!-- TODO --}}
+                                {{#if errors.duration}}
+                                <div class="invalid-feedback">Please enter the route's distance.</div>
+                                {{/if}}
+                            </div>
+                            <div class="form-floating col-4 me-2">
+                                <input type="number" value="{{ route.elevationGained }}" name="elevationGained"
+                                    class="form-control {{#if errors.elevationGained}}is-invalid{{/if}}"
+                                    id="elevationGained"></input>
+                                <label for="elevationGained">Elevation gained (m)</label> {{!-- TODO --}}
+                                {{#if errors.elevationGained}}
+                                <div class="invalid-feedback">Please enter the route's elevation gained.</div>
+                                {{/if}}
+                            </div>
+                            <div class="form-floating col-4 me-2">
+                                <input type="number" value="{{ route.elevationLost }}" name="elevationLost"
+                                    class="form-control {{#if errors.elevationLost}}is-invalid{{/if}}"
+                                    id="elevationLost"></input>
+                                <label for="elevationLost">Elevation lost (m)</label> {{!-- TODO --}}
+                                {{#if errors.duration}}
+                                <div class="invalid-feedback">Please enter the route's elevation lost.</div>
                                 {{/if}}
                             </div>
                         </div>
@@ -84,6 +111,13 @@
                 </div>
                 <button id="submit" style="width: 100%;" class="btn bg-ph-primary p-3" type="submit">Edit route</button>
             </div>
+        </div>
+    </form>
+</div>
+<div style="margin-bottom: 120px;" class="container d-flex justify-content-center">
+    <form action="/route/{{ route.id }}/delete" method="POST" id="delete">
+        <div style="margin: 0 auto;" onclick="document.getElementById('delete').submit();" class="delete-label">
+            <p><i class="far fa-trash-alt me-2"></i>Delete route</p>
         </div>
     </form>
 </div>

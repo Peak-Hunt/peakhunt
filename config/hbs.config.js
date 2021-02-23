@@ -33,12 +33,18 @@ hbs.registerHelper("setChecked", function (value, currentValue) {
 
 hbs.registerHelper('checkIfOwner', function(owner, currentUser) {
     if (owner !== currentUser) {
-        return new hbs.SafeString('style="display: none;"');
+        return new hbs.SafeString('style="visibility: hidden;"');
     }
 })
 
 hbs.registerHelper('doNotShowIfOwner', function(owner, currentUser) {
     if (owner === currentUser) {
+        return new hbs.SafeString('style="display: none;"');
+    }
+})
+
+hbs.registerHelper('doNotShowIfNoOwner', function(owner, currentUser) {
+    if (owner !== currentUser) {
         return new hbs.SafeString('style="display: none;"');
     }
 })
