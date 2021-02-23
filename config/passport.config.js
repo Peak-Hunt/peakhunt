@@ -18,10 +18,11 @@ passport.use('local-auth', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
 }, (email, password, next) => {
+    console.log('mail', email)
     User.findOne({ email })
         .then(user => {
             if (!user) {
-                next(null, null, { email: 'Invalid email or password' })
+                next(null, null, { email: 'Invalid email or password.' })
             } else {
                 return user.checkPassword(password)
                     .then(match => {
@@ -32,7 +33,7 @@ passport.use('local-auth', new LocalStrategy({
                                 next(null, null, { email: 'Please, verify your account before logging in.' })
                             }
                         } else {
-                            next(null, null, { email: 'Invalid email or password' })
+                            next(null, null, { email: 'Invalid email or password.' })
                         }
                     })
             }

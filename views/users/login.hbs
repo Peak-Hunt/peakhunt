@@ -18,11 +18,11 @@
                         {{/if}}
                     </div>
                     <div class="form-floating mb-2">
-                        <input type="password" class="form-control {{#if errors.password}}is-invalid{{/if}} "
+                        <input type="password" class="form-control {{#if errors.message}}is-invalid{{/if}}"
                             name="password" id="password" placeholder="Enter Your Password">
                         <label for="password">Password</label>
-                        {{#if errors.email}}
-                        <div class="invalid-feedback"> {{ errors.password }}</div>
+                        {{#if errors.message}}
+                        <div class="invalid-feedback">{{ errors.message }}</div>
                         {{/if}}
                     </div>
                     <a href="/forgot" class="form-link ph-primary">Forgot password?</a>
