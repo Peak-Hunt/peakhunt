@@ -371,7 +371,7 @@ section {
 
 /* Login */
 .login-form-container {
-    max-width: 500px;
+    width: 400px;
 }
 
 .social-login-button {

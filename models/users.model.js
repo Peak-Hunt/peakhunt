@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const URL_PATTERN = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
 const NAME_PATTERN = /^\S*$/;
-const PASSWORD_PATTERN = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"/;
+const PASSWORD_PATTERN = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
 
 const userSchema = new Schema({
     name: {
@@ -34,7 +34,7 @@ const userSchema = new Schema({
     avatar: {
       type: String,
       default: function() {
-        return `https://i.pravatar.cc/150?u=${this.id}`
+        return `https://eu.ui-avatars.com/api/?background=random&name=${this.name}`
       },
     },
     banner: {

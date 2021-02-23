@@ -13,7 +13,7 @@
                     <form class="mt-2" action="/register" id="login" method="POST">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control {{#if errors.name}}is-invalid{{/if}}" name="name"
-                                id="name" placeholder="Enter your email">
+                                id="name" value="{{ user.name }}" placeholder="Peakhunter">
                             <label for="email">Username</label>
                             {{#if errors.name}}
                             <div class="invalid-feedback">{{ errors.name }}</div>
@@ -21,17 +21,17 @@
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control {{#if errors.email}}is-invalid{{/if}}" name="email"
-                                id="email" placeholder="Enter your email">
+                                id="email" value="{{ user.email }}" placeholder="Enter your email">
                             <label for="email">Email</label>
                             {{#if errors.email}}
                             <div class="invalid-feedback">{{ errors.email }}</div>
                             {{/if}}
                         </div>
                         <div class="form-floating mb-2">
-                            <input type="password" class="form-control {{#if errors.password}}is-invalid{{/if}} "
-                                name="password" id="password" placeholder="Enter a password">
+                            <input type="password" class="form-control {{#if errors.password}}is-invalid{{/if}}"
+                                name="password" value="{{ user.password }}" id="password" placeholder="Enter a password">
                             <label for="password">Password</label>
-                            {{#if errors.email}}
+                            {{#if errors.password}}
                             <div class="invalid-feedback"> {{ errors.password }}</div>
                             {{/if}}
                         </div>

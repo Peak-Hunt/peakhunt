@@ -37,6 +37,7 @@ module.exports.doRegister = (req, res, next) => {
             }
         })
         .catch((error) => {
+            console.log(error)
             if (error instanceof mongoose.Error.ValidationError) {
                 renderWithErrors(error.errors);
             } else {
