@@ -31,7 +31,7 @@
                                 <label for="floatingSelect">Difficulty</label>
                             </div>
                             <div class="form-floating col-3 me-2">
-                                <input step="0.5" value="{{ route.duration }}" name="duration"
+                                <input type="number" step="0.5" value="{{ route.duration }}" name="duration"
                                     class="form-control {{#if errors.duration}}is-invalid{{/if}}" id="duration"></input>
                                 <label for="duration">Duration (h)</label>
                                 {{#if errors.duration}}

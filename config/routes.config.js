@@ -20,7 +20,6 @@ router.post('/route/:id/edit', secure.isAuthenticated, routesMid.loadRoute, rout
 router.get('/routes/new', secure.isAuthenticated, routesController.create);
 router.post('/routes', secure.isAuthenticated, routesController.doCreate);
 router.post('/route/:id/delete', secure.isAuthenticated, routesMid.loadRoute, routesController.delete);
-router.get('/my-routes', secure.isAuthenticated, routesController.myRoutes);
 
 router.post('/route/:routeId/reviews', secure.isAuthenticated, routesMid.loadRoute, reviewsController.doCreate);
 router.get('/review/:reviewId/edit', secure.isAuthenticated, reviewsController.edit);
