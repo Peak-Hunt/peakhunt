@@ -13,4 +13,16 @@
         {{> routeList route=route}}
         {{/each}}
     </div>
+    <div class="d-flex justify-content-center p-5">
+        <nav>
+            <ul class="pagination">
+                <li class="page-item {{#unless pagination.previous}} disabled {{/unless}}">
+                    <a href="/user/bayonasier?page={{ pagination.previous.page }}" class="page-link">Previous</a>
+                </li>
+                <li class="page-item {{#unless pagination.next}} disabled {{/unless}}">
+                    <a href="/user/bayonasier?page={{ pagination.next.page }}" class="page-link">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </div>

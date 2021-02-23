@@ -158,63 +158,86 @@ module.exports.doSettings = (req, res, next) => {
     }
 };
 
-module.exports.profile = (req, res, next) => {
-    User.findOne({ name: req.params.username })
-        .then(user => {
-            Route.find({ user: user.id })
-                .then((routes) => {
-                    console.log(routes)
+module.exports.profile = async (req, res, next) => {
+    try {
+        const page = parseInt(req.query.page) || 1;
+        delete req.query.page;
+        const limit = 8;
+        const startIndex = (page - 1) * limit;
+        const endIndex = page * limit;
+
+        const pagination = {};
+        
+        const user = await User.findOne({ name: req.params.username });
+        if (endIndex < await Route.countDocuments({ user: user.id }).exec()) {
+            pagination.next = {
+                page: page + 1,
+                limit
+            }
+        }
+        if (startIndex > 0) {
+            pagination.previous = {
+                page: page - 1,
+                limit
+            }
+        }
+        if (user) {
+            const routes = await Route.find({ user: user.id }).limit(limit).skip(startIndex).exec()
+                 if (routes) {
                     res.render('users/profile', {
                         user,
                         routes,
                         sportOptions: constants.SPORT_OPTIONS,
                         difficultyOptions: constants.DIFFICULTY_OPTIONS,
+                        pagination
                     });
-                })
-        })
-        .catch(next);
+                }
+        }
+    } catch (error) {
+        next(error);
+    }
 }
 
 module.exports.forgot = (req, res, next) => {
     res.render('users/forgot', {
-      user: req.user
+        user: req.user
     });
-  };
+};
 
 module.exports.forgot = (req, res, next) => {
     const tokenSinString = crypto.randomBytes(20)
     var token = tokenSinString.toString('hex')
     User.findOne({
         email: req.body.email
-      })
-      .then(user => {
-        if (!user) {
-          res.status(400).render('users/forgot', {
-            email: req.body.email,
-          })
-        } else {
-          user.resetPasswordToken = token;
-          user.resetPasswordExpires = Date.now() + 3600000;
-          User.findById(user.id, )
-            .then(user => {
-              const token = user.resetPasswordToken
-              const email = user.email
-              mailer.sendForgotMail(token, email);
-              res.render('users/forgot', {
-                user: user,
-                verification: true
-              })
-            })
-        }
-      })
-      .catch((error) => {
-        if (error instanceof mongoose.Error.ValidationError) {
-          renderWithErrors(error.errors);
-        } else {
-          next(error);
-        };
-      });
-  };
+    })
+        .then(user => {
+            if (!user) {
+                res.status(400).render('users/forgot', {
+                    email: req.body.email,
+                })
+            } else {
+                user.resetPasswordToken = token;
+                user.resetPasswordExpires = Date.now() + 3600000;
+                User.findById(user.id,)
+                    .then(user => {
+                        const token = user.resetPasswordToken
+                        const email = user.email
+                        mailer.sendForgotMail(token, email);
+                        res.render('users/forgot', {
+                            user: user,
+                            verification: true
+                        })
+                    })
+            }
+        })
+        .catch((error) => {
+            if (error instanceof mongoose.Error.ValidationError) {
+                renderWithErrors(error.errors);
+            } else {
+                next(error);
+            };
+        });
+};
 
 module.exports.doForgot = (req, res, next) => {
     res.render("users/login");
