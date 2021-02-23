@@ -370,8 +370,9 @@ section {
 
 /* Login */
 .login-form-container {
-    width: 400px;
+    max-width: 500px;
 }
+
 .social-login-button {
     background-color: #e7e7e7;
     padding: 20px;
@@ -704,4 +705,5 @@ to {
     transform: translateY(-15px);
 }
 }
+
 
