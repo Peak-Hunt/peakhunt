@@ -40,7 +40,7 @@ router.get('/user/:username', userController.profile);
 router.get('/logout', secure.isAuthenticated, userController.logout);
 
 router.get('/forgot', userController.forgot) 
-router.post('/forgot', userController.forgot) 
+router.post('/forgot', userController.doForgot) 
 
 
 module.exports = router;
